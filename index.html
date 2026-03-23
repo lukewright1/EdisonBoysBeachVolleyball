@@ -1063,33 +1063,23 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
     </div>
   </div>
 
-  <!-- GOOGLE CALENDAR EMBED -->
-  <div style="margin-bottom:16px;">
-    <iframe 
-      src="https://calendar.google.com/calendar/embed?src=72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com&ctz=America%2FLos_Angeles&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&bgcolor=%230a1628&color=%23F6BF26&mode=AGENDA"
-      style="border:1px solid rgba(255,255,255,0.08);border-radius:3px;width:100%;min-height:520px;background:#0a1628;"
-      frameborder="0"
-      scrolling="no"
-      title="Edison Chargers BVB Schedule">
-    </iframe>
-  </div>
+  <!-- SCHEDULE OUTPUT -->
+  <div id="sched"><div class="empty" style="padding:40px 0;text-align:center;font-family:'Barlow Condensed',sans-serif;color:rgba(255,255,255,0.4);font-size:14px;letter-spacing:1px;">Loading schedule...</div></div>
 
   <!-- SUBSCRIBE BAR -->
-  <div style="padding:14px 20px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(245,166,35,.06));border:1px solid rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+  <div style="margin-top:28px;padding:14px 20px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(245,166,35,.06));border:1px solid rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
     <div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;">Subscribe to Calendar</div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);margin-top:2px;">Get game reminders on your phone — updates automatically</div>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <a href="https://calendar.google.com/calendar/r?cid=72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com" 
+      <a href="https://calendar.google.com/calendar/r?cid=72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com"
          target="_blank"
          style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:9px 16px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
         Google Calendar
       </a>
       <a href="https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics"
          style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:9px 16px;border-radius:2px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.7);text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
         iPhone / iCal
       </a>
     </div>
@@ -1449,7 +1439,7 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v7.2</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v7.5</div>
   </div>
 </footer>
 
@@ -2518,7 +2508,41 @@ function durToEndTime(startTime, durMins) {
   const em = total % 60;
   return String(eh).padStart(2,'0') + ':' + String(em).padStart(2,'0');
 }
+const GCAL_ICAL = 'https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics';
+const CORS_PROXIES = [
+  'https://api.allorigins.win/raw?url=',
+  'https://corsproxy.io/?url=',
+];
+
+function fetchWithTimeout(url, ms) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('timeout')), ms);
+    fetch(url).then(r => { clearTimeout(timer); resolve(r); }).catch(e => { clearTimeout(timer); reject(e); });
+  });
+}
+
+async function fetchIcal() {
+  for (const proxy of CORS_PROXIES) {
+    try {
+      const url = proxy + encodeURIComponent(GCAL_ICAL);
+      const res = await fetchWithTimeout(url, 8000);
+      if (res.ok) {
+        const text = await res.text();
+        if (text.includes('BEGIN:VCALENDAR')) return text;
+      }
+    } catch(e) { console.warn('Proxy failed:', proxy, e.message); }
+  }
+  return null;
+}
+
 async function loadEvents() {
+  try {
+    const ical = await fetchIcal();
+    if (ical) {
+      const parsed = parseIcal(ical);
+      if (parsed.length) { events = parsed; render(); return; }
+    }
+  } catch(e) { console.warn('iCal load failed, using fallback:', e); }
   try {
     const d = await getAppData();
     if (d.events && d.events.length) { events = d.events; return; }
@@ -2528,6 +2552,60 @@ async function loadEvents() {
     if (local) { events = JSON.parse(local); return; }
   } catch {}
   events = getDefaults();
+}
+
+function parseIcal(ical) {
+  const evts = [];
+  const blocks = ical.split('BEGIN:VEVENT').slice(1);
+  blocks.forEach(block => {
+    const get = key => {
+      const m = block.match(new RegExp(key + '[^:]*:([^\\r\\n]+)'));
+      return m ? m[1].trim() : '';
+    };
+    const getML = key => {
+      const re = new RegExp('(?:^|\\n)' + key + '[^:\\n]*:([\\s\\S]*?)(?=\\r?\\n[A-Z\\-])');
+      const m = block.match(re);
+      if (!m) return '';
+      return m[1].replace(/\r?\n[ \t]/g, '').trim();
+    };
+    const dtRaw = get('DTSTART');
+    let date = '', time = '', year = new Date().getFullYear(), dur = 90;
+    if (dtRaw) {
+      const dt = dtRaw.replace(/[TZ]/g,'');
+      const y = dt.slice(0,4), mo = dt.slice(4,6), d = dt.slice(6,8);
+      date = `${y}-${mo}-${d}`; year = parseInt(y);
+      if (dtRaw.includes('T')) {
+        const h = parseInt(dt.slice(8,10)), mn = parseInt(dt.slice(10,12));
+        const ptH = ((h - 7) + 24) % 24;
+        time = String(ptH).padStart(2,'0') + ':' + String(mn).padStart(2,'0');
+        const dtEnd = get('DTEND');
+        if (dtEnd) {
+          const ed = dtEnd.replace(/[TZ]/g,'');
+          const eh = ((parseInt(ed.slice(8,10)) - 7) + 24) % 24;
+          const em = parseInt(ed.slice(10,12));
+          const sm = parseInt(time.slice(0,2))*60 + parseInt(time.slice(3,5));
+          const endm = eh*60 + em;
+          if (endm > sm) dur = endm - sm;
+        }
+      }
+    }
+    const summary = getML('SUMMARY').replace(/\\n/g,' ').replace(/\\,/g,',').replace(/\\/g,'');
+    const location = getML('LOCATION').replace(/\\n/g,' ').replace(/\\,/g,',').replace(/\\/g,'');
+    const description = getML('DESCRIPTION').replace(/\\n/g,'\n').replace(/\\,/g,',').replace(/\\/g,'');
+    const uid = get('UID');
+    if (!date || !summary) return;
+    const sl = summary.toLowerCase();
+    let type = 'event';
+    if (sl.includes(' vs ') || sl.includes('game') || sl.includes('match')) type = 'game';
+    else if (sl.includes('tryout')) type = 'tryout';
+    evts.push({
+      id: uid || uid(), type, teams:['all'], date, time, dur,
+      loc: location || PRACTICE_LOC, opponent: summary, ha:'home',
+      result: date < new Date().toISOString().slice(0,10) ? 'past' : 'tbd',
+      score:'', note: description, year, series: null
+    });
+  });
+  return evts;
 }
 
 async function saveEvents() {

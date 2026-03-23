@@ -923,12 +923,6 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
   <!-- TOP CONTROLS -->
   <div class="top-controls">
     <div class="year-sel" id="yearSel" style="display:none;"></div>
-    <div class="team-tabs">
-      <button class="tt ta" id="tt-all" onclick="switchTeam('all')">All <span class="tcnt ca" id="cnt-all">0</span></button>
-      <button class="tt" id="tt-varsity" onclick="switchTeam('varsity')">Varsity <span class="tcnt cv" id="cnt-varsity">0</span></button>
-      <button class="tt" id="tt-jv1" onclick="switchTeam('jv1')">JV1 <span class="tcnt cj" id="cnt-jv1">0</span></button>
-      <button class="tt" id="tt-jv2" onclick="switchTeam('jv2')">JV2 <span class="tcnt ck" id="cnt-jv2">0</span></button>
-    </div>
   </div>
 
   <!-- ADMIN PANEL -->
@@ -1069,17 +1063,35 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
     </div>
   </div>
 
-  <!-- SCHEDULE OUTPUT -->
-  <div id="sched"></div>
+  <!-- GOOGLE CALENDAR EMBED -->
+  <div style="margin-bottom:16px;">
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?src=72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com&ctz=America%2FLos_Angeles&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&bgcolor=%230a1628&color=%23F6BF26&mode=AGENDA"
+      style="border:1px solid rgba(255,255,255,0.08);border-radius:3px;width:100%;min-height:520px;background:#0a1628;"
+      frameborder="0"
+      scrolling="no"
+      title="Edison Chargers BVB Schedule">
+    </iframe>
+  </div>
 
-  <!-- SUBSCRIBE BAR — below schedule -->
-  <div class="sub-bar sa" id="subBar" style="margin-top:32px;">
-    <div class="sbt">
-      <h3>Subscribe to Schedule</h3>
-      <p>Add games &amp; events to your calendar. Updates automatically.</p>
+  <!-- SUBSCRIBE BAR -->
+  <div style="padding:14px 20px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(245,166,35,.06));border:1px solid rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;">Subscribe to Calendar</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);margin-top:2px;">Get game reminders on your phone — updates automatically</div>
     </div>
-    <div class="sopts">
-      <button class="btn bg bsm" onclick="openSubModal()">Add to Calendar</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <a href="https://calendar.google.com/calendar/r?cid=72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com" 
+         target="_blank"
+         style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:9px 16px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+        Google Calendar
+      </a>
+      <a href="https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics"
+         style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:9px 16px;border-radius:2px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.7);text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
+        iPhone / iCal
+      </a>
     </div>
   </div>
 
@@ -1292,73 +1304,6 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
   </div>
 </div>
 
-<!-- SUBSCRIBE MODAL -->
-<div class="mov" id="subMov">
-  <div class="mbox">
-    <h2>📅 Subscribe to Schedule</h2>
-    <p>Pick your team and add to your calendar. Updates automatically when coaches make changes.</p>
-    <div class="stabs">
-      <button class="stab sv" id="st-varsity" onclick="setSubTeam('varsity')">Varsity</button>
-      <button class="stab" id="st-jv1" onclick="setSubTeam('jv1')">JV1</button>
-      <button class="stab" id="st-jv2" onclick="setSubTeam('jv2')">JV2</button>
-    </div>
-    <div class="sc show" id="sc-varsity">
-      <div class="smethod">
-        <h4>Varsity Calendar URL</h4>
-        <p>Paste this into your calendar app to subscribe.</p>
-        <div class="ucrow"><input type="text" id="iu-varsity" readonly /><button class="btn bg bsm" onclick="copyUrl('varsity')">Copy</button><span class="cc" id="cc-varsity">✓ Copied!</span></div>
-      </div>
-    </div>
-    <div class="sc" id="sc-jv1">
-      <div class="smethod">
-        <h4>JV1 Calendar URL</h4>
-        <p>Paste this into your calendar app to subscribe.</p>
-        <div class="ucrow"><input type="text" id="iu-jv1" readonly /><button class="btn bg bsm" onclick="copyUrl('jv1')">Copy</button><span class="cc" id="cc-jv1">✓ Copied!</span></div>
-      </div>
-    </div>
-    <div class="sc" id="sc-jv2">
-      <div class="smethod">
-        <h4>JV2 Calendar URL</h4>
-        <p>Paste this into your calendar app to subscribe.</p>
-        <div class="ucrow"><input type="text" id="iu-jv2" readonly /><button class="btn bg bsm" onclick="copyUrl('jv2')">Copy</button><span class="cc" id="cc-jv2">✓ Copied!</span></div>
-      </div>
-    </div>
-    <div class="smethod" style="margin-top:10px">
-      <h4>How to Subscribe</h4>
-      <div class="ptabs">
-        <button class="ptab active" onclick="setPlatform('g',this)">Google</button>
-        <button class="ptab" onclick="setPlatform('a',this)">Apple / iPhone</button>
-        <button class="ptab" onclick="setPlatform('o',this)">Outlook</button>
-      </div>
-      <div class="pinstr active" id="ig">
-        <ol class="steps">
-          <li>Copy the URL for your team above.</li>
-          <li>Open Google Calendar on desktop → click <strong>+</strong> next to "Other calendars" → <strong>From URL</strong>.</li>
-          <li>Paste and click <strong>Add Calendar</strong>. Done.</li>
-        </ol>
-      </div>
-      <div class="pinstr" id="ia">
-        <ol class="steps">
-          <li>Copy the URL for your team above.</li>
-          <li>On iPhone: <strong>Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar</strong>.</li>
-          <li>Paste the URL → Save. Set refresh to Every Hour.</li>
-        </ol>
-      </div>
-      <div class="pinstr" id="io">
-        <ol class="steps">
-          <li>Copy the URL for your team above.</li>
-          <li>Outlook → Calendar → Add Calendar → <strong>Subscribe from web</strong>.</li>
-          <li>Paste → Import.</li>
-        </ol>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:14px">
-      <button class="btn bgh bsm" onclick="downloadIcal()">Download .ics instead</button>
-      <button class="btn bg" onclick="closeSubModal()">Done</button>
-    </div>
-  </div>
-</div>
-
 <!-- CONFIRM DIALOG -->
 <div class="cov" id="confirmOv">
   <div class="cbox">
@@ -1504,7 +1449,7 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v7.0</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v7.2</div>
   </div>
 </footer>
 
@@ -2551,17 +2496,8 @@ window.addEventListener('load', async () => {
   await loadEvents();
   buildYearSelector();
   updateCounts();
-  switchTeam('all');
-  setUrls();
+  render();
 });
-
-function setUrls() {
-  const base = location.href.split('?')[0];
-  TEAMS.forEach(t => {
-    const el = document.getElementById('iu-' + t);
-    if (el) el.value = base + '?ical=' + t;
-  });
-}
 
 // Calculate duration from start/end time
 function calcDur() {
@@ -2652,53 +2588,11 @@ function setYear(y) {
 // ─────────────────────────────────────────────
 const TAB_CLS = {all:'ta',varsity:'tv',jv1:'tj',jv2:'tk'};
 
-function switchTeam(t) {
-  curTeam = t;
-  ['all','varsity','jv1','jv2'].forEach(x => {
-    const el = document.getElementById('tt-'+x);
-    if(el) el.className = 'tt' + (x===t ? ' '+TAB_CLS[x] : '');
-  });
-  updateSubBar(t);
-  render();
-}
-
-function updateSubBar(t) {
-  const bar = document.getElementById('subBar');
-  const cls = {all:'sa',varsity:'sv',jv1:'sj',jv2:'sk'};
-  bar.className = 'sub-bar ' + (cls[t]||'sa');
-
-  const titles = {
-    all:'📅 Subscribe to Your Team\'s Schedule',
-    varsity:'📅 Varsity — Never Miss a Game',
-    jv1:'📅 JV1 — Never Miss a Game',
-    jv2:'📅 JV2 — Never Miss a Game',
-  };
-  document.getElementById('subTitle').textContent = titles[t];
-
-  const btns = document.getElementById('subBtns');
-  if (t === 'all') {
-    btns.innerHTML = `
-      <button class="btn bsm" style="background:rgba(245,166,35,.15);color:var(--gold);border:1px solid rgba(245,166,35,.3)" onclick="openSubModal();setSubTeam('varsity')">● Varsity</button>
-      <button class="btn bsm" style="background:rgba(59,130,246,.15);color:var(--jv1);border:1px solid rgba(59,130,246,.3)" onclick="openSubModal();setSubTeam('jv1')">● JV1</button>
-      <button class="btn bsm" style="background:rgba(168,85,247,.15);color:var(--jv2);border:1px solid rgba(168,85,247,.3)" onclick="openSubModal();setSubTeam('jv2')">● JV2</button>`;
-  } else {
-    btns.innerHTML = `
-      <button class="btn bgr bsm" onclick="openSubModal()">Add to Calendar</button>
-      <button class="btn bgh bsm" onclick="downloadIcal()">Download .ics</button>`;
-  }
-}
-
 // ─────────────────────────────────────────────
 // COUNTS
 // ─────────────────────────────────────────────
 function updateCounts() {
-  const yearEvts = events.filter(e => e.year === curYear && e.type !== 'practice');
-  ['all','varsity','jv1','jv2'].forEach(t => {
-    const el = document.getElementById('cnt-'+t);
-    if (!el) return;
-    if (t === 'all') el.textContent = yearEvts.length;
-    else el.textContent = yearEvts.filter(e => e.teams.includes(t) || e.teams.includes('all')).length;
-  });
+  // No team tabs to update — just a no-op now
 }
 
 // ─────────────────────────────────────────────
@@ -2707,11 +2601,8 @@ function updateCounts() {
 function render() {
   const container = document.getElementById('sched');
 
-  // Filter by year and team
+  // Filter by year only — all teams shown together
   let evts = events.filter(e => e.year === curYear);
-  if (curTeam !== 'all') {
-    evts = evts.filter(e => e.teams.includes(curTeam) || e.teams.includes('all'));
-  }
 
   // Sort by date then time
   evts.sort((a,b) => {
@@ -2758,8 +2649,8 @@ function renderCard(e) {
   // Title — always use the user-entered name
   let title = '';
   if (e.type === 'game') {
-    const teamLabel = e.teams.includes('all') ? '' : e.teams.map(t=>LABELS[t]).join('/') + ': ';
-    title = `${teamLabel}${e.opponent || 'Edison vs TBD'}`;
+    const teamLabel = '';
+    title = `${e.opponent || 'Edison vs TBD'}`;
   } else {
     title = e.opponent || (e.type === 'practice' ? 'Practice' : e.type === 'tryout' ? 'Tryouts' : 'Event');
   }
@@ -3218,19 +3109,16 @@ function closeConfirm() { document.getElementById('confirmOv').classList.remove(
 // ─────────────────────────────────────────────
 // iCAL
 // ─────────────────────────────────────────────
-function generateIcal(team) {
-  const lbl = LABELS[team];
+function generateIcal() {
   const lines = [
     'BEGIN:VCALENDAR','VERSION:2.0',
-    `PRODID:-//Edison Chargers BVB ${lbl}//EN`,
-    `X-WR-CALNAME:Edison Chargers BVB ${lbl}`,
-    `X-WR-CALDESC:Edison High School Beach Volleyball ${lbl} — Games & Events`,
+    'PRODID:-//Edison Chargers Boys Beach Volleyball//EN',
+    'X-WR-CALNAME:Edison Chargers BVB Schedule',
+    'X-WR-CALDESC:Edison High School Boys Beach Volleyball — Games & Events',
     'X-WR-TIMEZONE:America/Los_Angeles','CALSCALE:GREGORIAN','METHOD:PUBLISH',
   ];
 
-  const filtered = events.filter(e =>
-    e.year === curYear && (e.teams.includes(team)||e.teams.includes('all'))
-  );
+  const filtered = events.filter(e => e.year === curYear);
 
   filtered.forEach(e => {
     if (!e.date) return;
@@ -3252,9 +3140,9 @@ function generateIcal(team) {
     }
 
     let summary = '';
-    if (e.type==='game') summary = `${lbl}: Edison vs ${e.opponent}`;
-    else if (e.type==='practice') summary = `Edison BVB Practice — ${e.teams.includes('all')?'All Teams':e.teams.map(t=>LABELS[t]).join('/')}`;
-    else summary = 'Edison BVB Tryouts';
+    if (e.type==='game') summary = `Edison BVB vs ${e.opponent}`;
+    else if (e.type==='tryout') summary = `Edison BVB Tryouts`;
+    else summary = e.opponent || 'Edison BVB Event';
 
     const loc = e.loc || PRACTICE_LOC;
     const desc = [
@@ -3265,14 +3153,13 @@ function generateIcal(team) {
     const stamp = new Date().toISOString().replace(/[-:.]/g,'').slice(0,15)+'Z';
 
     lines.push('BEGIN:VEVENT');
-    lines.push(`UID:${e.id}-${team}@edisonbvb`);
+    lines.push(`UID:${e.id}@edisonbvb`);
     lines.push(`DTSTAMP:${stamp}`);
     if (e.time) { lines.push(`DTSTART:${ds}`); lines.push(`DTEND:${de}`); }
     else { lines.push(`DTSTART;VALUE=DATE:${ds}`); lines.push(`DTEND;VALUE=DATE:${de}`); }
     lines.push(`SUMMARY:${summary}`);
     lines.push(`LOCATION:${loc}`);
     if (desc) lines.push(`DESCRIPTION:${desc}`);
-    // Three reminders — 3hr, 1hr, 30min
     ['PT3H','PT1H','PT30M'].forEach(t => {
       lines.push('BEGIN:VALARM');
       lines.push(`TRIGGER:-${t}`);
@@ -3288,55 +3175,19 @@ function generateIcal(team) {
 }
 
 function downloadIcal() {
-  const t = curTeam==='all' ? 'varsity' : curTeam;
-  const ic = generateIcal(t);
+  const ic = generateIcal();
   const blob = new Blob([ic],{type:'text/calendar;charset=utf-8'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href=url; a.download=`edison-bvb-${LABELS[t].toLowerCase()}.ics`; a.click();
+  a.href=url; a.download=`edison-bvb-${curYear}.ics`; a.click();
   URL.revokeObjectURL(url);
 }
 
-// ─────────────────────────────────────────────
-// SUBSCRIBE MODAL
-// ─────────────────────────────────────────────
-function openSubModal() {
-  setUrls();
-  setSubTeam(curTeam==='all'?'varsity':curTeam);
-  document.getElementById('subMov').classList.add('open');
-}
-function closeSubModal() { document.getElementById('subMov').classList.remove('open'); }
-
-function setSubTeam(t) {
-  const cls={varsity:'sv',jv1:'sj',jv2:'sk'};
-  TEAMS.forEach(x=>{
-    document.getElementById('st-'+x).className='stab'+(x===t?' '+cls[x]:'');
-    document.getElementById('sc-'+x).className='sc'+(x===t?' show':'');
-  });
-}
-
-function copyUrl(t) {
-  const v = document.getElementById('iu-'+t).value;
-  navigator.clipboard.writeText(v).then(()=>{
-    const el = document.getElementById('cc-'+t);
-    el.classList.add('show');
-    setTimeout(()=>el.classList.remove('show'),2200);
-  });
-}
-
-function setPlatform(n, btn) {
-  document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.pinstr').forEach(x=>x.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('i'+n).classList.add('active');
-}
-
 // Close on backdrop
-['subMov','loginOv','confirmOv'].forEach(id=>{
+['loginOv','confirmOv'].forEach(id=>{
   document.getElementById(id).addEventListener('click',function(e){
     if(e.target===this){
-      if(id==='subMov') closeSubModal();
-      else if(id==='loginOv') closeLogin();
+      if(id==='loginOv') closeLogin();
       else closeConfirm();
     }
   });

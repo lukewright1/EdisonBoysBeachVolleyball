@@ -843,6 +843,7 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
     <button class="tab-btn" onclick="showTab('roster')">Roster</button>
     <button class="tab-btn" onclick="showTab('news')">News</button>
     <button class="tab-btn" onclick="showTab('gallery')">Gallery</button>
+    <button id="adminBtn" onclick="toggleAdmin()" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:6px 14px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.4);">Admin</button>
   </div>
 </nav>
 
@@ -1486,7 +1487,7 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v6.2</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v6.3</div>
   </div>
 </footer>
 
@@ -1894,32 +1895,33 @@ async function pushToGitHub() {
     setGhStatus('Encoding...', 'muted');
 
     // Temporarily reset all admin UI to clean state before capturing HTML
+    const safeHide = id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
+    const safeRemove = (id, cls) => { const el = document.getElementById(id); if (el) el.classList.remove(cls); };
+    const safeStyle = (id, prop, val) => { const el = document.getElementById(id); if (el) el.style[prop] = val; };
+
     document.body.classList.remove('admin-active');
     document.body.style.paddingBottom = '';
-    document.getElementById('adminBar').classList.remove('open');
-    document.getElementById('admPanel').classList.remove('open');
-    document.getElementById('adminBtn').style.background = '';
-    document.getElementById('adminBtn').style.color = '';
-    ['add-photo-btn','news-admin-btn','ig-admin-btn','apple-album-admin-btn'].forEach(id => {
-      const el = document.getElementById(id); if (el) el.style.display = 'none';
-    });
-    // Close any open overlays
-    ['githubPushOverlay','changePwOverlay','editModalOverlay'].forEach(id => {
-      const el = document.getElementById(id); if (el) el.style.display = 'none';
-    });
+    safeRemove('adminBar', 'open');
+    safeRemove('admPanel', 'open');
+    safeStyle('adminBtn', 'background', '');
+    safeStyle('adminBtn', 'color', '');
+    ['add-photo-btn','news-admin-btn','ig-admin-btn','apple-album-admin-btn',
+     'githubPushOverlay','changePwOverlay'].forEach(safeHide);
+    const editOv = document.getElementById('editModalOverlay');
+    if (editOv) editOv.classList.remove('open');
 
     const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
 
     // Restore admin UI after capture
     document.body.classList.add('admin-active');
     document.body.style.paddingBottom = '60px';
-    document.getElementById('adminBar').classList.add('open');
-    document.getElementById('admPanel').classList.add('open');
-    document.getElementById('adminBtn').style.background = 'var(--green)';
-    document.getElementById('adminBtn').style.color = '#fff';
-    ['add-photo-btn','news-admin-btn','ig-admin-btn','apple-album-admin-btn'].forEach(id => {
-      const el = document.getElementById(id); if (el) el.style.display = 'block';
-    });
+    const safeAdd = (id, cls) => { const el = document.getElementById(id); if (el) el.classList.add(cls); };
+    const safeShow = id => { const el = document.getElementById(id); if (el) el.style.display = 'block'; };
+    safeAdd('adminBar', 'open');
+    safeAdd('admPanel', 'open');
+    safeStyle('adminBtn', 'background', 'var(--green)');
+    safeStyle('adminBtn', 'color', '#fff');
+    ['add-photo-btn','news-admin-btn','ig-admin-btn','apple-album-admin-btn'].forEach(safeShow);
     document.getElementById('githubPushOverlay').style.display = 'flex';
     const encoder = new TextEncoder();
     const data = encoder.encode(html);

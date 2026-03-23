@@ -45,9 +45,9 @@
   ],
   "news": [
     {
-      "id": "post-1774300470349",
-      "title": "TEST 2",
-      "body": "TEST 2",
+      "id": "post-1774300647844",
+      "title": "TEST 3",
+      "body": "TEST 3",
       "date": "March 23, 2026"
     },
     {
@@ -120,6 +120,10 @@
           {
             "name": "Luke Gass",
             "senior": true
+          },
+          {
+            "name": "TEST",
+            "senior": true
           }
         ]
       },
@@ -174,6 +178,10 @@
           {
             "name": "Cameron Schurig",
             "senior": false
+          },
+          {
+            "name": "TEST",
+            "senior": true
           }
         ]
       },
@@ -240,6 +248,10 @@
           {
             "name": "Nathan Santana",
             "senior": false
+          },
+          {
+            "name": "TEST",
+            "senior": true
           }
         ]
       }

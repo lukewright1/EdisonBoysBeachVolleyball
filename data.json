@@ -116,6 +116,10 @@
           {
             "name": "Luke Gass",
             "senior": true
+          },
+          {
+            "name": "Mason Dean",
+            "senior": false
           }
         ]
       },
@@ -133,10 +137,6 @@
           },
           {
             "name": "Brandon Clark",
-            "senior": false
-          },
-          {
-            "name": "Mason Dean",
             "senior": false
           },
           {

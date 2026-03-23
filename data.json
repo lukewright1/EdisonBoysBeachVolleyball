@@ -120,6 +120,10 @@
           {
             "name": "Luke Gass",
             "senior": true
+          },
+          {
+            "name": "TEST",
+            "senior": false
           }
         ]
       },

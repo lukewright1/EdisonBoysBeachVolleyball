@@ -786,6 +786,8 @@
 
         <!-- ADMIN POST FORM -->
         <div id="news-form" style="display:none;background:rgba(10,22,40,0.95);border:1px solid rgba(245,166,35,0.2);border-radius:3px;padding:16px;margin-bottom:16px;">
+          <input type="hidden" id="news-edit-index" value="" />
+          <div id="news-form-title" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:12px;">New Announcement</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;flex-direction:column;gap:4px;">
               <label style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);">Title</label>
@@ -849,9 +851,42 @@
 <div id="tab-gallery" class="tab-content">
   <div class="page-section">
     <div class="section-label reveal">Moments</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;" class="reveal">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px;" class="reveal">
       <h2 class="section-title" style="margin-bottom:0;">PHOTO GALLERY</h2>
-      <button id="add-photo-btn" onclick="showAddPhoto()" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 16px;border-radius:2px;border:1px solid rgba(245,166,35,0.4);background:rgba(245,166,35,0.08);color:var(--gold);">✚ Add Photo</button>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button id="apple-album-admin-btn" onclick="toggleAppleAlbumForm()" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 16px;border-radius:2px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.6);">🍎 Set Album Link</button>
+        <button id="add-photo-btn" onclick="showAddPhoto()" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 16px;border-radius:2px;border:1px solid rgba(245,166,35,0.4);background:rgba(245,166,35,0.08);color:var(--gold);">✚ Add Photo</button>
+      </div>
+    </div>
+
+    <!-- Apple Album Link Form (admin only) -->
+    <div id="apple-album-form" style="display:none;background:rgba(10,22,40,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:16px;margin-bottom:24px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:10px;">Paste your iCloud Shared Album link — e.g. https://www.icloud.com/photos/...</div>
+      <div style="display:flex;gap:8px;">
+        <input id="apple-album-url" type="text" placeholder="https://www.icloud.com/photos/..."
+          style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:2px;color:#fff;font-family:'Barlow',sans-serif;font-size:13px;padding:8px 10px;" />
+        <button onclick="saveAppleAlbum()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 18px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);">Save</button>
+        <button onclick="document.getElementById('apple-album-form').style.display='none'" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;cursor:pointer;padding:8px 12px;border-radius:2px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text-muted);">✕</button>
+      </div>
+    </div>
+
+    <!-- Apple Shared Album card -->
+    <div id="apple-album-card" style="display:none;margin-bottom:32px;">
+      <a id="apple-album-link" href="https://www.icloud.com/sharedalbum/#B2SGWZuqDGTLyIj" target="_blank" style="display:block;text-decoration:none;position:relative;border-radius:4px;overflow:hidden;cursor:pointer;">
+        <!-- Hero photo -->
+        <img src="https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full-2025.jpg"
+          alt="Edison Chargers Beach Volleyball 2025"
+          style="width:100%;height:380px;object-fit:cover;object-position:center 30%;display:block;transition:transform 0.4s;"
+          onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" />
+        <!-- Dark overlay -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,14,26,0.85) 0%,rgba(6,14,26,0.1) 60%);pointer-events:none;"></div>
+        <!-- Label -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 28px;pointer-events:none;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">📷 Full Season Album</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;color:#fff;line-height:1;">View All Team Photos</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;letter-spacing:1px;">Opens in iCloud Photos ↗</div>
+        </div>
+      </a>
     </div>
 
     <!-- Add Photo Form (admin only) -->
@@ -973,7 +1008,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v4.6</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v4.9</div>
   </div>
 </footer>
 
@@ -1040,6 +1075,7 @@ window.addEventListener('load', async () => {
   loadNews();
   await loadIgPosts();
   renderIgPosts();
+  await loadAppleAlbum();
 
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
@@ -1129,6 +1165,7 @@ function toggleAdmin() {
     document.getElementById('adminBtn').style.background = 'var(--green)';
     document.getElementById('adminBtn').style.color = '#fff';
     document.getElementById('add-photo-btn').style.display = 'block';
+    document.getElementById('apple-album-admin-btn').style.display = 'block';
     document.getElementById('news-admin-btn').style.display = 'block';
     document.getElementById('ig-admin-btn').style.display = 'block';
     isAdminOnNews = true;
@@ -1153,6 +1190,7 @@ function logoutAdmin() {
   document.getElementById('adminBtn').style.background = '';
   document.getElementById('adminBtn').style.color = '';
   document.getElementById('add-photo-btn').style.display = 'none';
+  document.getElementById('apple-album-admin-btn').style.display = 'none';
   document.getElementById('news-admin-btn').style.display = 'none';
   document.getElementById('ig-admin-btn').style.display = 'none';
   isAdminOnNews = false;
@@ -1646,12 +1684,16 @@ function renderNews() {
   const container = document.getElementById('news-posts');
   if (!container) return;
   if (!newsPosts.length) {
-    container.innerHTML = `<div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--text-muted);letter-spacing:0.5px;padding:20px 0;">No announcements yet. Check Instagram for the latest updates.</div>`;
+    container.innerHTML = `<div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--text-muted);letter-spacing:0.5px;padding:20px 0;">No announcements yet.</div>`;
     return;
   }
   container.innerHTML = newsPosts.map((p,i) => `
     <div style="background:rgba(18,32,64,0.6);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:18px 20px;margin-bottom:10px;position:relative;">
-      ${isAdminOnNews ? `<button onclick="deletePost(${i})" style="position:absolute;top:12px;right:12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);color:#f87171;">Remove</button>` : ''}
+      ${isAdminOnNews ? `
+        <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px;">
+          <button onclick="editPost(${i})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(245,166,35,0.4);background:rgba(245,166,35,0.08);color:var(--gold);">✏️ Edit</button>
+          <button onclick="deletePost(${i})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);color:#f87171;">🗑 Delete</button>
+        </div>` : ''}
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">${p.date}</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#fff;margin-bottom:8px;">${p.title}</div>
       <div style="font-family:'Barlow',sans-serif;font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;">${p.body}</div>
@@ -1664,8 +1706,24 @@ function updateNewsAdminBtn() {
 }
 
 function toggleNewsAdmin() {
+  // Reset to add mode
+  document.getElementById('news-edit-index').value = '';
+  document.getElementById('news-title-input').value = '';
+  document.getElementById('news-body-input').value = '';
+  document.getElementById('news-form-title').textContent = 'New Announcement';
   newsAdminOpen = !newsAdminOpen;
   document.getElementById('news-form').style.display = newsAdminOpen ? 'block' : 'none';
+}
+
+function editPost(i) {
+  const p = newsPosts[i];
+  document.getElementById('news-edit-index').value = i;
+  document.getElementById('news-title-input').value = p.title;
+  document.getElementById('news-body-input').value = p.body;
+  document.getElementById('news-form-title').textContent = 'Edit Announcement';
+  document.getElementById('news-form').style.display = 'block';
+  newsAdminOpen = true;
+  document.getElementById('news-form').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
 function savePost() {
@@ -1673,25 +1731,67 @@ function savePost() {
   const body = document.getElementById('news-body-input').value.trim();
   if (!title || !body) { alert('Please fill in both fields.'); return; }
   const dateStr = new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'});
-  newsPosts.unshift({ title, body, date: dateStr });
+  const editIdx = document.getElementById('news-edit-index').value;
+  if (editIdx !== '') {
+    newsPosts[parseInt(editIdx)] = { ...newsPosts[parseInt(editIdx)], title, body };
+  } else {
+    newsPosts.unshift({ id: 'post-' + Date.now(), title, body, date: dateStr });
+  }
   saveNews();
   renderNews();
   document.getElementById('news-title-input').value = '';
   document.getElementById('news-body-input').value = '';
+  document.getElementById('news-edit-index').value = '';
+  document.getElementById('news-form-title').textContent = 'New Announcement';
   newsAdminOpen = false;
   document.getElementById('news-form').style.display = 'none';
 }
 
 function cancelPost() {
   newsAdminOpen = false;
+  document.getElementById('news-edit-index').value = '';
   document.getElementById('news-form').style.display = 'none';
 }
 
 function deletePost(i) {
-  if (!confirm('Remove this announcement?')) return;
+  if (!confirm('Delete this announcement?')) return;
   newsPosts.splice(i, 1);
   saveNews();
   renderNews();
+}
+
+// ─────────────────────────────────────────────
+// APPLE SHARED ALBUM
+// ─────────────────────────────────────────────
+const APPLE_ALBUM_KEY = 'edison-apple-album';
+
+async function loadAppleAlbum() {
+  const DEFAULT_ALBUM = 'https://www.icloud.com/sharedalbum/#B2SGWZuqDGTLyIj';
+  let url = DEFAULT_ALBUM;
+  try {
+    let r = null;
+    try { r = await window.storage.get(APPLE_ALBUM_KEY, true); } catch {}
+    if (r) url = r.value;
+    else url = localStorage.getItem(APPLE_ALBUM_KEY) || DEFAULT_ALBUM;
+  } catch {}
+  document.getElementById('apple-album-url').value = url;
+  document.getElementById('apple-album-link').href = url;
+  document.getElementById('apple-album-card').style.display = 'block';
+}
+
+function toggleAppleAlbumForm() {
+  const form = document.getElementById('apple-album-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+async function saveAppleAlbum() {
+  const url = document.getElementById('apple-album-url').value.trim();
+  if (!url) { alert('Please enter an iCloud album URL.'); return; }
+  try { await window.storage.set(APPLE_ALBUM_KEY, url, true); } catch {}
+  try { localStorage.setItem(APPLE_ALBUM_KEY, url); } catch {}
+  document.getElementById('apple-album-link').href = url;
+  document.getElementById('apple-album-card').style.display = 'block';
+  document.getElementById('apple-album-form').style.display = 'none';
 }
 
 // Responsive news grid

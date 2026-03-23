@@ -953,7 +953,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v5.1</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v5.3</div>
   </div>
 </footer>
 
@@ -968,23 +968,216 @@ let currentEditEl = null;
 let currentEditType = null;
 
 // ─────────────────────────────────────────────
-// STORAGE
+// GITHUB DATA STORAGE — single source of truth
 // ─────────────────────────────────────────────
-async function loadSiteData() {
+const DATA_URL = 'https://raw.githubusercontent.com/lukewright1/EdisonBoysBeachVolleyball/main/data.json';
+const DATA_PATH = 'data.json';
+let _ghToken = null; // set when admin logs in
+
+function getToken() {
+  return _ghToken || sessionStorage.getItem('gh_token') || '';
+}
+
+// Load all site data from GitHub
+async function loadAllData() {
   try {
-    let r = null;
-    try { r = await window.storage.get(SITE_KEY, true); } catch {}
-    if (r) return JSON.parse(r.value);
-    const local = localStorage.getItem(SITE_KEY);
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+  } catch {}
+  // Fallback to localStorage
+  try {
+    const local = localStorage.getItem('edison-all-data');
     if (local) return JSON.parse(local);
   } catch {}
   return null;
 }
 
+// Save all site data to GitHub
+async function saveAllData(data) {
+  // Always cache locally immediately
+  try { localStorage.setItem('edison-all-data', JSON.stringify(data)); } catch {}
+
+  const token = getToken();
+  if (!token) return; // no token = local only
+
+  try {
+    const headers = {
+      'Authorization': `token ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    };
+    const apiBase = `https://api.github.com/repos/${GITHUB_REPO}/contents`;
+
+    // Get current SHA
+    let sha = '';
+    try {
+      const getRes = await fetch(`${apiBase}/${DATA_PATH}`, { headers });
+      if (getRes.ok) {
+        const getData = await getRes.json();
+        sha = getData.sha || '';
+      }
+    } catch {}
+
+    // Encode and push
+    const json = JSON.stringify(data, null, 2);
+    const bytes = new TextEncoder().encode(json);
+    const binString = Array.from(bytes, b => String.fromCodePoint(b)).join('');
+    const encoded = btoa(binString);
+
+    const body = { message: `Data update ${new Date().toLocaleDateString()}`, content: encoded, branch: GITHUB_BRANCH };
+    if (sha) body.sha = sha;
+
+    await fetch(`${apiBase}/${DATA_PATH}`, {
+      method: 'PUT', headers, body: JSON.stringify(body)
+    });
+  } catch(e) {
+    console.warn('GitHub save failed, data saved locally only:', e);
+  }
+}
+
+// Get the full data object (cached in memory after first load)
+let _appData = null;
+async function getAppData() {
+  if (_appData) return _appData;
+  const loaded = await loadAllData();
+  _appData = loaded || buildDefaultData();
+  return _appData;
+}
+
+async function persistData() {
+  if (_appData) await saveAllData(_appData);
+}
+
+const DEFAULT_NEWS = [
+  {
+    id: 'default-physical-day',
+    title: '🏥 Physical Day — May 30, 2026',
+    body: 'All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.',
+    date: 'Mar 23, 2026'
+  }
+];
+
+const DEFAULT_ROSTER = {
+  coaches: [
+    { role: 'Head Coach', name: 'Brian Boone' },
+    { role: 'Assistant Coach', name: 'Nathan Cumme' },
+    { role: 'Assistant Coach', name: 'Luke Wright' }
+  ],
+  sections: [
+    { label: 'Varsity', color: '#f5a623', players: [
+      { name: 'Andrew Boone', senior: true },
+      { name: 'Kion Cumme', senior: true },
+      { name: 'Brent Benson', senior: true },
+      { name: 'Kai Stolaruk', senior: true },
+      { name: 'Shane Wright', senior: false },
+      { name: 'William Huffman', senior: true },
+      { name: 'Jack Grady', senior: false },
+      { name: 'Shane Nguyen', senior: false },
+      { name: 'Beckett Bierlin', senior: false },
+      { name: 'Luke Gass', senior: true }
+    ]},
+    { label: 'JV', color: '#3b82f6', players: [
+      { name: 'Thomas Stettin', senior: false },
+      { name: 'Matt Copelin', senior: false },
+      { name: 'Jackson Felsmann', senior: false },
+      { name: 'Joel Akins', senior: false },
+      { name: 'Brandon Clark', senior: false },
+      { name: 'Mason Dean', senior: false },
+      { name: 'August Larson', senior: true },
+      { name: 'Jackson Crane', senior: true },
+      { name: 'Jack Mastin', senior: true },
+      { name: 'Andrew Hoffman', senior: true },
+      { name: 'Hayden Pham', senior: false },
+      { name: 'Cameron Schurig', senior: false }
+    ]},
+    { label: 'Edison Team', color: 'rgba(255,255,255,0.55)', players: [
+      { name: 'Cooper Platt', senior: false },
+      { name: 'Tyler Tomlin', senior: false },
+      { name: 'Joe Ferrier', senior: false },
+      { name: 'Sean Cottrell', senior: false },
+      { name: 'Landon Megrin', senior: false },
+      { name: 'Nate Ferrier', senior: false },
+      { name: 'Stefan Molodoi', senior: false },
+      { name: 'Choe Jonathan', senior: false },
+      { name: 'Asher Schaumburg', senior: false },
+      { name: 'Paul Wakim', senior: false },
+      { name: 'Sam Brown', senior: false },
+      { name: 'Rowlson Rex', senior: false },
+      { name: 'Martinez Edmond', senior: false },
+      { name: 'Caleb McGary', senior: false },
+      { name: 'Nathan Santana', senior: false }
+    ]}
+  ]
+};
+
+let rosterData = JSON.parse(JSON.stringify(DEFAULT_ROSTER));
+
+function buildDefaultData() {
+  return {
+    about: DEFAULT_DATA.about,
+    facts: DEFAULT_DATA.facts,
+    coaches: DEFAULT_DATA.coaches,
+    roster: DEFAULT_ROSTER,
+    news: [...DEFAULT_NEWS],
+    igPosts: [],
+    appleAlbum: 'https://www.icloud.com/sharedalbum/#B2SGWZuqDGTLyIj',
+    gallery: DEFAULT_DATA.gallery
+  };
+}
+
+// Legacy wrappers so existing code still works
+async function loadSiteData() {
+  const d = await getAppData();
+  return { about: d.about, facts: d.facts, coaches: d.coaches, gallery: d.gallery };
+}
 async function saveSiteData(data) {
-  const json = JSON.stringify(data);
-  try { await window.storage.set(SITE_KEY, json, true); } catch {}
-  try { localStorage.setItem(SITE_KEY, json); } catch {}
+  _appData = { ..._appData, ...data };
+  await persistData();
+}
+async function loadNews() {
+  const d = await getAppData();
+  newsPosts = d.news || [...DEFAULT_NEWS];
+  renderNews();
+}
+async function saveNews() {
+  _appData.news = newsPosts;
+  await persistData();
+}
+async function loadIgPosts() {
+  const d = await getAppData();
+  igPosts = d.igPosts || [];
+}
+async function saveIgPosts() {
+  _appData.igPosts = igPosts;
+  await persistData();
+}
+async function loadRoster() {
+  const d = await getAppData();
+  rosterData = d.roster || JSON.parse(JSON.stringify(DEFAULT_ROSTER));
+  renderRoster();
+}
+async function saveRoster() {
+  _appData.roster = rosterData;
+  await persistData();
+}
+async function loadAppleAlbum() {
+  const d = await getAppData();
+  const url = d.appleAlbum || 'https://www.icloud.com/sharedalbum/#B2SGWZuqDGTLyIj';
+  document.getElementById('apple-album-url').value = url;
+  document.getElementById('apple-album-link').href = url;
+  document.getElementById('apple-album-card').style.display = 'block';
+}
+async function saveAppleAlbum() {
+  const url = document.getElementById('apple-album-url').value.trim();
+  if (!url) { alert('Please enter an iCloud album URL.'); return; }
+  _appData.appleAlbum = url;
+  await persistData();
+  document.getElementById('apple-album-link').href = url;
+  document.getElementById('apple-album-card').style.display = 'block';
+  document.getElementById('apple-album-form').style.display = 'none';
 }
 
 // Default data
@@ -1012,16 +1205,35 @@ let siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
 // INIT
 // ─────────────────────────────────────────────
 window.addEventListener('load', async () => {
-  const saved = await loadSiteData();
-  if (saved) siteData = { ...DEFAULT_DATA, ...saved };
+  // Load all data from GitHub in one fetch
+  const d = await getAppData();
+
+  // Apply site data (about, facts, coaches, gallery)
+  if (d.about) siteData.about = d.about;
+  if (d.facts) siteData.facts = d.facts;
+  if (d.coaches) siteData.coaches = d.coaches;
+  if (d.gallery) siteData.gallery = d.gallery;
   applyData();
   renderCoaches();
   renderGallery();
-  loadNews();
-  await loadIgPosts();
+
+  // News
+  newsPosts = d.news && d.news.length ? d.news : [...DEFAULT_NEWS];
+  renderNews();
+
+  // Instagram posts
+  igPosts = d.igPosts || [];
   renderIgPosts();
-  await loadAppleAlbum();
-  await loadRoster();
+
+  // Apple album
+  const albumUrl = d.appleAlbum || 'https://www.icloud.com/sharedalbum/#B2SGWZuqDGTLyIj';
+  document.getElementById('apple-album-url').value = albumUrl;
+  document.getElementById('apple-album-link').href = albumUrl;
+  document.getElementById('apple-album-card').style.display = 'block';
+
+  // Roster
+  rosterData = d.roster || JSON.parse(JSON.stringify(DEFAULT_ROSTER));
+  renderRoster();
 
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
@@ -1270,16 +1482,6 @@ function renderCoaches() {
     `</div>`;
 }
 
-function addCoach() {
-  siteData.coaches.push({ role: 'Coach Role', name: 'Coach Name', bio: 'Bio — click to edit in admin mode.' });
-  renderCoaches();
-}
-
-function removeCoach(i) {
-  if (!confirm('Remove this coach?')) return;
-  siteData.coaches.splice(i, 1);
-  renderCoaches();
-}
 
 // ─────────────────────────────────────────────
 function downloadIndexHTML() {
@@ -1313,6 +1515,7 @@ async function pushToGitHub() {
   const token = document.getElementById('gh-token-input').value.trim();
   if (!token) { setGhStatus('Please enter your GitHub token.', 'red'); return; }
   sessionStorage.setItem('gh_token', token);
+  _ghToken = token; // make available to data saves
 
   const btn = document.getElementById('gh-push-btn');
   btn.textContent = 'Pushing...';
@@ -1453,26 +1656,8 @@ function downloadResized() {
 // ─────────────────────────────────────────────
 // INSTAGRAM POSTS
 // ─────────────────────────────────────────────
-const IG_KEY = 'edison-ig-posts';
+// igPosts load/save handled by unified storage above
 let igPosts = [];
-
-async function loadIgPosts() {
-  try {
-    let r = null;
-    try { r = await window.storage.get(IG_KEY, true); } catch {}
-    if (r) { igPosts = JSON.parse(r.value); return; }
-    const local = localStorage.getItem(IG_KEY);
-    if (local) { igPosts = JSON.parse(local); return; }
-  } catch {}
-  igPosts = [];
-}
-
-async function saveIgPosts() {
-  const json = JSON.stringify(igPosts);
-  try { await window.storage.set(IG_KEY, json, true); } catch {}
-  try { localStorage.setItem(IG_KEY, json); } catch {}
-}
-
 function toggleIgAdmin() {
   const form = document.getElementById('ig-form');
   form.style.display = form.style.display === 'none' ? 'block' : 'none';
@@ -1594,39 +1779,10 @@ function removePhoto(i) {
 // ─────────────────────────────────────────────
 // NEWS / ANNOUNCEMENTS
 // ─────────────────────────────────────────────
-const NEWS_KEY = 'edison-bvb-news';
+// news load/save handled by unified storage above
 let newsPosts = [];
-
-const DEFAULT_NEWS = [
-  {
-    id: 'default-physical-day',
-    title: '🏥 Physical Day — May 30, 2026',
-    body: 'All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.',
-    date: new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'})
-  }
-];
 let newsAdminOpen = false;
 let isAdminOnNews = false;
-
-async function loadNews() {
-  try {
-    let r = null;
-    try { r = await window.storage.get(NEWS_KEY, true); } catch {}
-    if (r) { newsPosts = JSON.parse(r.value); renderNews(); return; }
-    const local = localStorage.getItem(NEWS_KEY);
-    if (local) { newsPosts = JSON.parse(local); renderNews(); return; }
-  } catch {}
-  // No saved posts — seed with defaults
-  newsPosts = [...DEFAULT_NEWS];
-  await saveNews();
-  renderNews();
-}
-
-async function saveNews() {
-  const json = JSON.stringify(newsPosts);
-  try { await window.storage.set(NEWS_KEY, json, true); } catch {}
-  try { localStorage.setItem(NEWS_KEY, json); } catch {}
-}
 
 function renderNews() {
   const container = document.getElementById('news-posts');
@@ -1761,79 +1917,7 @@ function doChangePw() {
 // ─────────────────────────────────────────────
 // ROSTER
 // ─────────────────────────────────────────────
-const ROSTER_KEY = 'edison-roster-v1';
-
-const DEFAULT_ROSTER = {
-  coaches: [
-    { role: 'Head Coach', name: 'Brian Boone' },
-    { role: 'Assistant Coach', name: 'Nathan Cumme' },
-    { role: 'Assistant Coach', name: 'Luke Wright' }
-  ],
-  sections: [
-    { label: 'Varsity', color: '#f5a623', players: [
-      { name: 'Andrew Boone', senior: true },
-      { name: 'Kion Cumme', senior: true },
-      { name: 'Brent Benson', senior: true },
-      { name: 'Kai Stolaruk', senior: true },
-      { name: 'Shane Wright', senior: false },
-      { name: 'William Huffman', senior: true },
-      { name: 'Jack Grady', senior: false },
-      { name: 'Shane Nguyen', senior: false },
-      { name: 'Beckett Bierlin', senior: false },
-      { name: 'Luke Gass', senior: true }
-    ]},
-    { label: 'JV', color: '#3b82f6', players: [
-      { name: 'Thomas Stettin', senior: false },
-      { name: 'Matt Copelin', senior: false },
-      { name: 'Jackson Felsmann', senior: false },
-      { name: 'Joel Akins', senior: false },
-      { name: 'Brandon Clark', senior: false },
-      { name: 'Mason Dean', senior: false },
-      { name: 'August Larson', senior: true },
-      { name: 'Jackson Crane', senior: true },
-      { name: 'Jack Mastin', senior: true },
-      { name: 'Andrew Hoffman', senior: true },
-      { name: 'Hayden Pham', senior: false },
-      { name: 'Cameron Schurig', senior: false }
-    ]},
-    { label: 'Edison Team', color: 'rgba(255,255,255,0.55)', players: [
-      { name: 'Cooper Platt', senior: false },
-      { name: 'Tyler Tomlin', senior: false },
-      { name: 'Joe Ferrier', senior: false },
-      { name: 'Sean Cottrell', senior: false },
-      { name: 'Landon Megrin', senior: false },
-      { name: 'Nate Ferrier', senior: false },
-      { name: 'Stefan Molodoi', senior: false },
-      { name: 'Choe Jonathan', senior: false },
-      { name: 'Asher Schaumburg', senior: false },
-      { name: 'Paul Wakim', senior: false },
-      { name: 'Sam Brown', senior: false },
-      { name: 'Rowlson Rex', senior: false },
-      { name: 'Martinez Edmond', senior: false },
-      { name: 'Caleb McGary', senior: false },
-      { name: 'Nathan Santana', senior: false }
-    ]}
-  ]
-};
-
-let rosterData = JSON.parse(JSON.stringify(DEFAULT_ROSTER));
-
-async function loadRoster() {
-  try {
-    let r = null;
-    try { r = await window.storage.get(ROSTER_KEY, true); } catch {}
-    if (r) { rosterData = JSON.parse(r.value); renderRoster(); return; }
-    const local = localStorage.getItem(ROSTER_KEY);
-    if (local) { rosterData = JSON.parse(local); renderRoster(); return; }
-  } catch {}
-  renderRoster();
-}
-
-async function saveRoster() {
-  const json = JSON.stringify(rosterData);
-  try { await window.storage.set(ROSTER_KEY, json, true); } catch {}
-  try { localStorage.setItem(ROSTER_KEY, json); } catch {}
-}
+// DEFAULT_ROSTER, rosterData, loadRoster, saveRoster all handled by unified storage above
 
 function renderRoster() {
   const container = document.getElementById('roster-container');
@@ -1932,35 +2016,11 @@ function addCoach() {
 // ─────────────────────────────────────────────
 // APPLE SHARED ALBUM
 // ─────────────────────────────────────────────
-const APPLE_ALBUM_KEY = 'edison-apple-album';
-
-async function loadAppleAlbum() {
-  const DEFAULT_ALBUM = 'https://www.icloud.com/sharedalbum/#B2SGWZuqDGTLyIj';
-  let url = DEFAULT_ALBUM;
-  try {
-    let r = null;
-    try { r = await window.storage.get(APPLE_ALBUM_KEY, true); } catch {}
-    if (r) url = r.value;
-    else url = localStorage.getItem(APPLE_ALBUM_KEY) || DEFAULT_ALBUM;
-  } catch {}
-  document.getElementById('apple-album-url').value = url;
-  document.getElementById('apple-album-link').href = url;
-  document.getElementById('apple-album-card').style.display = 'block';
-}
+// loadAppleAlbum and saveAppleAlbum handled by unified storage above
 
 function toggleAppleAlbumForm() {
   const form = document.getElementById('apple-album-form');
   form.style.display = form.style.display === 'none' ? 'block' : 'none';
-}
-
-async function saveAppleAlbum() {
-  const url = document.getElementById('apple-album-url').value.trim();
-  if (!url) { alert('Please enter an iCloud album URL.'); return; }
-  try { await window.storage.set(APPLE_ALBUM_KEY, url, true); } catch {}
-  try { localStorage.setItem(APPLE_ALBUM_KEY, url); } catch {}
-  document.getElementById('apple-album-link').href = url;
-  document.getElementById('apple-album-card').style.display = 'block';
-  document.getElementById('apple-album-form').style.display = 'none';
 }
 
 // Responsive news grid

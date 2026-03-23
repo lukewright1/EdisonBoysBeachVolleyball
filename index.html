@@ -561,12 +561,14 @@
 
   /* ── ADMIN EDITING ── */
   .admin-active .editable-field {
-    position: relative; cursor: pointer; border-radius: 2px;
-    transition: outline 0.2s, background 0.2s;
+    position: relative; cursor: pointer !important; border-radius: 2px;
+    outline: 2px dashed rgba(245,166,35,0.45);
+    outline-offset: 3px;
+    transition: outline-color 0.2s, background 0.2s;
   }
   .admin-active .editable-field:hover {
-    outline: 1px dashed rgba(245,166,35,0.6);
-    background: rgba(245,166,35,0.04);
+    outline-color: var(--gold);
+    background: rgba(245,166,35,0.07);
   }
   .edit-modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 500;
@@ -1191,7 +1193,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v3.9</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v4.0</div>
   </div>
 </footer>
 
@@ -1385,11 +1387,21 @@ let editListenersAttached = false;
 function attachEditListeners() {
   if (editListenersAttached) return;
   editListenersAttached = true;
-  document.addEventListener('click', function(e) {
+  // Use event delegation on document body
+  document.body.addEventListener('click', function(e) {
     if (!isAdmin) return;
-    const el = e.target.closest('.editable-field');
-    if (el) { e.preventDefault(); openEditModal(el); }
-  });
+    // Walk up the DOM to find an editable-field
+    let el = e.target;
+    while (el && el !== document.body) {
+      if (el.classList && el.classList.contains('editable-field')) {
+        e.preventDefault();
+        e.stopPropagation();
+        openEditModal(el);
+        return;
+      }
+      el = el.parentElement;
+    }
+  }, true); // Use capture phase so it fires before other handlers
 }
 
 // ─────────────────────────────────────────────

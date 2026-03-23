@@ -130,21 +130,22 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
 .event-card.is-tryout{border-left:3px solid var(--jv1)}
   .event-card.is-event{border-left:3px solid var(--jv2)}
 
-.ec-main{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:0;padding:0}
-.ec-date{padding:14px 20px;min-width:110px;text-align:center;border-right:1px solid var(--border);background:rgba(255,255,255,0.02)}
+.ec-main{display:grid;grid-template-columns:auto 1fr auto;align-items:stretch;gap:0;padding:0}
+.ec-date{padding:14px 20px;min-width:110px;text-align:center;border-right:1px solid var(--border);background:rgba(255,255,255,0.02);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .ec-day{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
 .ec-num{font-family:'Bebas Neue',sans-serif;font-size:54px;line-height:1;color:#fff}
 .ec-mon{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--gold)}
 
-.ec-info{padding:14px 18px;flex:1}
+.ec-info{padding:14px 18px;flex:1;min-width:0}
 .ec-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:#fff;line-height:1.15;margin-bottom:8px}
 .ec-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
 .ec-time{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;color:rgba(255,255,255,0.88);display:flex;align-items:center;gap:5px;letter-spacing:0.5px}
 .ec-loc{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;color:rgba(255,255,255,0.75);display:flex;align-items:center;gap:5px;letter-spacing:0.5px}
 .ec-note{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);margin-top:8px;line-height:1.5;letter-spacing:0.3px}
 
-.ec-teams{padding:12px 14px 12px 0;display:flex;flex-direction:column;gap:6px;align-items:flex-end;justify-content:center}
-.ec-actions{padding:8px 10px;display:flex;flex-direction:column;gap:4px;border-left:1px solid var(--border)}
+.ec-right{padding:12px 14px;display:flex;flex-direction:column;gap:6px;align-items:flex-end;justify-content:center;border-left:1px solid var(--border);min-width:110px}
+.ec-teams{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.ec-actions{display:flex;flex-direction:column;gap:4px;margin-top:6px;align-items:flex-end}
 
 .pill{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:3px;display:inline-block;white-space:nowrap}
 .pill-all{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25)}
@@ -218,10 +219,19 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
 @media(max-width:640px){
   header{padding:12px 14px}
   main{padding:20px 12px 60px}
-  .ec-main{grid-template-columns:72px 1fr auto}
-  .ec-actions{display:none}
-  .tt{padding:7px 14px 10px;font-size:16px}
+  .ec-main{grid-template-columns:68px 1fr auto}
+  .ec-date{padding:12px 8px;min-width:68px}
+  .ec-num{font-size:40px}
+  .ec-mon{font-size:14px}
+  .ec-info{padding:12px 10px}
+  .ec-title{font-size:18px}
+  .ec-time,.ec-loc{font-size:13px}
+  .ec-note{font-size:12px}
+  .ec-right{padding:8px;min-width:80px}
+  .pill{font-size:12px;padding:3px 8px}
+  .tt{padding:7px 10px 10px;font-size:14px}
   .fg{grid-template-columns:1fr}
+  .hact .btn span{display:none}
 }
 </style>
 </head>
@@ -892,8 +902,10 @@ function renderCard(e) {
         </div>
         ${e.note?`<div class="ec-note">📝 ${e.note}</div>`:''}
       </div>
-      <div class="ec-teams">${pills}</div>
-      ${adminBtns}
+      <div class="ec-right">
+        <div class="ec-teams">${pills}</div>
+        ${adminBtns}
+      </div>
     </div>
   </div>`;
 }
@@ -1450,6 +1462,6 @@ function setPlatform(n, btn) {
   });
 });
 </script>
-<div style="text-align:center;padding:16px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v2.1</div>
+<div style="text-align:center;padding:16px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v2.2</div>
 </body>
 </html>

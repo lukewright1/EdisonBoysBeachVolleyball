@@ -96,7 +96,7 @@
   .tab-btn:hover { color: var(--gold); }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-  #adminBtn { background: transparent; color: rgba(255,255,255,0.4); transition: background 0.2s, color 0.2s; }
+  #adminBtn { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.12); transition: background 0.2s, color 0.2s; }
   #adminBtn.admin-on { background: var(--green) !important; color: #fff !important; border-color: var(--green); }
 
   /* ── HERO ── */
@@ -860,7 +860,7 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
     <button class="tab-btn" onclick="showTab('roster')">Roster</button>
     <button class="tab-btn" onclick="showTab('news')">News</button>
     <button class="tab-btn" onclick="showTab('gallery')">Gallery</button>
-    <button id="adminBtn" onclick="toggleAdmin()" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:6px 14px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);">Admin</button>
+    <button id="adminBtn" onclick="toggleAdmin()" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:6px 14px;border-radius:2px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.25);">Admin</button>
   </div>
 </nav>
 
@@ -1504,7 +1504,7 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v6.8</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v7.0</div>
   </div>
 </footer>
 
@@ -2397,9 +2397,11 @@ function renderRoster() {
   if (isAdmin) html += `<button onclick="addCoach()" style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:6px 14px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.06);color:var(--gold);">+ Add Coach</button>`;
   html += `</div></div>`;
   rosterData.sections.forEach((sec, si) => {
-    html += `<div style="margin-bottom:40px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:12px;">${sec.label}</div><div style="max-width:500px;">`;
+    html += `<div style="margin-bottom:40px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:12px;">${sec.label}</div><div style="max-width:600px;">`;
     sec.players.forEach((p, pi) => {
-      html += `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;"><div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:${sec.color};">${p.name}${p.senior?` &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span>`:''}</div>${isAdmin?`<div style="display:flex;gap:6px;flex-shrink:0;margin-left:12px;"><button onclick="toggleSenior(${si},${pi})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(245,166,35,${p.senior?'0.6':'0.2'});background:rgba(245,166,35,${p.senior?'0.15':'0.04'});color:${p.senior?'var(--gold)':'rgba(245,166,35,0.4)'};">⚡</button><button onclick="editPlayer(${si},${pi})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(245,166,35,0.4);background:rgba(245,166,35,0.08);color:var(--gold);">✏️</button><button onclick="deletePlayer(${si},${pi})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);color:#f87171;">🗑</button></div>`:''}`;
+      const moveOpts = rosterData.sections.map((s,i) => i!==si ? `<option value="${i}">${s.label}</option>` : '').join('');
+      const moveBtn = isAdmin ? `<select onchange="movePlayer(${si},${pi},+this.value);this.value=''" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;cursor:pointer;padding:4px 6px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);"><option value="" disabled selected>Move →</option>${moveOpts}</select>` : '';
+      html += `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;"><div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:${sec.color};">${p.name}${p.senior?` &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span>`:''}</div>${isAdmin?`<div style="display:flex;gap:6px;flex-shrink:0;margin-left:12px;align-items:center;">${moveBtn}<button onclick="toggleSenior(${si},${pi})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(245,166,35,${p.senior?'0.6':'0.2'});background:rgba(245,166,35,${p.senior?'0.15':'0.04'});color:${p.senior?'var(--gold)':'rgba(245,166,35,0.4)'};">⚡</button><button onclick="editPlayer(${si},${pi})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(245,166,35,0.4);background:rgba(245,166,35,0.08);color:var(--gold);">✏️</button><button onclick="deletePlayer(${si},${pi})" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;cursor:pointer;padding:3px 8px;border-radius:2px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);color:#f87171;">🗑</button></div>`:''}`;
       html += `</div>`;
     });
     if (isAdmin) html += `<button onclick="addPlayer(${si})" style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:6px 14px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.06);color:var(--gold);">+ Add Player</button>`;
@@ -2412,6 +2414,12 @@ function toggleSenior(si,pi){rosterData.sections[si].players[pi].senior=!rosterD
 function editPlayer(si,pi){const p=rosterData.sections[si].players[pi];const n=prompt('Edit name:',p.name);if(n===null)return;rosterData.sections[si].players[pi].name=n.trim()||p.name;saveRoster();renderRoster();}
 function deletePlayer(si,pi){if(!confirm(`Remove ${rosterData.sections[si].players[pi].name}?`))return;rosterData.sections[si].players.splice(pi,1);saveRoster();renderRoster();}
 function addPlayer(si){const n=prompt('New player name:');if(!n||!n.trim())return;rosterData.sections[si].players.push({name:n.trim(),senior:false});saveRoster();renderRoster();}
+function movePlayer(fromSi, fromPi, toSi) {
+  const player = rosterData.sections[fromSi].players.splice(fromPi, 1)[0];
+  rosterData.sections[toSi].players.push(player);
+  saveRoster();
+  renderRoster();
+}
 function editCoach(ci){const c=rosterData.coaches[ci];const r=prompt('Role:',c.role);if(r===null)return;const n=prompt('Name:',c.name);if(n===null)return;rosterData.coaches[ci]={role:r.trim()||c.role,name:n.trim()||c.name};saveRoster();renderRoster();}
 function deleteCoach(ci){if(!confirm(`Remove ${rosterData.coaches[ci].name}?`))return;rosterData.coaches.splice(ci,1);saveRoster();renderRoster();}
 function addCoach(){const r=prompt('Role:');if(!r||!r.trim())return;const n=prompt('Name:');if(!n||!n.trim())return;rosterData.coaches.push({role:r.trim(),name:n.trim()});saveRoster();renderRoster();}

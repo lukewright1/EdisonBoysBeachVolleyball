@@ -56,5 +56,193 @@
       "body": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
       "date": "Mar 23, 2026"
     }
-  ]
+  ],
+  "roster": {
+    "coaches": [
+      {
+        "role": "Head Coach",
+        "name": "Brian Boone"
+      },
+      {
+        "role": "Assistant Coach",
+        "name": "Nathan Cumme"
+      },
+      {
+        "role": "Assistant Coach",
+        "name": "Luke Wright"
+      },
+      {
+        "role": "TEST",
+        "name": "TEST"
+      }
+    ],
+    "sections": [
+      {
+        "label": "Varsity",
+        "color": "#f5a623",
+        "players": [
+          {
+            "name": "Andrew Boone",
+            "senior": true
+          },
+          {
+            "name": "Kion Cumme",
+            "senior": true
+          },
+          {
+            "name": "Brent Benson",
+            "senior": true
+          },
+          {
+            "name": "Kai Stolaruk",
+            "senior": true
+          },
+          {
+            "name": "Shane Wright",
+            "senior": false
+          },
+          {
+            "name": "William Huffman",
+            "senior": true
+          },
+          {
+            "name": "Jack Grady",
+            "senior": false
+          },
+          {
+            "name": "Shane Nguyen",
+            "senior": false
+          },
+          {
+            "name": "Beckett Bierlin",
+            "senior": false
+          },
+          {
+            "name": "Luke Gass",
+            "senior": true
+          }
+        ]
+      },
+      {
+        "label": "JV",
+        "color": "#3b82f6",
+        "players": [
+          {
+            "name": "Thomas Stettin",
+            "senior": false
+          },
+          {
+            "name": "Matt Copelin",
+            "senior": false
+          },
+          {
+            "name": "Jackson Felsmann",
+            "senior": false
+          },
+          {
+            "name": "Joel Akins",
+            "senior": false
+          },
+          {
+            "name": "Brandon Clark",
+            "senior": false
+          },
+          {
+            "name": "Mason Dean",
+            "senior": false
+          },
+          {
+            "name": "August Larson",
+            "senior": true
+          },
+          {
+            "name": "Jackson Crane",
+            "senior": true
+          },
+          {
+            "name": "Jack Mastin",
+            "senior": true
+          },
+          {
+            "name": "Andrew Hoffman",
+            "senior": true
+          },
+          {
+            "name": "Hayden Pham",
+            "senior": false
+          },
+          {
+            "name": "Cameron Schurig",
+            "senior": false
+          }
+        ]
+      },
+      {
+        "label": "Edison Team",
+        "color": "rgba(255,255,255,0.55)",
+        "players": [
+          {
+            "name": "Cooper Platt",
+            "senior": false
+          },
+          {
+            "name": "Tyler Tomlin",
+            "senior": false
+          },
+          {
+            "name": "Joe Ferrier",
+            "senior": false
+          },
+          {
+            "name": "Sean Cottrell",
+            "senior": false
+          },
+          {
+            "name": "Landon Megrin",
+            "senior": false
+          },
+          {
+            "name": "Nate Ferrier",
+            "senior": false
+          },
+          {
+            "name": "Stefan Molodoi",
+            "senior": false
+          },
+          {
+            "name": "Choe Jonathan",
+            "senior": false
+          },
+          {
+            "name": "Asher Schaumburg",
+            "senior": false
+          },
+          {
+            "name": "Paul Wakim",
+            "senior": false
+          },
+          {
+            "name": "Sam Brown",
+            "senior": false
+          },
+          {
+            "name": "Rowlson Rex",
+            "senior": false
+          },
+          {
+            "name": "Martinez Edmond",
+            "senior": false
+          },
+          {
+            "name": "Caleb McGary",
+            "senior": false
+          },
+          {
+            "name": "Nathan Santana",
+            "senior": false
+          }
+        ]
+      }
+    ]
+  }
 }

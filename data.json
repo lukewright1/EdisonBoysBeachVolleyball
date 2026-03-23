@@ -116,6 +116,10 @@
           {
             "name": "Luke Gass",
             "senior": true
+          },
+          {
+            "name": "Matt Copelin",
+            "senior": false
           }
         ]
       },
@@ -123,10 +127,6 @@
         "label": "JV",
         "color": "#3b82f6",
         "players": [
-          {
-            "name": "Matt Copelin",
-            "senior": false
-          },
           {
             "name": "Jackson Felsmann",
             "senior": false

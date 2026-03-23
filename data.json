@@ -116,10 +116,6 @@
           {
             "name": "Luke Gass",
             "senior": true
-          },
-          {
-            "name": "Matt Copelin",
-            "senior": true
           }
         ]
       },
@@ -185,6 +181,10 @@
           },
           {
             "name": "Stefan Molodoi",
+            "senior": false
+          },
+          {
+            "name": "Matt Copelin",
             "senior": false
           }
         ]

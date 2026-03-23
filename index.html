@@ -953,7 +953,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v5.0</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v5.1</div>
   </div>
 </footer>
 
@@ -961,7 +961,7 @@
 // ─────────────────────────────────────────────
 // CONFIG
 // ─────────────────────────────────────────────
-const ADMIN_PW = 'chargers2025';
+const ADMIN_PW = 'chargers2026';
 const SITE_KEY = 'edison-site-data-v1';
 let isAdmin = false;
 let currentEditEl = null;
@@ -1103,7 +1103,7 @@ function showTab(name) {
 function toggleAdmin() {
   if (isAdmin) { logoutAdmin(); return; }
   const pw = prompt('Enter admin password:');
-  if (pw === ADMIN_PW) {
+  if (pw === getAdminPw()) {
     isAdmin = true;
     document.body.classList.add('admin-active');
     document.getElementById('adminBar').classList.add('open');
@@ -1710,6 +1710,55 @@ function deletePost(i) {
 
 // ─────────────────────────────────────────────
 // ─────────────────────────────────────────────
+// CHANGE PASSWORD
+// ─────────────────────────────────────────────
+const PW_KEY = 'edison-admin-pw';
+
+function getAdminPw() {
+  return localStorage.getItem(PW_KEY) || ADMIN_PW;
+}
+
+function showChangePw() {
+  document.getElementById('changePwOverlay').style.display = 'flex';
+  document.getElementById('pw-current').value = '';
+  document.getElementById('pw-new').value = '';
+  document.getElementById('pw-confirm').value = '';
+  document.getElementById('pw-status').textContent = '';
+  setTimeout(() => document.getElementById('pw-current').focus(), 80);
+}
+
+function closeChangePw() {
+  document.getElementById('changePwOverlay').style.display = 'none';
+}
+
+function doChangePw() {
+  const current = document.getElementById('pw-current').value;
+  const newPw = document.getElementById('pw-new').value;
+  const confirm = document.getElementById('pw-confirm').value;
+  const status = document.getElementById('pw-status');
+
+  if (current !== getAdminPw()) {
+    status.textContent = '❌ Current password is incorrect.';
+    status.style.color = '#f87171';
+    return;
+  }
+  if (!newPw || newPw.length < 6) {
+    status.textContent = '❌ New password must be at least 6 characters.';
+    status.style.color = '#f87171';
+    return;
+  }
+  if (newPw !== confirm) {
+    status.textContent = '❌ Passwords do not match.';
+    status.style.color = '#f87171';
+    return;
+  }
+  localStorage.setItem(PW_KEY, newPw);
+  status.textContent = '✅ Password changed successfully!';
+  status.style.color = '#4ade80';
+  setTimeout(() => closeChangePw(), 1500);
+}
+
+// ─────────────────────────────────────────────
 // ROSTER
 // ─────────────────────────────────────────────
 const ROSTER_KEY = 'edison-roster-v1';
@@ -1929,7 +1978,29 @@ window.addEventListener('resize', adjustNewsGrid);
   <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
     <button onclick="saveAllEdits()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);">Save All</button>
     <button onclick="showGithubPush()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:none;background:var(--green);color:#fff;">⬆ Push to GitHub</button>
+    <button onclick="showChangePw()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text-muted);">🔑 Password</button>
     <button onclick="logoutAdmin()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text-muted);">Exit Admin</button>
+  </div>
+</div>
+
+<!-- CHANGE PASSWORD MODAL -->
+<div id="changePwOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;align-items:center;justify-content:center;">
+  <div style="background:#0d1e3a;border:1px solid rgba(245,166,35,0.3);border-radius:4px;padding:28px;width:90%;max-width:420px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">🔑 Change Password</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:18px;">Changes take effect immediately on this device. Update the code in the file to make it permanent.</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+      <input id="pw-current" type="password" placeholder="Current password"
+        style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:2px;color:#fff;font-family:'Barlow',sans-serif;font-size:14px;padding:10px 12px;width:100%;" />
+      <input id="pw-new" type="password" placeholder="New password"
+        style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:2px;color:#fff;font-family:'Barlow',sans-serif;font-size:14px;padding:10px 12px;width:100%;" />
+      <input id="pw-confirm" type="password" placeholder="Confirm new password"
+        style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:2px;color:#fff;font-family:'Barlow',sans-serif;font-size:14px;padding:10px 12px;width:100%;" />
+    </div>
+    <div id="pw-status" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:14px;min-height:18px;"></div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="doChangePw()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:9px 22px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);">Save Password</button>
+      <button onclick="closeChangePw()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:9px 22px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text-muted);">Cancel</button>
+    </div>
   </div>
 </div>
 

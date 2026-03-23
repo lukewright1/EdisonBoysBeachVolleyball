@@ -705,24 +705,20 @@
 <!-- ══════════════════ TAB: ROSTER ══════════════════ -->
 <div id="tab-roster" class="tab-content">
   <div class="page-section">
-    <div class="section-label reveal">Staff</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;" class="reveal">
-      <h2 class="section-title" style="margin-bottom:0;">COACHING STAFF</h2>
-      <button id="add-coach-btn" onclick="addCoach()" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 16px;border-radius:2px;border:1px solid rgba(245,166,35,0.4);background:rgba(245,166,35,0.08);color:var(--gold);">✚ Add Coach</button>
-    </div>
-    <div class="coaches-row reveal" id="coaches-container" style="grid-template-columns: 1fr 1fr; gap: 24px;"></div>
-  </div>
-
-  <div class="section-divider"></div>
-
-  <div class="page-section">
     <div class="section-label reveal">The Team</div>
     <h2 class="section-title reveal">ROSTER</h2>
-    <div>
+    <div class="reveal">
     <div style="margin-bottom:40px;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:16px;">Varsity</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:12px;">Coaching Staff</div>
       <div style="max-width:500px;">
-        <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Andrew Boone &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
+        <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:12px;"><span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);min-width:130px;">Head Coach</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#fff;">Brian Boone</span></div>
+        <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:12px;"><span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);min-width:130px;">Assistant Coach</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#fff;">Nathan Cumme</span></div>
+        <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:12px;"><span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);min-width:130px;">Assistant Coach</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#fff;">Luke Wright</span></div>
+      </div>
+    </div>
+    <div style="margin-bottom:40px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:12px;">Varsity</div>
+      <div style="max-width:500px;"><div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Andrew Boone &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Kion Cumme &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Brent Benson &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Kai Stolaruk &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
@@ -731,13 +727,11 @@
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Jack Grady</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Shane Nguyen</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Beckett Bierlin</div>
-<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Luke Gass &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
-      </div>
+<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f5a623;">Luke Gass &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div></div>
     </div>
     <div style="margin-bottom:40px;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:16px;">JV</div>
-      <div style="max-width:500px;">
-        <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Thomas Stettin</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:12px;">JV</div>
+      <div style="max-width:500px;"><div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Thomas Stettin</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Matt Copelin</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Jackson Felsmann</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Joel Akins</div>
@@ -748,13 +742,11 @@
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Jack Mastin &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Andrew Hoffman &nbsp;<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);">⚡ Senior</span></div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Hayden Pham</div>
-<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Cameron Schurig</div>
-      </div>
+<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#3b82f6;">Cameron Schurig</div></div>
     </div>
     <div style="margin-bottom:40px;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:16px;">Edison Team</div>
-      <div style="max-width:500px;">
-        <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Cooper Platt</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);border-left:3px solid var(--gold);padding-left:14px;margin-bottom:12px;">Edison Team</div>
+      <div style="max-width:500px;"><div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Cooper Platt</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Tyler Tomlin</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Joe Ferrier</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Sean Cottrell</div>
@@ -768,10 +760,11 @@
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Rowlson Rex</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Martinez Edmond</div>
 <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Caleb McGary</div>
-<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Nathan Santana</div>
-      </div>
+<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:rgba(255,255,255,0.55);">Nathan Santana</div></div>
     </div>
     </div>
+  </div>
+</div>
 
 <!-- ══════════════════ TAB: NEWS ══════════════════ -->
 <div id="tab-news" class="tab-content">
@@ -1014,7 +1007,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v4.2</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v4.3</div>
   </div>
 </footer>
 

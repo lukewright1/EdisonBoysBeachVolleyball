@@ -1,1 +1,46 @@
-{}
+{
+  "about": {
+    "p1": "Edison High School's Boys Beach Volleyball program is one of the top club programs in Orange County. The team competes in the Orange County Volleyball Beach League (OCVBL), a club sport featuring some of the most competitive schools in Southern California. This is not a CIF program.",
+    "p2": "The program runs as a <strong>fall sport</strong>, typically beginning the week before school starts and running through playoffs in mid-to-late October. Athletes develop the serving, passing, setting, and competitive instincts needed to go up against Orange County's best and earn their spot at the next level.",
+    "p3": "The team practices at <strong>Newland Beach Volleyball Courts</strong> in Huntington Beach, right in the heart of Surf City USA, the same sand that has produced some of the country's finest beach volleyball players."
+  },
+  "facts": {
+    "league": "Orange County Volleyball Beach League (OCVBL)",
+    "season": "Fall (Aug – Oct)",
+    "practice": "Newland Beach Courts, HB"
+  },
+  "coaches": [
+    {
+      "role": "Head Coach",
+      "name": "Brian Boone",
+      "bio": "An Edison High School alumnus and former collegiate indoor player at UCLA, Coach Boone brings an elite competitive background to the program. He also serves as an Edison US History and CIBACS teacher — deeply rooted in the school and community he coaches for. Under his leadership the Chargers have become one of Orange County's most competitive OCVBL programs."
+    },
+    {
+      "role": "Assistant Coaches",
+      "name": "Nathan Cumme & Luke Wright",
+      "bio": "Nathan and Luke bring additional coaching depth to the Chargers, supporting player development at Newland Beach Volleyball Courts throughout the fall season."
+    }
+  ],
+  "gallery": [
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full-2025.jpg",
+      "caption": "Full Team 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2025.jpg",
+      "caption": "JV Team 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv1-2025.jpg",
+      "caption": "JV1 Team 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2025.jpg",
+      "caption": "Varsity 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-jv2-2025.jpg",
+      "caption": "Varsity JV2 2025"
+    }
+  ]
+}

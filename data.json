@@ -245,25 +245,6 @@
   ],
   "events": [
     {
-      "type": "game",
-      "teams": [
-        "all"
-      ],
-      "time": "15:30",
-      "endtime": "17:00",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Test",
-      "ha": "home",
-      "result": "win",
-      "score": "5-1",
-      "note": "Just a test",
-      "year": 2026,
-      "id": "mn49i741oexp",
-      "date": "2026-03-28",
-      "series": null
-    },
-    {
       "id": "0le9l3n4sffds54semmq4g650v@google.com",
       "type": "event",
       "teams": [

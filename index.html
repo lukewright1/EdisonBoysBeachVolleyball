@@ -1439,7 +1439,7 @@ main{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v7.5</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v7.8</div>
   </div>
 </footer>
 
@@ -1519,10 +1519,10 @@ window.addEventListener('load', async () => {
 
   const saved = await loadSiteData();
   if (saved) siteData = { ...DEFAULT_DATA, ...saved };
-  applyData();
+  applyData(); // Apply immediately with defaults or saved data
   renderCoaches();
   renderGallery();
-  loadNews();
+  loadNews(); // async but doesn't block
   await loadIgPosts();
   renderIgPosts();
   await loadAppleAlbum();
@@ -1541,7 +1541,10 @@ window.addEventListener('load', async () => {
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
   document.querySelectorAll('.stat-card').forEach((c,i) => c.style.transitionDelay = i*0.07+'s');
-  setTimeout(triggerReveals, 200);
+  // Trigger reveals immediately for elements already in view, and again after render
+  triggerReveals();
+  setTimeout(triggerReveals, 100);
+  setTimeout(triggerReveals, 500);
 
   // nav
   const nav = document.querySelector('nav');
@@ -2509,10 +2512,7 @@ function durToEndTime(startTime, durMins) {
   return String(eh).padStart(2,'0') + ':' + String(em).padStart(2,'0');
 }
 const GCAL_ICAL = 'https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics';
-const CORS_PROXIES = [
-  'https://api.allorigins.win/raw?url=',
-  'https://corsproxy.io/?url=',
-];
+const CORS_PROXIES = ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?url='];
 
 function fetchWithTimeout(url, ms) {
   return new Promise((resolve, reject) => {
@@ -2524,34 +2524,79 @@ function fetchWithTimeout(url, ms) {
 async function fetchIcal() {
   for (const proxy of CORS_PROXIES) {
     try {
-      const url = proxy + encodeURIComponent(GCAL_ICAL);
-      const res = await fetchWithTimeout(url, 8000);
-      if (res.ok) {
-        const text = await res.text();
-        if (text.includes('BEGIN:VCALENDAR')) return text;
-      }
-    } catch(e) { console.warn('Proxy failed:', proxy, e.message); }
+      const res = await fetchWithTimeout(proxy + encodeURIComponent(GCAL_ICAL), 8000);
+      if (res.ok) { const t = await res.text(); if (t.includes('BEGIN:VCALENDAR')) return t; }
+    } catch(e) { console.warn('Proxy failed:', e.message); }
   }
   return null;
 }
 
+const GCAL_ID = '72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678@group.calendar.google.com';
+const GCAL_API_KEY = ''; // Leave blank — we use the public embed JSON feed instead
+const GCAL_JSON = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=AIzaSyD-placeholder&orderBy=startTime&singleEvents=true&timeMin=${new Date().toISOString()}`;
+
+// Use Google's public calendar feed (no API key needed for public calendars)
+const GCAL_PUBLIC_FEED = `https://www.google.com/calendar/feeds/${encodeURIComponent(GCAL_ID)}/public/full?alt=json&orderby=starttime&sortorder=ascending&singleevents=true&futureevents=true`;
+
 async function loadEvents() {
+  const sched = document.getElementById('sched');
+  if (sched) sched.innerHTML = '<div class="empty" style="padding:40px 0;text-align:center;font-family:\'Barlow Condensed\',sans-serif;color:rgba(255,255,255,0.4);font-size:14px;letter-spacing:1px;">Loading schedule...</div>';
+
+  // 1. iCal via CORS proxy — works on all browsers including Safari
   try {
     const ical = await fetchIcal();
     if (ical) {
       const parsed = parseIcal(ical);
       if (parsed.length) { events = parsed; render(); return; }
     }
-  } catch(e) { console.warn('iCal load failed, using fallback:', e); }
+  } catch(e) { console.warn('iCal fetch failed:', e.message); }
+
+  // 2. Google public JSON feed fallback
+  try {
+    const res = await fetchWithTimeout(GCAL_PUBLIC_FEED, 8000);
+    if (res.ok) {
+      const data = await res.json();
+      const entries = data.feed && data.feed.entry;
+      if (entries && entries.length) {
+        events = entries.map(entry => {
+          const title = (entry.title && entry.title.$t) || 'Event';
+          const when = entry['gd$when'] && entry['gd$when'][0];
+          const startRaw = (when && when.startTime) || '';
+          const endRaw   = (when && when.endTime) || '';
+          const loc = (entry['gd$where'] && entry['gd$where'][0] && entry['gd$where'][0].valueString) || PRACTICE_LOC;
+          const note = (entry.content && entry.content.$t) || '';
+          let date = '', time = '', dur = 90, year = new Date().getFullYear();
+          if (startRaw) {
+            date = startRaw.slice(0, 10);
+            year = parseInt(date.slice(0, 4));
+            if (startRaw.includes('T')) {
+              const d = new Date(startRaw);
+              const pt = new Date(d.getTime() - (7 * 60 * 60 * 1000));
+              time = String(pt.getUTCHours()).padStart(2,'0') + ':' + String(pt.getUTCMinutes()).padStart(2,'0');
+              if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
+            }
+          }
+          const sl = title.toLowerCase();
+          let type = 'event';
+          if (sl.includes(' vs ') || sl.includes('game')) type = 'game';
+          else if (sl.includes('tryout')) type = 'tryout';
+          return { id: uid(), type, teams:['all'], date, time, dur, loc,
+            opponent: title, ha:'home',
+            result: date < new Date().toISOString().slice(0,10) ? 'past' : 'tbd',
+            score:'', note, year, series: null };
+        });
+        render(); return;
+      }
+    }
+  } catch(e) { console.warn('Google JSON feed failed:', e.message); }
+
+  // 3. Final fallback: data.json saved events
   try {
     const d = await getAppData();
-    if (d.events && d.events.length) { events = d.events; return; }
-  } catch {}
-  try {
-    const local = localStorage.getItem('edison-bvb-events-v2');
-    if (local) { events = JSON.parse(local); return; }
+    if (d.events && d.events.length) { events = d.events; render(); return; }
   } catch {}
   events = getDefaults();
+  render();
 }
 
 function parseIcal(ical) {

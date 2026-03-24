@@ -242,5 +242,80 @@
       "url": "https://www.instagram.com/p/DO86pNxD_WT/",
       "added": "3/23/2026"
     }
+  ],
+  "events": [
+    {
+      "type": "game",
+      "teams": [
+        "all"
+      ],
+      "time": "15:30",
+      "endtime": "17:00",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Test",
+      "ha": "home",
+      "result": "win",
+      "score": "5-1",
+      "note": "Just a test",
+      "year": 2026,
+      "id": "mn49i741oexp",
+      "date": "2026-03-28",
+      "series": null
+    },
+    {
+      "id": "0le9l3n4sffds54semmq4g650v@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-05-30",
+      "time": "10:00",
+      "dur": 240,
+      "loc": "Edison High School, 21400 Magnolia St, Huntington Beach, CA 92646, USA",
+      "opponent": "ALL - Edison Physical Day",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "2ndvbvbbaa6j172f7pghs9se1k@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-08-18",
+      "time": "10:00",
+      "dur": 30,
+      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
+      "opponent": "TEST - Varsity - Edison v Newport Harbor",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
+      "type": "tryout",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-08-26",
+      "time": "15:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
+      "opponent": "Possible Tryout Date",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    }
   ]
 }

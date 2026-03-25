@@ -186,10 +186,6 @@
           {
             "name": "Matt Copelin",
             "senior": false
-          },
-          {
-            "name": "TEST",
-            "senior": true
           }
         ]
       },
@@ -236,6 +232,10 @@
           {
             "name": "Nathan Santana",
             "senior": false
+          },
+          {
+            "name": "TEST",
+            "senior": true
           }
         ]
       }

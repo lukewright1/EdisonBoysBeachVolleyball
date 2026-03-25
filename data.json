@@ -189,7 +189,7 @@
           },
           {
             "name": "TEST",
-            "senior": false
+            "senior": true
           }
         ]
       },

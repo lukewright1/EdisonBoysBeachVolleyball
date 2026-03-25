@@ -165,11 +165,10 @@
   body {
     padding-bottom: calc(56px + env(safe-area-inset-bottom));
   }
-  /* Adjust nav - just show logo + admin, no tabs */
+  /* Keep nav logo visible - just hide the tab row inside it */
   nav {
     padding: 10px 16px !important;
-    flex-wrap: nowrap !important;
-    justify-content: space-between;
+    flex-wrap: wrap !important;
   }
   /* Admin bar sits above bottom nav */
   .admin-bar {
@@ -774,7 +773,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v8.8</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v8.9</div>
   </div>
 </footer>
 

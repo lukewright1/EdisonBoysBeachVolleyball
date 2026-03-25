@@ -279,6 +279,61 @@
       "note": "",
       "year": 2026,
       "series": null
+    },
+    {
+      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-02",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Edison - First day of school",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-07",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "No School - Labor Day",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "760b169lv6utaj4284m1ng9nvs@google.com",
+      "type": "game",
+      "teams": [
+        "jv1"
+      ],
+      "date": "2026-09-09",
+      "time": "15:45",
+      "dur": 75,
+      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
+      "opponent": "Varsity - Edison vs Newport Harbor",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "Varsity - Edison vs Newport Harbor @ Grant St in Newport Beach",
+      "year": 2026,
+      "series": null,
+      "endtime": "17:00"
     }
   ]
 }

@@ -263,24 +263,6 @@
       "series": null
     },
     {
-      "id": "2ndvbvbbaa6j172f7pghs9se1k@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-08-18",
-      "time": "10:00",
-      "dur": 30,
-      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
-      "opponent": "TEST - Varsity - Edison v Newport Harbor",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
       "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
       "type": "tryout",
       "teams": [

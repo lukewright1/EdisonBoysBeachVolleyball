@@ -59,180 +59,63 @@
   ],
   "roster": {
     "coaches": [
-      {
-        "role": "Head Coach",
-        "name": "Brian Boone"
-      },
-      {
-        "role": "Assistant Coach",
-        "name": "Nathan Cumme"
-      },
-      {
-        "role": "Assistant Coach",
-        "name": "Luke Wright"
-      }
+      { "role": "Head Coach",       "name": "Brian Boone"    },
+      { "role": "Assistant Coach",  "name": "Nathan Cumme"   },
+      { "role": "Assistant Coach",  "name": "Luke Wright"    }
     ],
     "sections": [
       {
         "label": "Varsity",
         "color": "#f5a623",
         "players": [
-          {
-            "name": "Andrew Boone",
-            "senior": true
-          },
-          {
-            "name": "Kion Cumme",
-            "senior": true
-          },
-          {
-            "name": "Brent Benson",
-            "senior": true
-          },
-          {
-            "name": "Kai Stolaruk",
-            "senior": true
-          },
-          {
-            "name": "Shane Wright",
-            "senior": false
-          },
-          {
-            "name": "William Huffman",
-            "senior": true
-          },
-          {
-            "name": "Jack Grady",
-            "senior": false
-          },
-          {
-            "name": "Shane Nguyen",
-            "senior": false
-          },
-          {
-            "name": "Beckett Bierlin",
-            "senior": false
-          },
-          {
-            "name": "Luke Gass",
-            "senior": true
-          },
-          {
-            "name": "Mason Dean",
-            "senior": false
-          }
+          { "name": "Andrew Boone",    "senior": true  },
+          { "name": "Kion Cumme",      "senior": true  },
+          { "name": "Brent Benson",    "senior": true  },
+          { "name": "Kai Stolaruk",    "senior": true  },
+          { "name": "Shane Wright",    "senior": false },
+          { "name": "William Huffman", "senior": true  },
+          { "name": "Jack Grady",      "senior": false },
+          { "name": "Shane Nguyen",    "senior": false },
+          { "name": "Beckett Bierlin", "senior": false },
+          { "name": "Luke Gass",       "senior": true  },
+          { "name": "Mason Dean",      "senior": false }
         ]
       },
       {
         "label": "JV",
         "color": "#3b82f6",
         "players": [
-          {
-            "name": "Jackson Felsmann",
-            "senior": false
-          },
-          {
-            "name": "Joel Akins",
-            "senior": false
-          },
-          {
-            "name": "Brandon Clark",
-            "senior": false
-          },
-          {
-            "name": "August Larson",
-            "senior": true
-          },
-          {
-            "name": "Jackson Crane",
-            "senior": true
-          },
-          {
-            "name": "Jack Mastin",
-            "senior": true
-          },
-          {
-            "name": "Andrew Hoffman",
-            "senior": true
-          },
-          {
-            "name": "Hayden Pham",
-            "senior": false
-          },
-          {
-            "name": "Cameron Schurig",
-            "senior": false
-          },
-          {
-            "name": "Cooper Platt",
-            "senior": false
-          },
-          {
-            "name": "Tyler Tomlin",
-            "senior": false
-          },
-          {
-            "name": "Joe Ferrier",
-            "senior": false
-          },
-          {
-            "name": "Sean Cottrell",
-            "senior": false
-          },
-          {
-            "name": "Stefan Molodoi",
-            "senior": false
-          },
-          {
-            "name": "Matt Copelin",
-            "senior": false
-          }
+          { "name": "Jackson Felsmann", "senior": false },
+          { "name": "Joel Akins",       "senior": false },
+          { "name": "Brandon Clark",    "senior": false },
+          { "name": "August Larson",    "senior": true  },
+          { "name": "Jackson Crane",    "senior": true  },
+          { "name": "Jack Mastin",      "senior": true  },
+          { "name": "Andrew Hoffman",   "senior": true  },
+          { "name": "Hayden Pham",      "senior": false },
+          { "name": "Cameron Schurig",  "senior": false },
+          { "name": "Cooper Platt",     "senior": false },
+          { "name": "Tyler Tomlin",     "senior": false },
+          { "name": "Joe Ferrier",      "senior": false },
+          { "name": "Sean Cottrell",    "senior": false },
+          { "name": "Stefan Molodoi",   "senior": false },
+          { "name": "Matt Copelin",     "senior": false }
         ]
       },
       {
         "label": "Edison Team",
         "color": "rgba(255,255,255,0.55)",
         "players": [
-          {
-            "name": "Landon Megrin",
-            "senior": false
-          },
-          {
-            "name": "Nate Ferrier",
-            "senior": false
-          },
-          {
-            "name": "Choe Jonathan",
-            "senior": false
-          },
-          {
-            "name": "Asher Schaumburg",
-            "senior": false
-          },
-          {
-            "name": "Paul Wakim",
-            "senior": false
-          },
-          {
-            "name": "Sam Brown",
-            "senior": false
-          },
-          {
-            "name": "Rex Rowlson",
-            "senior": false
-          },
-          {
-            "name": "Edmond Martinez",
-            "senior": false
-          },
-          {
-            "name": "Caleb McGary",
-            "senior": false
-          },
-          {
-            "name": "Nathan Santana",
-            "senior": false
-          }
+          { "name": "Landon Megrin",    "senior": false },
+          { "name": "Nate Ferrier",     "senior": false },
+          { "name": "Choe Jonathan",    "senior": false },
+          { "name": "Asher Schaumburg", "senior": false },
+          { "name": "Paul Wakim",       "senior": false },
+          { "name": "Sam Brown",        "senior": false },
+          { "name": "Rex Rowlson",      "senior": false },
+          { "name": "Edmond Martinez",  "senior": false },
+          { "name": "Caleb McGary",     "senior": false },
+          { "name": "Nathan Santana",   "senior": false }
         ]
       }
     ]
@@ -243,97 +126,5 @@
       "added": "3/23/2026"
     }
   ],
-  "events": [
-    {
-      "id": "0le9l3n4sffds54semmq4g650v@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-05-30",
-      "time": "10:00",
-      "dur": 240,
-      "loc": "Edison High School, 21400 Magnolia St, Huntington Beach, CA 92646, USA",
-      "opponent": "ALL - Edison Physical Day",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
-      "type": "tryout",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-08-26",
-      "time": "15:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
-      "opponent": "Possible Tryout Date",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-02",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Edison - First day of school",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-07",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "No School - Labor Day",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "760b169lv6utaj4284m1ng9nvs@google.com",
-      "type": "game",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-09-09",
-      "time": "15:45",
-      "dur": 75,
-      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
-      "opponent": "Varsity - Edison vs Newport Harbor",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "Varsity - Edison vs Newport Harbor @ Grant St in Newport Beach",
-      "year": 2026,
-      "series": null,
-      "endtime": "17:00"
-    }
-  ]
+  "events": []
 }

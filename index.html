@@ -882,7 +882,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.4</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.6</div>
   </div>
 </footer>
 
@@ -1681,7 +1681,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v10.4'; // bump when defaults change
+const DATA_VERSION = 'v10.6'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -3296,7 +3296,14 @@ document.getElementById('calModal').addEventListener('click', function(e) {
     <!-- iPhone instructions -->
     <div id="calModal-iphone">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">📱 Subscribe on iPhone</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1px;margin-bottom:18px;">All games & events will appear in your iPhone Calendar and update automatically</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1px;margin-bottom:14px;">All games & events will appear in your iPhone Calendar and update automatically</div>
+
+      <!-- Try direct subscribe first -->
+      <a href="webcal://://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics" onclick="dismissSubscribePrompt(true)" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px 20px;border-radius:2px;background:var(--gold);color:var(--navy);text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px;-webkit-tap-highlight-color:transparent;">
+        ＋ Subscribe to Calendar
+      </a>
+
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,0.2);text-align:center;letter-spacing:0.5px;margin-bottom:18px;">If nothing happens, use the manual steps below</div>
 
       <!-- Step 1: Copy URL -->
       <div style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.2);border-radius:3px;padding:14px 16px;margin-bottom:16px;">

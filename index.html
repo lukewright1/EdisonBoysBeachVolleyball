@@ -723,7 +723,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v9.4</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v9.6</div>
   </div>
 </footer>
 
@@ -1518,7 +1518,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v9.4'; // bump when defaults change
+const DATA_VERSION = 'v9.6'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -1925,7 +1925,7 @@ async function _refreshEventsBackground() {
       if (entries && entries.length) {
           // cache these too
         events = entries.map(entry => {
-          const title = (entry.title && entry.title.$t) || 'Event';
+          const rawTitle = (entry.title && entry.title.$t) || 'Event';
           const when = entry['gd$when'] && entry['gd$when'][0];
           const startRaw = (when && when.startTime) || '';
           const endRaw   = (when && when.endTime) || '';
@@ -1942,23 +1942,85 @@ async function _refreshEventsBackground() {
               if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
             }
           }
-          const sl = title.toLowerCase();
-          let type = 'event';
-          if (sl.includes(' vs ') || sl.includes('game')) type = 'game';
-          else if (sl.includes('tryout')) type = 'tryout';
-          return { id: uid(), type, teams:['all'], date, time, dur, loc,
-            opponent: title, ha:'home',
-            result: date < new Date().toISOString().slice(0,10) ? 'past' : 'tbd',
-            score:'', note, year, series: null };
+          // Apply same prefix + result parsing as iCal
+          const parsed = parseTitlePrefixes(rawTitle, date);
+          return { id: uid(), ...parsed, date, time, dur, loc, note, year, series: null };
         });
+        try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
         render(); return;
       }
     }
   } catch(e) { console.warn('Google JSON feed failed:', e.message); }
 
-  // 3. Final fallback - show empty state, don't pull stale data.json events
+  // 2. iCal via CORS proxy — backup for when JSON feed fails
+  try {
+    const ical = await fetchIcal();
+    if (ical) {
+      const parsed = parseIcal(ical);
+      if (parsed.length) {
+        events = parsed;
+        try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
+        render(); return;
+      }
+    }
+  } catch(e) { console.warn('iCal proxy fetch failed:', e.message); }
+
+  // 3. Final fallback — keep showing cached events if we have them, don't wipe to empty
+  try {
+    const lsCache = localStorage.getItem('gcal-events-cache');
+    if (lsCache) {
+      const cached = JSON.parse(lsCache);
+      if (cached.length) { events = cached; render(); return; }
+    }
+  } catch {}
+
   events = [];
   render();
+}
+
+
+// ── Shared title prefix + result parser (used by both iCal and JSON feed) ──
+function parseTitlePrefixes(summary, date) {
+  let cleanSummary = summary;
+  let teams = ['all'];
+  const prefixMap = [
+    { pattern: /^\[V\]\s*/i,    teams: ['varsity'] },
+    { pattern: /^\[VAR\]\s*/i,  teams: ['varsity'] },
+    { pattern: /^\[JV1\]\s*/i,  teams: ['jv1'] },
+    { pattern: /^\[JV2\]\s*/i,  teams: ['jv2'] },
+    { pattern: /^\[JV\]\s*/i,   teams: ['jv1','jv2'] },
+    { pattern: /^\[ALL\]\s*/i,  teams: ['all'] },
+  ];
+  for (const pm of prefixMap) {
+    if (pm.pattern.test(cleanSummary)) {
+      teams = pm.teams;
+      cleanSummary = cleanSummary.replace(pm.pattern, '').trim();
+      break;
+    }
+  }
+  let calResult = null, calScore = '';
+  const resultRx = /^(W|L)\s+([\d]+[–\-][\d]+)\s*/i;
+  const rm = cleanSummary.match(resultRx);
+  if (rm) {
+    calResult = rm[1].toUpperCase() === 'W' ? 'win' : 'loss';
+    calScore  = rm[2];
+    cleanSummary = cleanSummary.replace(resultRx, '').trim();
+  }
+  const sl = cleanSummary.toLowerCase();
+  let type = 'event';
+  if (sl.includes(' vs ') || sl.includes('game') || sl.includes('match')) type = 'game';
+  else if (calResult) type = 'game';
+  else if (sl.includes('tryout')) type = 'tryout';
+  else if (sl.includes('practice')) type = 'practice';
+
+  const today = new Date().toISOString().slice(0,10);
+  const eventId = date + '-' + cleanSummary.slice(0,20);
+  const overrides = getResultOverrides();
+  const ov = overrides[eventId] || {};
+  const result = ov.result !== undefined ? ov.result : calResult ? calResult : date < today ? 'past' : 'tbd';
+  const score  = ov.score  !== undefined ? ov.score  : calScore;
+
+  return { type, teams, opponent: cleanSummary, ha: 'home', result, score };
 }
 
 function parseIcal(ical) {
@@ -2161,7 +2223,11 @@ function render() {
   });
 
   if (!evts.length) {
-    container.innerHTML = `<div class="empty">No events scheduled for ${curYear}.<br>${schedAdminOn?'Use the form above to add events.':'Check back soon.'}</div>`;
+    container.innerHTML = `<div class="empty" style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+      <div style="font-size:28px;">🏐</div>
+      <div>${schedAdminOn?'No events yet — use the form above to add events.':'Schedule coming soon — check back later.'}</div>
+      ${!schedAdminOn?`<button onclick="loadEvents();render();" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);color:var(--gold);">↻ Refresh Schedule</button>`:''}
+    </div>`;
     return;
   }
 

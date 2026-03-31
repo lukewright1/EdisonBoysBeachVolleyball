@@ -882,7 +882,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.2</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.4</div>
   </div>
 </footer>
 
@@ -1681,7 +1681,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v10.2'; // bump when defaults change
+const DATA_VERSION = 'v10.4'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -3044,7 +3044,7 @@ document.getElementById('lightbox').addEventListener('touchend', e => {
 
 // ── Calendar Subscribe Prompt ──
 const CAL_SUBSCRIBE_KEY = 'edison-cal-subscribed';
-const WEBCAL_URL = 'webcal://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics';
+
 
 function initSubscribePrompt() {
   // Don't show if already dismissed or subscribed
@@ -3295,43 +3295,37 @@ document.getElementById('calModal').addEventListener('click', function(e) {
 
     <!-- iPhone instructions -->
     <div id="calModal-iphone">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">📱 Add to iPhone Calendar</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1px;margin-bottom:14px;">Subscribes to the full calendar — all events update automatically</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">📱 Subscribe on iPhone</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1px;margin-bottom:18px;">All games & events will appear in your iPhone Calendar and update automatically</div>
 
-      <!-- Try webcal:// first — works on many iOS devices -->
-      <a href="webcal://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics" onclick="dismissSubscribePrompt(true)" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:12px 20px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;">
-        ＋ Tap to Add Calendar
-      </a>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,0.25);text-align:center;letter-spacing:1px;margin-bottom:16px;">If nothing happens, use the manual steps below</div>
-
-      <!-- Big copy URL box -->
-      <div style="background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.2);border-radius:3px;padding:16px;margin-bottom:20px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">① Copy this Calendar URL</div>
+      <!-- Step 1: Copy URL -->
+      <div style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.2);border-radius:3px;padding:14px 16px;margin-bottom:16px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Step 1 — Copy this URL</div>
         <div style="display:flex;gap:8px;align-items:center;">
-          <input id="ical-url-input" readonly value="https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics" style="flex:1;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:2px;color:rgba(255,255,255,0.6);font-family:monospace;font-size:10px;padding:10px;min-width:0;" />
-          <button onclick="copyIcalUrl()" id="copy-btn" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;padding:10px 18px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);flex-shrink:0;white-space:nowrap;">Copy</button>
+          <input id="ical-url-input" readonly value="https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics" style="flex:1;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:2px;color:rgba(255,255,255,0.55);font-family:monospace;font-size:10px;padding:9px 10px;min-width:0;" />
+          <button onclick="copyIcalUrl()" id="copy-btn" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;padding:10px 16px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);flex-shrink:0;">Copy</button>
         </div>
-        <div id="copy-confirm" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:#4ade80;letter-spacing:1px;margin-top:8px;opacity:0;transition:opacity 0.3s;">✓ Copied!</div>
+        <div id="copy-confirm" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:#4ade80;letter-spacing:1px;margin-top:6px;min-height:16px;opacity:0;transition:opacity 0.3s;">✓ Copied to clipboard!</div>
       </div>
 
-      <!-- Steps -->
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px;">② Then follow these steps</div>
-      <ol style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+      <!-- Step 2: Settings path -->
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px;">Step 2 — Open iPhone Settings</div>
+      <ol style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:4px;">
         <li style="display:flex;gap:10px;align-items:flex-start;">
           <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;">Open <strong style="color:#fff;">Settings</strong> on your iPhone</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5;">Go to <strong style="color:#fff;">Settings → Calendar</strong></span>
         </li>
         <li style="display:flex;gap:10px;align-items:flex-start;">
           <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">2</span>
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;"><strong style="color:#fff;">Calendar → Accounts → Add Account → Other</strong></span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5;">Tap <strong style="color:#fff;">Accounts → Add Account → Other</strong></span>
         </li>
         <li style="display:flex;gap:10px;align-items:flex-start;">
           <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">3</span>
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;">Tap <strong style="color:#fff;">Add Subscribed Calendar</strong></span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5;">Tap <strong style="color:#fff;">Add Subscribed Calendar</strong></span>
         </li>
         <li style="display:flex;gap:10px;align-items:flex-start;">
           <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">4</span>
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;">Paste the URL → tap <strong style="color:#fff;">Next → Save</strong></span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5;">Paste the URL in the <strong style="color:#fff;">Server</strong> field → tap <strong style="color:#fff;">Next → Save</strong></span>
         </li>
       </ol>
     </div>

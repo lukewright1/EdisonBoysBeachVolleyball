@@ -882,7 +882,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.0</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.1</div>
   </div>
 </footer>
 
@@ -1681,7 +1681,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v10.0'; // bump when defaults change
+const DATA_VERSION = 'v10.1'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -3058,16 +3058,16 @@ function initSubscribePrompt() {
       <div class="cal-prompt-icon">📅</div>
       <div class="cal-prompt-text">
         <div class="cal-prompt-title">Subscribe to Calendar</div>
-        <div class="cal-prompt-sub">Get games, practices & tryouts automatically on your phone</div>
+        <div class="cal-prompt-sub">Get game reminders on your phone — updates automatically</div>
       </div>
     </div>
     <div class="cal-prompt-actions">
-      <a href="${WEBCAL_URL}" class="cal-subscribe-btn" onclick="dismissSubscribePrompt(true)" style="background:var(--gold);color:var(--navy);">
+      <button class="cal-subscribe-btn" onclick="showCalModal('iphone')" style="background:var(--gold);color:var(--navy);">
         📱 iPhone / iCal
-      </a>
-      <a href="https://calendar.google.com/calendar/r?cid=72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com" target="_blank" class="cal-subscribe-btn" onclick="dismissSubscribePrompt(true)" style="background:rgba(255,255,255,0.08);color:var(--white);border:1px solid rgba(255,255,255,0.15);">
+      </button>
+      <button class="cal-subscribe-btn" onclick="showCalModal('google')" style="background:rgba(255,255,255,0.08);color:var(--white);border:1px solid rgba(255,255,255,0.15);">
         Google Calendar
-      </a>
+      </button>
       <button class="cal-dismiss-btn" onclick="dismissSubscribePrompt(false)">Not now</button>
     </div>
   `;
@@ -3152,6 +3152,43 @@ function renderRecords() {
   bar.innerHTML = cards.join('');
   bar.style.display = 'flex';
 }
+
+
+// ── Calendar Subscribe Modal ──
+function showCalModal(type) {
+  document.getElementById('calModal-iphone').style.display = type === 'iphone' ? 'block' : 'none';
+  document.getElementById('calModal-google').style.display = type === 'google' ? 'block' : 'none';
+  const modal = document.getElementById('calModal');
+  modal.style.display = 'flex';
+  if (type === 'iphone') dismissSubscribePrompt(true);
+}
+
+function closeCalModal() {
+  document.getElementById('calModal').style.display = 'none';
+}
+
+function copyIcalUrl() {
+  const url = 'https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics';
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const confirm = document.getElementById('copy-confirm');
+    btn.textContent = 'Copied!';
+    confirm.style.opacity = '1';
+    setTimeout(() => { btn.textContent = 'Copy'; confirm.style.opacity = '0'; }, 2500);
+  }).catch(() => {
+    // Fallback for older iOS
+    const input = document.getElementById('ical-url-input');
+    input.select();
+    document.execCommand('copy');
+    document.getElementById('copy-confirm').style.opacity = '1';
+    setTimeout(() => document.getElementById('copy-confirm').style.opacity = '0', 2500);
+  });
+}
+
+// Close modal on backdrop click
+document.getElementById('calModal').addEventListener('click', function(e) {
+  if (e.target === this) closeCalModal();
+});
 
 </script>
 
@@ -3248,6 +3285,62 @@ function renderRecords() {
   <div id="lightbox-caption"></div>
   <div id="lightbox-counter"></div>
   <button class="lightbox-btn" id="lightbox-next" onclick="lightboxNav(1); event.stopPropagation();">&#8250;</button>
+</div>
+
+
+<!-- CALENDAR SUBSCRIBE MODAL -->
+<div id="calModal" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#0d1e3a;border:1px solid rgba(245,166,35,0.25);border-radius:4px;padding:28px;width:100%;max-width:440px;position:relative;">
+    <button onclick="closeCalModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:20px;cursor:pointer;line-height:1;">✕</button>
+
+    <!-- iPhone instructions -->
+    <div id="calModal-iphone">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">📱 Add to iPhone Calendar</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1px;margin-bottom:20px;">Subscribes to the full calendar — all events update automatically</div>
+
+      <!-- Big copy URL box -->
+      <div style="background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.2);border-radius:3px;padding:16px;margin-bottom:20px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">① Copy this Calendar URL</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="ical-url-input" readonly value="https://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics" style="flex:1;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:2px;color:rgba(255,255,255,0.6);font-family:monospace;font-size:10px;padding:10px;min-width:0;" />
+          <button onclick="copyIcalUrl()" id="copy-btn" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;padding:10px 18px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);flex-shrink:0;white-space:nowrap;">Copy</button>
+        </div>
+        <div id="copy-confirm" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:#4ade80;letter-spacing:1px;margin-top:8px;opacity:0;transition:opacity 0.3s;">✓ Copied!</div>
+      </div>
+
+      <!-- Steps -->
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px;">② Then follow these steps</div>
+      <ol style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="display:flex;gap:10px;align-items:flex-start;">
+          <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">1</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;">Open <strong style="color:#fff;">Settings</strong> on your iPhone</span>
+        </li>
+        <li style="display:flex;gap:10px;align-items:flex-start;">
+          <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">2</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;"><strong style="color:#fff;">Calendar → Accounts → Add Account → Other</strong></span>
+        </li>
+        <li style="display:flex;gap:10px;align-items:flex-start;">
+          <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">3</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;">Tap <strong style="color:#fff;">Add Subscribed Calendar</strong></span>
+        </li>
+        <li style="display:flex;gap:10px;align-items:flex-start;">
+          <span style="background:var(--green);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">4</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.4;">Paste the URL → tap <strong style="color:#fff;">Next → Save</strong></span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Google Calendar instructions -->
+    <div id="calModal-google" style="display:none;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">Google Calendar</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1px;margin-bottom:20px;">Click the button below to subscribe</div>
+      <a href="https://calendar.google.com/calendar/r?cid=72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com" target="_blank" onclick="dismissSubscribePrompt(true);closeCalModal();" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:12px 24px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;">
+        Open in Google Calendar ↗
+      </a>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,0.35);line-height:1.6;">This opens Google Calendar where you'll see an <strong style="color:rgba(255,255,255,0.5);">"Add calendar"</strong> prompt. You must be signed into your Google account.</div>
+    </div>
+
+  </div>
 </div>
 
 </body>

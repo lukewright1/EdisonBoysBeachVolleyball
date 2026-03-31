@@ -882,7 +882,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.6</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v10.8</div>
   </div>
 </footer>
 
@@ -1681,7 +1681,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v10.6'; // bump when defaults change
+const DATA_VERSION = 'v10.8'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -3062,8 +3062,9 @@ function initSubscribePrompt() {
       </div>
     </div>
     <div class="cal-prompt-actions">
-      <button class="cal-subscribe-btn" onclick="showCalModal('iphone')" style="background:var(--gold);color:var(--navy);">
-        📱 iPhone / iCal
+      <button class="cal-subscribe-btn" onclick="showCalModal('iphone')" style="background:var(--gold);color:var(--navy);display:inline-flex;align-items:center;gap:7px;">
+        <svg width="13" height="16" viewBox="0 0 13 16" fill="currentColor"><path d="M10.5 0H2.5C1.4 0 .5.9.5 2v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm-4 14.5c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm4-3H2.5V2H10.5v9.5z"/></svg>
+        iPhone / iCal
       </button>
       <button class="cal-subscribe-btn" onclick="showCalModal('google')" style="background:rgba(255,255,255,0.08);color:var(--white);border:1px solid rgba(255,255,255,0.15);">
         Google Calendar
@@ -3300,7 +3301,7 @@ document.getElementById('calModal').addEventListener('click', function(e) {
 
       <!-- Try direct subscribe first -->
       <a href="webcal://://calendar.google.com/calendar/ical/72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678%40group.calendar.google.com/public/basic.ics" onclick="dismissSubscribePrompt(true)" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px 20px;border-radius:2px;background:var(--gold);color:var(--navy);text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px;-webkit-tap-highlight-color:transparent;">
-        ＋ Subscribe to Calendar
+        Add to Calendar
       </a>
 
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,0.2);text-align:center;letter-spacing:0.5px;margin-bottom:18px;">If nothing happens, use the manual steps below</div>

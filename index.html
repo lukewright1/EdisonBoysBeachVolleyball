@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.3</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.5</div>
   </div>
 </footer>
 
@@ -1678,7 +1678,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v11.3'; // bump when defaults change
+const DATA_VERSION = 'v11.5'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2032,7 +2032,7 @@ async function fetchIcal() {
 }
 
 const GCAL_ID = '72c69450d0398d42b97c7cfc03ca9903de1adc6caf78186a31fbf5543fb5b678@group.calendar.google.com';
-const GCAL_API_KEY = ''; // Leave blank — we use the public embed JSON feed instead
+const GCAL_API_KEY = 'AIzaSyBJN5xRYjKZGCjpMF8BPnyfLSx0qylIWFs'; // Leave blank — we use the public embed JSON feed instead
 const GCAL_JSON = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=AIzaSyD-placeholder&orderBy=startTime&singleEvents=true&timeMin=${new Date().toISOString()}`;
 
 // Use Google's public calendar feed (no API key needed for public calendars)
@@ -2063,20 +2063,41 @@ async function loadEvents() {
 }
 
 async function _refreshEventsBackground() {
-  // 1. iCal via CORS proxy — works on all browsers including Safari
+  // 1. Google Calendar API v3 — direct, no proxy, fastest (needs API key)
   try {
-    const ical = await fetchIcal();
-    if (ical) {
-      const parsed = parseIcal(ical);
-      if (parsed.length) {
-        events = parsed;
-        try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
-        render(); return;
+    if (GCAL_API_KEY) {
+      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear(), 0, 1).toISOString()}&maxResults=100`;
+      const res = await fetchWithTimeout(url, 4000);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.items && data.items.length) {
+          events = data.items.map(item => {
+            const rawTitle = item.summary || 'Event';
+            const startRaw = (item.start && (item.start.dateTime || item.start.date)) || '';
+            const endRaw   = (item.end   && (item.end.dateTime   || item.end.date))   || '';
+            const loc  = item.location || PRACTICE_LOC;
+            const note = item.description || '';
+            let date = '', time = '', dur = 90, year = new Date().getFullYear();
+            if (startRaw) {
+              date = startRaw.slice(0, 10);
+              year = parseInt(date.slice(0, 4));
+              if (startRaw.includes('T')) {
+                const d = new Date(startRaw);
+                time = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+                if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
+              }
+            }
+            const parsed = parseTitlePrefixes(rawTitle, date);
+            return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
+          });
+          try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
+          render(); return;
+        }
       }
     }
-  } catch(e) { console.warn('iCal fetch failed:', e.message); }
+  } catch(e) { console.warn('API v3 failed:', e.message); }
 
-  // 2. Google public JSON feed fallback
+  // 2. Google public JSON feed — no proxy needed
   try {
     const res = await fetchWithTimeout(GCAL_PUBLIC_FEED, 4000);
     if (res.ok) {

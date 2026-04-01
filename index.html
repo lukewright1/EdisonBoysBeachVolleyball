@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.1</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.3</div>
   </div>
 </footer>
 
@@ -1679,7 +1679,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v12.1'; // bump when defaults change
+const DATA_VERSION = 'v12.3'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2058,12 +2058,21 @@ async function _refreshEventsBackground() {
             let date = '', time = '', dur = 90, year = new Date().getFullYear();
             if (startRaw) {
               if (startRaw.includes('T')) {
-                // Timed event — use local date/time from Date object
+                // Timed event — parse timezone offset directly from string
+                console.log('RAW startRaw:', startRaw);
                 const d = new Date(startRaw);
-                const yr = d.getFullYear();
-                const mo = String(d.getMonth()+1).padStart(2,'0');
-                const dy = String(d.getDate()).padStart(2,'0');
-                date = `${yr}-${mo}-${dy}`;
+                // Extract date from the original string if it has timezone offset
+                // e.g. "2026-04-01T17:30:00-07:00" -> use "2026-04-01" directly
+                if (startRaw.match(/[+-]\d{2}:\d{2}$/)) {
+                  // Has explicit timezone offset — use date portion directly
+                  date = startRaw.slice(0, 10);
+                } else {
+                  // UTC or no offset — convert to local
+                  const yr = d.getFullYear();
+                  const mo = String(d.getMonth()+1).padStart(2,'0');
+                  const dy = String(d.getDate()).padStart(2,'0');
+                  date = `${yr}-${mo}-${dy}`;
+                }
                 time = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
                 if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
               } else {
@@ -2210,22 +2219,31 @@ function parseIcal(ical) {
     const dtRaw = get('DTSTART');
     let date = '', time = '', year = new Date().getFullYear(), dur = 90;
     if (dtRaw) {
-      const dt = dtRaw.replace(/[TZ]/g,'');
-      const y = dt.slice(0,4), mo = dt.slice(4,6), d = dt.slice(6,8);
-      date = `${y}-${mo}-${d}`; year = parseInt(y);
       if (dtRaw.includes('T')) {
-        const h = parseInt(dt.slice(8,10)), mn = parseInt(dt.slice(10,12));
-        const ptH = ((h - 7) + 24) % 24;
-        time = String(ptH).padStart(2,'0') + ':' + String(mn).padStart(2,'0');
+        // Timed event — use Date object for proper local timezone conversion
+        const y = dtRaw.slice(0,4), mo = dtRaw.slice(4,6), d = dtRaw.slice(6,8);
+        const h = dtRaw.slice(9,11), mn = dtRaw.slice(11,13);
+        const startLocal = new Date(`${y}-${mo}-${d}T${h}:${mn}:00Z`);
+        date = startLocal.getFullYear() + '-' +
+               String(startLocal.getMonth()+1).padStart(2,'0') + '-' +
+               String(startLocal.getDate()).padStart(2,'0');
+        year = startLocal.getFullYear();
+        time = String(startLocal.getHours()).padStart(2,'0') + ':' +
+               String(startLocal.getMinutes()).padStart(2,'0');
         const dtEnd = get('DTEND');
-        if (dtEnd) {
-          const ed = dtEnd.replace(/[TZ]/g,'');
-          const eh = ((parseInt(ed.slice(8,10)) - 7) + 24) % 24;
-          const em = parseInt(ed.slice(10,12));
-          const sm = parseInt(time.slice(0,2))*60 + parseInt(time.slice(3,5));
-          const endm = eh*60 + em;
+        if (dtEnd && dtEnd.includes('T')) {
+          const ey = dtEnd.slice(0,4), emo = dtEnd.slice(4,6), ed = dtEnd.slice(6,8);
+          const eh = dtEnd.slice(9,11), em = dtEnd.slice(11,13);
+          const endLocal = new Date(`${ey}-${emo}-${ed}T${eh}:${em}:00Z`);
+          const sm = startLocal.getHours()*60 + startLocal.getMinutes();
+          const endm = endLocal.getHours()*60 + endLocal.getMinutes();
           if (endm > sm) dur = endm - sm;
         }
+      } else {
+        // All-day event — date string is YYYYMMDD, no timezone conversion needed
+        const y = dtRaw.slice(0,4), mo = dtRaw.slice(4,6), d = dtRaw.slice(6,8);
+        date = `${y}-${mo}-${d}`;
+        year = parseInt(y);
       }
     }
     const summary = getML('SUMMARY').replace(/\\n/g,' ').replace(/\\,/g,',').replace(/\\/g,'');

@@ -245,6 +245,24 @@
   ],
   "events": [
     {
+      "id": "2n83dtf051vehh0olot3pds4vk@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-04-01",
+      "time": "17:30",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Indoor Boys - Edison @ Marina HS",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "Join Edison's indoor team to battle vs Marina HS at Marina. \nJV & Fr/So - 4:30p\nVarsity - 5:30p",
+      "year": 2026,
+      "series": null
+    },
+    {
       "id": "0le9l3n4sffds54semmq4g650v@google.com",
       "type": "event",
       "teams": [
@@ -263,42 +281,6 @@
       "series": null
     },
     {
-      "id": "EF755751-B23A-4B43-BD7B-6F56A2ACBA02",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-04-05",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Easter TEST",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-07",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "No School - Labor Day",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
       "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
       "type": "tryout",
       "teams": [
@@ -309,24 +291,6 @@
       "dur": 120,
       "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
       "opponent": "Possible Tryout Date",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-02",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Edison - First day of school",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -353,20 +317,56 @@
       "series": null
     },
     {
-      "id": "2n83dtf051vehh0olot3pds4vk@google.com",
+      "id": "EF755751-B23A-4B43-BD7B-6F56A2ACBA02",
       "type": "event",
       "teams": [
         "all"
       ],
-      "date": "2026-04-01",
-      "time": "17:30",
+      "date": "2026-04-05",
+      "time": "",
       "dur": 90,
       "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Indoor Boys - Edison @ Marina HS",
+      "opponent": "Easter",
       "ha": "home",
       "result": "tbd",
       "score": "",
-      "note": "Join Edison's indoor team to battle vs Marina HS at Marina. \nJV & Fr/So - 4:30p\nVarsity - 5:30p",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-02",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Edison - First day of school",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-07",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "No School - Labor Day",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
       "year": 2026,
       "series": null
     }

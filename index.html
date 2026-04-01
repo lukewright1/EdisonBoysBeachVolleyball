@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.9</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.0</div>
   </div>
 </footer>
 
@@ -1679,7 +1679,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v11.9'; // bump when defaults change
+const DATA_VERSION = 'v12.0'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2057,13 +2057,20 @@ async function _refreshEventsBackground() {
             const note = item.description || '';
             let date = '', time = '', dur = 90, year = new Date().getFullYear();
             if (startRaw) {
-              date = startRaw.slice(0, 10);
-              year = parseInt(date.slice(0, 4));
               if (startRaw.includes('T')) {
+                // Timed event — use local date/time from Date object
                 const d = new Date(startRaw);
+                const yr = d.getFullYear();
+                const mo = String(d.getMonth()+1).padStart(2,'0');
+                const dy = String(d.getDate()).padStart(2,'0');
+                date = `${yr}-${mo}-${dy}`;
                 time = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
                 if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
+              } else {
+                // All-day event — date string is already local
+                date = startRaw.slice(0, 10);
               }
+              year = parseInt(date.slice(0, 4));
             }
             const parsed = parseTitlePrefixes(rawTitle, date);
             return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
@@ -2092,14 +2099,18 @@ async function _refreshEventsBackground() {
           const note = (entry.content && entry.content.$t) || '';
           let date = '', time = '', dur = 90, year = new Date().getFullYear();
           if (startRaw) {
-            date = startRaw.slice(0, 10);
-            year = parseInt(date.slice(0, 4));
             if (startRaw.includes('T')) {
               const d = new Date(startRaw);
-              const pt = new Date(d.getTime() - (7 * 60 * 60 * 1000));
-              time = String(pt.getUTCHours()).padStart(2,'0') + ':' + String(pt.getUTCMinutes()).padStart(2,'0');
+              const yr = d.getFullYear();
+              const mo = String(d.getMonth()+1).padStart(2,'0');
+              const dy = String(d.getDate()).padStart(2,'0');
+              date = `${yr}-${mo}-${dy}`;
+              time = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
               if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
+            } else {
+              date = startRaw.slice(0, 10);
             }
+            year = parseInt(date.slice(0, 4));
           }
           // Apply same prefix + result parsing as iCal
           const parsed = parseTitlePrefixes(rawTitle, date);

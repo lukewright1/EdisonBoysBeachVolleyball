@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.7</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.9</div>
   </div>
 </footer>
 
@@ -1696,7 +1696,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v12.7'; // bump when defaults change
+const DATA_VERSION = 'v12.9'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2051,10 +2051,18 @@ const GCAL_JSON = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIC
 const GCAL_PUBLIC_FEED = `https://www.google.com/calendar/feeds/${encodeURIComponent(GCAL_ID)}/public/full?alt=json&orderby=starttime&sortorder=ascending&singleevents=true&futureevents=true`;
 
 async function loadEvents() {
-  const sched = document.getElementById('sched');
-  // Always fetch fresh — API v3 is fast enough, no cache needed
-  if (sched) sched.innerHTML = '<div class="empty" style="padding:40px 0;text-align:center;font-family:\'Barlow Condensed\',sans-serif;color:rgba(255,255,255,0.4);font-size:14px;letter-spacing:1px;">Loading schedule…</div>';
-  await _refreshEventsBackground();
+  // Step 1: Show data.json events INSTANTLY (zero network wait)
+  try {
+    const d = await getAppData();
+    if (d && d.events && d.events.length) {
+      events = d.events;
+      render(); buildYearSelector(); updateCounts();
+    }
+  } catch {}
+
+  // Step 2: Silently refresh from Google Calendar in background
+  // Don't await — let it update without blocking the UI
+  _refreshEventsBackground().catch(() => {});
 }
 
 async function _refreshEventsBackground() {
@@ -2066,6 +2074,15 @@ async function _refreshEventsBackground() {
     done = true;
     events = evtList;
     render(); buildYearSelector(); updateCounts();
+    // Write fresh events back to data.json so next load is instant
+    try {
+      getAppData().then(d => {
+        if (d) {
+          d.events = evtList;
+          persistData();
+        }
+      });
+    } catch {}
   };
 
   // Build API v3 promise
@@ -2426,7 +2443,7 @@ function render() {
     container.innerHTML = `<div class="empty" style="display:flex;flex-direction:column;align-items:center;gap:16px;">
       <div style="font-size:28px;">🏐</div>
       <div>${schedAdminOn?'No events yet — use the form above to add events.':'Schedule coming soon — check back later.'}</div>
-      ${!schedAdminOn?`<button onclick="sessionStorage.removeItem('gcal-ical-cache');loadEvents();" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);color:var(--gold);">↻ Refresh Schedule</button>`:''}
+      ${!schedAdminOn?`<button onclick="loadEvents();" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);color:var(--gold);">↻ Refresh Schedule</button>`:''}
     </div>`;
     return;
   }

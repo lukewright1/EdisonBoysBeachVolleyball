@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.0</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.1</div>
   </div>
 </footer>
 
@@ -1679,7 +1679,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v12.0'; // bump when defaults change
+const DATA_VERSION = 'v12.1'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2044,7 +2044,7 @@ async function _refreshEventsBackground() {
   // 1. Google Calendar API v3 — direct, no proxy, fastest (needs API key)
   try {
     if (GCAL_API_KEY) {
-      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear(), 0, 1).toISOString()}&timeMax=${new Date(new Date().getFullYear(), 11, 31).toISOString()}&maxResults=100`;
+      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear() - 1, 11, 1).toISOString()}&maxResults=250`;
       const res = await fetchWithTimeout(url, 4000);
       if (res.ok) {
         const data = await res.json();
@@ -2080,7 +2080,7 @@ async function _refreshEventsBackground() {
         }
       }
     }
-  } catch(e) { console.warn('API v3 failed:', e.message); }
+  } catch(e) { console.warn('API v3 failed:', e.message, e); }
 
   // 2. Google public JSON feed — no proxy needed
   try {

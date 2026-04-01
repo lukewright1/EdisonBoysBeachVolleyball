@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.8</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.9</div>
   </div>
 </footer>
 
@@ -996,6 +996,7 @@ window.addEventListener('load', async () => {
   buildYearSelector();
   updateCounts();
   render();
+  startAutoRefresh();
 
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
@@ -1678,7 +1679,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v11.8'; // bump when defaults change
+const DATA_VERSION = 'v11.9'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -1974,6 +1975,7 @@ window.addEventListener('load', async () => {
   buildYearSelector();
   updateCounts();
   render();
+  startAutoRefresh();
 });
 
 // Calculate duration from start/end time
@@ -2006,14 +2008,7 @@ function fetchWithTimeout(url, ms) {
 }
 
 async function fetchIcal() {
-  // Check session cache first — avoid re-fetching on tab switches
-  try {
-    const cached = sessionStorage.getItem('gcal-ical-cache');
-    const cachedTime = sessionStorage.getItem('gcal-ical-time');
-    if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 2 * 60 * 1000) {
-      return cached; // Use cache if less than 2 minutes old
-    }
-  } catch {}
+  // No session cache — always fetch fresh
 
   for (const proxy of CORS_PROXIES) {
     try {
@@ -2040,24 +2035,7 @@ const GCAL_PUBLIC_FEED = `https://www.google.com/calendar/feeds/${encodeURICompo
 
 async function loadEvents() {
   const sched = document.getElementById('sched');
-
-  // 0. Show localStorage cache INSTANTLY while fetching in background
-  try {
-    const lsCache = localStorage.getItem('gcal-events-cache');
-    const lsTime  = localStorage.getItem('gcal-events-time');
-    if (lsCache && lsTime && (Date.now() - parseInt(lsTime)) < 5 * 60 * 1000) {
-      const cached = JSON.parse(lsCache);
-      if (cached.length) {
-        events = cached;
-        render(); // show immediately
-        // Still refresh in background — but don't block UI
-        _refreshEventsBackground();
-        return;
-      }
-    }
-  } catch {}
-
-  // No cache — show loading spinner and fetch
+  // Always fetch fresh — API v3 is fast enough, no cache needed
   if (sched) sched.innerHTML = '<div class="empty" style="padding:40px 0;text-align:center;font-family:\'Barlow Condensed\',sans-serif;color:rgba(255,255,255,0.4);font-size:14px;letter-spacing:1px;">Loading schedule…</div>';
   await _refreshEventsBackground();
 }
@@ -2090,7 +2068,7 @@ async function _refreshEventsBackground() {
             const parsed = parseTitlePrefixes(rawTitle, date);
             return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
           });
-          try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
+          // no localStorage cache — always fetch fresh
           render(); buildYearSelector(); updateCounts(); return;
         }
       }
@@ -2127,7 +2105,7 @@ async function _refreshEventsBackground() {
           const parsed = parseTitlePrefixes(rawTitle, date);
           return { id: uid(), ...parsed, date, time, dur, loc, note, year, series: null };
         });
-        try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
+        // no localStorage cache — always fetch fresh
         render(); buildYearSelector(); updateCounts(); return;
       }
     }
@@ -2140,7 +2118,7 @@ async function _refreshEventsBackground() {
       const parsed = parseIcal(ical);
       if (parsed.length) {
         events = parsed;
-        try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
+        // no localStorage cache — always fetch fresh
         render(); buildYearSelector(); updateCounts(); return;
       }
     }
@@ -2408,7 +2386,7 @@ function render() {
     container.innerHTML = `<div class="empty" style="display:flex;flex-direction:column;align-items:center;gap:16px;">
       <div style="font-size:28px;">🏐</div>
       <div>${schedAdminOn?'No events yet — use the form above to add events.':'Schedule coming soon — check back later.'}</div>
-      ${!schedAdminOn?`<button onclick="localStorage.removeItem('gcal-events-cache');localStorage.removeItem('gcal-ical-cache');loadEvents();" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);color:var(--gold);">↻ Refresh Schedule</button>`:''}
+      ${!schedAdminOn?`<button onclick="sessionStorage.removeItem('gcal-ical-cache');loadEvents();" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);color:var(--gold);">↻ Refresh Schedule</button>`:''}
     </div>`;
     return;
   }
@@ -3205,6 +3183,24 @@ function copyIcalUrl() {
 document.getElementById('calModal').addEventListener('click', function(e) {
   if (e.target === this) closeCalModal();
 });
+
+
+// ── Auto-refresh schedule every 60 seconds ──
+let _autoRefreshTimer = null;
+
+function startAutoRefresh() {
+  stopAutoRefresh();
+  _autoRefreshTimer = setInterval(async () => {
+    const schedTab = document.getElementById('tab-schedule');
+    if (schedTab && schedTab.classList.contains('active')) {
+      await _refreshEventsBackground();
+    }
+  }, 60 * 1000);
+}
+
+function stopAutoRefresh() {
+  if (_autoRefreshTimer) { clearInterval(_autoRefreshTimer); _autoRefreshTimer = null; }
+}
 
 </script>
 

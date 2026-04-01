@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.6</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.8</div>
   </div>
 </footer>
 
@@ -1678,7 +1678,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v11.6'; // bump when defaults change
+const DATA_VERSION = 'v11.8'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2010,8 +2010,8 @@ async function fetchIcal() {
   try {
     const cached = sessionStorage.getItem('gcal-ical-cache');
     const cachedTime = sessionStorage.getItem('gcal-ical-time');
-    if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 5 * 60 * 1000) {
-      return cached; // Use cache if less than 5 minutes old
+    if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 2 * 60 * 1000) {
+      return cached; // Use cache if less than 2 minutes old
     }
   } catch {}
 
@@ -2045,7 +2045,7 @@ async function loadEvents() {
   try {
     const lsCache = localStorage.getItem('gcal-events-cache');
     const lsTime  = localStorage.getItem('gcal-events-time');
-    if (lsCache && lsTime && (Date.now() - parseInt(lsTime)) < 30 * 60 * 1000) {
+    if (lsCache && lsTime && (Date.now() - parseInt(lsTime)) < 5 * 60 * 1000) {
       const cached = JSON.parse(lsCache);
       if (cached.length) {
         events = cached;
@@ -2091,7 +2091,7 @@ async function _refreshEventsBackground() {
             return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
           });
           try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
-          render(); return;
+          render(); buildYearSelector(); updateCounts(); return;
         }
       }
     }
@@ -2128,7 +2128,7 @@ async function _refreshEventsBackground() {
           return { id: uid(), ...parsed, date, time, dur, loc, note, year, series: null };
         });
         try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
-        render(); return;
+        render(); buildYearSelector(); updateCounts(); return;
       }
     }
   } catch(e) { console.warn('Google JSON feed failed:', e.message); }
@@ -2141,7 +2141,7 @@ async function _refreshEventsBackground() {
       if (parsed.length) {
         events = parsed;
         try { localStorage.setItem('gcal-events-cache', JSON.stringify(events)); localStorage.setItem('gcal-events-time', Date.now().toString()); } catch {}
-        render(); return;
+        render(); buildYearSelector(); updateCounts(); return;
       }
     }
   } catch(e) { console.warn('iCal proxy fetch failed:', e.message); }
@@ -2151,7 +2151,7 @@ async function _refreshEventsBackground() {
     const lsCache = localStorage.getItem('gcal-events-cache');
     if (lsCache) {
       const cached = JSON.parse(lsCache);
-      if (cached.length) { events = cached; render(); return; }
+      if (cached.length) { events = cached; render(); buildYearSelector(); updateCounts(); return; }
     }
   } catch {}
 

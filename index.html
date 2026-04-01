@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.5</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v11.6</div>
   </div>
 </footer>
 
@@ -1678,7 +1678,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v11.5'; // bump when defaults change
+const DATA_VERSION = 'v11.6'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2066,7 +2066,7 @@ async function _refreshEventsBackground() {
   // 1. Google Calendar API v3 — direct, no proxy, fastest (needs API key)
   try {
     if (GCAL_API_KEY) {
-      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear(), 0, 1).toISOString()}&maxResults=100`;
+      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear(), 0, 1).toISOString()}&timeMax=${new Date(new Date().getFullYear(), 11, 31).toISOString()}&maxResults=100`;
       const res = await fetchWithTimeout(url, 4000);
       if (res.ok) {
         const data = await res.json();
@@ -2408,7 +2408,7 @@ function render() {
     container.innerHTML = `<div class="empty" style="display:flex;flex-direction:column;align-items:center;gap:16px;">
       <div style="font-size:28px;">🏐</div>
       <div>${schedAdminOn?'No events yet — use the form above to add events.':'Schedule coming soon — check back later.'}</div>
-      ${!schedAdminOn?`<button onclick="loadEvents();render();" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);color:var(--gold);">↻ Refresh Schedule</button>`:''}
+      ${!schedAdminOn?`<button onclick="localStorage.removeItem('gcal-events-cache');localStorage.removeItem('gcal-ical-cache');loadEvents();" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.08);color:var(--gold);">↻ Refresh Schedule</button>`:''}
     </div>`;
     return;
   }

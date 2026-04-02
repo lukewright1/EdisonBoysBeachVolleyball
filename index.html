@@ -879,7 +879,7 @@
       @edisonboysvolleyball
     </a>
     <div class="footer-hb">SURF CITY USA</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v12.9</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.15);">v13.1</div>
   </div>
 </footer>
 
@@ -1006,13 +1006,10 @@ window.addEventListener('load', async () => {
 
   // Clear any stale events saved to data.json/localStorage — Google Cal is source of truth
   try { localStorage.removeItem('edison-bvb-events-v2'); } catch {}
-  if (_appData) { _appData.events = []; }
+  // Note: keep _appData.events intact — used for instant load before Google Cal syncs
 
   // schedule
   await loadEvents();
-  buildYearSelector();
-  updateCounts();
-  render();
   startAutoRefresh();
 
   // scroll reveal
@@ -1696,7 +1693,7 @@ function updateSyncStatus() {
   }
 }
 
-const DATA_VERSION = 'v12.9'; // bump when defaults change
+const DATA_VERSION = 'v13.1'; // bump when defaults change
 
 async function getAppData() {
   if (_appData) return _appData;
@@ -2181,9 +2178,8 @@ async function _refreshEventsBackground() {
     }
   } catch(e) { console.warn('JSON feed failed:', e.message); }
 
-  // Everything failed
-  events = [];
-  render();
+  // Everything failed — keep whatever events are already showing
+  if (!events.length) render(); // only show empty state if truly nothing
 }
 
 

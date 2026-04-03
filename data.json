@@ -245,24 +245,6 @@
   ],
   "events": [
     {
-      "id": "0le9l3n4sffds54semmq4g650v@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-05-30",
-      "time": "10:00",
-      "dur": 240,
-      "loc": "Edison High School, 21400 Magnolia St, Huntington Beach, CA 92646, USA",
-      "opponent": "ALL - Edison Physical Day",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
-      "year": 2026,
-      "series": null
-    },
-    {
       "id": "EF755751-B23A-4B43-BD7B-6F56A2ACBA02",
       "type": "event",
       "teams": [
@@ -299,20 +281,20 @@
       "series": null
     },
     {
-      "id": "2n83dtf051vehh0olot3pds4vk@google.com",
-      "type": "game",
+      "id": "0le9l3n4sffds54semmq4g650v@google.com",
+      "type": "event",
       "teams": [
-        "varsity"
+        "all"
       ],
-      "date": "2026-04-01",
-      "time": "17:30",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Indoor Boys - Edison @ Marina HS",
+      "date": "2026-05-30",
+      "time": "10:00",
+      "dur": 240,
+      "loc": "Edison High School, 21400 Magnolia St, Huntington Beach, CA 92646, USA",
+      "opponent": "ALL - Edison Physical Day",
       "ha": "home",
-      "result": "win",
-      "score": "4-1",
-      "note": "Join Edison's indoor team to battle vs Marina HS at Marina. \nJV & Fr/So - 4:30p\nVarsity - 5:30p",
+      "result": "tbd",
+      "score": "",
+      "note": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
       "year": 2026,
       "series": null
     },

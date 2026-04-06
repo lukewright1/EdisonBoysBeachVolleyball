@@ -245,24 +245,6 @@
   ],
   "events": [
     {
-      "id": "EF755751-B23A-4B43-BD7B-6F56A2ACBA02",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-04-05",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Easter",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
       "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
       "type": "event",
       "teams": [
@@ -295,6 +277,24 @@
       "result": "tbd",
       "score": "",
       "note": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "EF755751-B23A-4B43-BD7B-6F56A2ACBA02",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-04-05",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Easter",
+      "ha": "home",
+      "result": "past",
+      "score": "",
+      "note": "",
       "year": 2026,
       "series": null
     },

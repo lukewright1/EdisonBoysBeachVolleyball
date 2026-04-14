@@ -245,18 +245,36 @@
   ],
   "events": [
     {
-      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
+      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
       "type": "event",
       "teams": [
         "all"
       ],
-      "date": "2026-09-02",
+      "date": "2026-09-07",
       "time": "",
       "dur": 90,
       "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Edison - First day of school",
+      "opponent": "No School - Labor Day",
       "ha": "home",
       "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "54hqmfc26lsdic4aqrafflc6qf@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-04-06",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Spring Break - No School",
+      "ha": "home",
+      "result": "past",
       "score": "",
       "note": "",
       "year": 2026,
@@ -299,16 +317,16 @@
       "series": null
     },
     {
-      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
+      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
       "type": "event",
       "teams": [
         "all"
       ],
-      "date": "2026-09-07",
+      "date": "2026-09-02",
       "time": "",
       "dur": 90,
       "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "No School - Labor Day",
+      "opponent": "Edison - First day of school",
       "ha": "home",
       "result": "tbd",
       "score": "",

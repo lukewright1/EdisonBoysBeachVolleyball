@@ -253,24 +253,6 @@
   ],
   "events": [
     {
-      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-02",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Edison - First day of school",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
       "id": "0le9l3n4sffds54semmq4g650v@google.com",
       "type": "event",
       "teams": [
@@ -285,42 +267,6 @@
       "result": "past",
       "score": "",
       "note": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1iakkivk0g0u7qmtgonigkrfes@google.com",
-      "type": "tryout",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-08-27",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
-      "opponent": "Tryouts - Day 2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-07",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "No School - Labor Day",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
       "year": 2026,
       "series": null
     },
@@ -343,6 +289,24 @@
       "series": null
     },
     {
+      "id": "1iakkivk0g0u7qmtgonigkrfes@google.com",
+      "type": "tryout",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-08-27",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
+      "opponent": "Tryouts - Day 2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
       "id": "2aqoniskpbaqp8ck8mv0c2hmj7@google.com",
       "type": "tryout",
       "teams": [
@@ -352,7 +316,43 @@
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
-      "opponent": "First Practice & 1 - Day Makeup Tryouts",
+      "opponent": "First Practice & Makeup Tryouts",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-02",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Edison - First day of school",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-07",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "No School - Labor Day",
       "ha": "home",
       "result": "tbd",
       "score": "",

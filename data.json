@@ -88,10 +88,6 @@
         "color": "#f5a623",
         "players": [
           {
-            "name": "Beckett Bierlin",
-            "senior": false
-          },
-          {
             "name": "Mason Dean",
             "senior": false
           }
@@ -205,6 +201,10 @@
           },
           {
             "name": "Shane Nguyen",
+            "senior": false
+          },
+          {
+            "name": "Beckett Bierlin",
             "senior": false
           }
         ]

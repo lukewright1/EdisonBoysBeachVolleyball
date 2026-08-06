@@ -88,10 +88,6 @@
         "color": "#f5a623",
         "players": [
           {
-            "name": "Jack Grady",
-            "senior": false
-          },
-          {
             "name": "Shane Nguyen",
             "senior": false
           },
@@ -205,6 +201,10 @@
           },
           {
             "name": "Shane Wright",
+            "senior": false
+          },
+          {
+            "name": "Jack Grady",
             "senior": false
           }
         ]

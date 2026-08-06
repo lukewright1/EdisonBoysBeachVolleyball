@@ -88,14 +88,6 @@
         "color": "#f5a623",
         "players": [
           {
-            "name": "Shane Nguyen",
-            "senior": false
-          },
-          {
-            "name": "Beckett Bierlin",
-            "senior": false
-          },
-          {
             "name": "Mason Dean",
             "senior": false
           }
@@ -221,6 +213,14 @@
           },
           {
             "name": "Jack Grady",
+            "senior": false
+          },
+          {
+            "name": "Shane Nguyen",
+            "senior": false
+          },
+          {
+            "name": "Beckett Bierlin",
             "senior": false
           }
         ]

@@ -88,10 +88,6 @@
         "color": "#f5a623",
         "players": [
           {
-            "name": "Kai Stolaruk",
-            "senior": true
-          },
-          {
             "name": "Shane Wright",
             "senior": false
           },

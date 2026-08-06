@@ -131,10 +131,6 @@
           {
             "name": "Stefan Molodoi",
             "senior": false
-          },
-          {
-            "name": "Matt Copelin",
-            "senior": false
           }
         ]
       },
@@ -204,6 +200,10 @@
           },
           {
             "name": "Mason Dean",
+            "senior": false
+          },
+          {
+            "name": "Matt Copelin",
             "senior": false
           }
         ]

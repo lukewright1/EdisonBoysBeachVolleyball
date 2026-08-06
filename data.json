@@ -88,10 +88,6 @@
         "color": "#f5a623",
         "players": [
           {
-            "name": "Shane Wright",
-            "senior": false
-          },
-          {
             "name": "Jack Grady",
             "senior": false
           },
@@ -221,6 +217,10 @@
           },
           {
             "name": "Kody Tran",
+            "senior": false
+          },
+          {
+            "name": "Shane Wright",
             "senior": false
           }
         ]

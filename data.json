@@ -86,12 +86,7 @@
       {
         "label": "Varsity",
         "color": "#f5a623",
-        "players": [
-          {
-            "name": "Mason Dean",
-            "senior": false
-          }
-        ]
+        "players": []
       },
       {
         "label": "JV",
@@ -221,6 +216,10 @@
           },
           {
             "name": "Beckett Bierlin",
+            "senior": false
+          },
+          {
+            "name": "Mason Dean",
             "senior": false
           }
         ]

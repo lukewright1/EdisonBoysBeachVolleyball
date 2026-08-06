@@ -93,28 +93,12 @@
         "color": "#3b82f6",
         "players": [
           {
-            "name": "Jackson Felsmann",
-            "senior": false
-          },
-          {
             "name": "Joel Akins",
             "senior": false
           },
           {
             "name": "Brandon Clark",
             "senior": false
-          },
-          {
-            "name": "Jackson Crane",
-            "senior": true
-          },
-          {
-            "name": "Jack Mastin",
-            "senior": true
-          },
-          {
-            "name": "Andrew Hoffman",
-            "senior": true
           },
           {
             "name": "Hayden Pham",
@@ -216,6 +200,10 @@
           },
           {
             "name": "Mason Dean",
+            "senior": false
+          },
+          {
+            "name": "Jackson Felsmann",
             "senior": false
           }
         ]

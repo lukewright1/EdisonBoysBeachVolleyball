@@ -86,7 +86,12 @@
       {
         "label": "Varsity",
         "color": "#f5a623",
-        "players": []
+        "players": [
+          {
+            "name": "Mason Dean",
+            "senior": false
+          }
+        ]
       },
       {
         "label": "JV",
@@ -103,6 +108,22 @@
           {
             "name": "Brandon Clark",
             "senior": false
+          },
+          {
+            "name": "August Larson",
+            "senior": true
+          },
+          {
+            "name": "Jackson Crane",
+            "senior": true
+          },
+          {
+            "name": "Jack Mastin",
+            "senior": true
+          },
+          {
+            "name": "Andrew Hoffman",
+            "senior": true
           },
           {
             "name": "Hayden Pham",
@@ -126,6 +147,14 @@
           },
           {
             "name": "Sean Cottrell",
+            "senior": false
+          },
+          {
+            "name": "Stefan Molodoi",
+            "senior": false
+          },
+          {
+            "name": "Matt Copelin",
             "senior": false
           }
         ]
@@ -192,18 +221,6 @@
           },
           {
             "name": "Beckett Bierlin",
-            "senior": false
-          },
-          {
-            "name": "Mason Dean",
-            "senior": false
-          },
-          {
-            "name": "Matt Copelin",
-            "senior": false
-          },
-          {
-            "name": "Stefan Molodoi",
             "senior": false
           }
         ]

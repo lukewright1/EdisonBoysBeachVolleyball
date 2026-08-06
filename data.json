@@ -249,42 +249,6 @@
   ],
   "events": [
     {
-      "id": "1iakkivk0g0u7qmtgonigkrfes@google.com",
-      "type": "tryout",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-08-27",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
-      "opponent": "Tryouts - Day 2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-07",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "No School - Labor Day",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
       "id": "5reaielvup5rb5aitv0fksf6rb@google.com",
       "type": "practice",
       "teams": [
@@ -303,52 +267,16 @@
       "series": null
     },
     {
-      "id": "2aqoniskpbaqp8ck8mv0c2hmj7@google.com",
-      "type": "tryout",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-01",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "First Practice & Makeup Tryouts",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-02",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Edison - First day of school",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "43ud14p521g83lk83jq6if7ia8@google.com",
+      "id": "creo2q6s8g5qkfda8bou8lsqk1@google.com",
       "type": "practice",
       "teams": [
         "all"
       ],
-      "date": "2026-09-03",
-      "time": "14:00",
+      "date": "2026-09-15",
+      "time": "07:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
+      "opponent": "Practice (M, T, Th) 2-4p",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -375,16 +303,88 @@
       "series": null
     },
     {
-      "id": "creo2q6s8g5qkfda8bou8lsqk1@google.com",
+      "id": "2aqoniskpbaqp8ck8mv0c2hmj7@google.com",
+      "type": "tryout",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-01",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "First Practice & Makeup Tryouts",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1iakkivk0g0u7qmtgonigkrfes@google.com",
+      "type": "tryout",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-08-27",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
+      "opponent": "Tryouts - Day 2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-02",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Edison - First day of school",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "54km7f3bpsjf4ahnhhudt3uibn@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-07",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "No School - Labor Day",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "43ud14p521g83lk83jq6if7ia8@google.com",
       "type": "practice",
       "teams": [
         "all"
       ],
-      "date": "2026-09-15",
-      "time": "07:00",
+      "date": "2026-09-03",
+      "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4p",
+      "opponent": "Practice (M, T, Th) 2-4pm",
       "ha": "home",
       "result": "tbd",
       "score": "",

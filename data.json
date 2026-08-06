@@ -93,6 +93,14 @@
         "color": "#3b82f6",
         "players": [
           {
+            "name": "Sean Cottrell",
+            "senior": false
+          },
+          {
+            "name": "Stefan Molodoi",
+            "senior": false
+          },
+          {
             "name": "Matt Copelin",
             "senior": false
           }
@@ -197,14 +205,6 @@
           {
             "name": "Joe Ferrier",
             "senior": false
-          },
-          {
-            "name": "Sean Cottrell",
-            "senior": false
-          },
-          {
-            "name": "Stefan Molodoi",
-            "senior": false
           }
         ]
       }
@@ -236,52 +236,16 @@
       "series": null
     },
     {
-      "id": "0403trfeopa506jjagi3hmno0s@google.com",
+      "id": "3caf5kbodbqqet1nk5ju6nu2fj@google.com",
       "type": "practice",
       "teams": [
         "all"
       ],
-      "date": "2026-09-10",
+      "date": "2026-09-14",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
       "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-02",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Edison - First day of school",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
-      "type": "tryout",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-08-26",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
-      "opponent": "Tryouts - Day 1",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -308,12 +272,12 @@
       "series": null
     },
     {
-      "id": "3caf5kbodbqqet1nk5ju6nu2fj@google.com",
+      "id": "498ogehcfvh07f4l4u0665bhvq@google.com",
       "type": "practice",
       "teams": [
         "all"
       ],
-      "date": "2026-09-14",
+      "date": "2026-09-22",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
@@ -362,12 +326,12 @@
       "series": null
     },
     {
-      "id": "1203ebf759q8faqp5colgo1n5n@google.com",
+      "id": "62ncdkookb2k0pjt8q32vjbqkm@google.com",
       "type": "practice",
       "teams": [
         "all"
       ],
-      "date": "2026-09-15",
+      "date": "2026-09-21",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
@@ -398,12 +362,30 @@
       "series": null
     },
     {
-      "id": "62ncdkookb2k0pjt8q32vjbqkm@google.com",
+      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-02",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Edison - First day of school",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "0403trfeopa506jjagi3hmno0s@google.com",
       "type": "practice",
       "teams": [
         "all"
       ],
-      "date": "2026-09-21",
+      "date": "2026-09-10",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
@@ -416,16 +398,16 @@
       "series": null
     },
     {
-      "id": "498ogehcfvh07f4l4u0665bhvq@google.com",
-      "type": "practice",
+      "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
+      "type": "tryout",
       "teams": [
         "all"
       ],
-      "date": "2026-09-22",
+      "date": "2026-08-26",
       "time": "14:00",
       "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
+      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
+      "opponent": "Tryouts - Day 1",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -458,6 +440,24 @@
         "all"
       ],
       "date": "2026-09-24",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1203ebf759q8faqp5colgo1n5n@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-15",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",

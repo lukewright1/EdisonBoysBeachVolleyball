@@ -91,12 +91,7 @@
       {
         "label": "JV",
         "color": "#3b82f6",
-        "players": [
-          {
-            "name": "Matt Copelin",
-            "senior": false
-          }
-        ]
+        "players": []
       },
       {
         "label": "Edison Team",
@@ -204,6 +199,10 @@
           },
           {
             "name": "Stefan Molodoi",
+            "senior": false
+          },
+          {
+            "name": "Matt Copelin",
             "senior": false
           }
         ]

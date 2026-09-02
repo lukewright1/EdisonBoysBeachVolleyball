@@ -114,10 +114,6 @@
             "senior": false
           },
           {
-            "name": "Shane Nguyen",
-            "senior": true
-          },
-          {
             "name": "Hayden Pham",
             "senior": true
           },
@@ -128,10 +124,6 @@
           {
             "name": "Calen Rosen",
             "senior": false
-          },
-          {
-            "name": "Cameron Schurig",
-            "senior": true
           },
           {
             "name": "Shane Wright",
@@ -170,6 +162,10 @@
           {
             "name": "Kyle Horrocks",
             "senior": false
+          },
+          {
+            "name": "Cameron Schurig",
+            "senior": true
           }
         ]
       },

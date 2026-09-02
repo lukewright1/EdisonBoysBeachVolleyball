@@ -234,13 +234,7 @@
           {
             "name": "Sean Cottrell",
             "senior": false
-          }
-        ]
-      },
-      {
-        "label": "FS2",
-        "color": "#fb923c",
-        "players": [
+          },
           {
             "name": "Sean Cottrell",
             "senior": false
@@ -248,7 +242,13 @@
           {
             "name": "James Cottrell",
             "senior": false
-          },
+          }
+        ]
+      },
+      {
+        "label": "FS2",
+        "color": "#fb923c",
+        "players": [
           {
             "name": "Andrew (AJ) Stanton",
             "senior": false

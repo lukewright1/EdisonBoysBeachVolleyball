@@ -224,10 +224,6 @@
             "senior": false
           },
           {
-            "name": "Jayden Boyer",
-            "senior": false
-          },
-          {
             "name": "Dane Schmidt",
             "senior": false
           },
@@ -259,6 +255,10 @@
           },
           {
             "name": "Kelly Dusky",
+            "senior": false
+          },
+          {
+            "name": "Jayden Boyer",
             "senior": false
           }
         ]

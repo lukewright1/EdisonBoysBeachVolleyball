@@ -256,6 +256,10 @@
           {
             "name": "Joseph Saitta",
             "senior": false
+          },
+          {
+            "name": "Sawyer Dinsbach",
+            "senior": false
           }
         ]
       },
@@ -265,10 +269,6 @@
         "players": [
           {
             "name": "Jack Krumpols",
-            "senior": false
-          },
-          {
-            "name": "Sawyer Dinsbach",
             "senior": false
           },
           {

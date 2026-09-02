@@ -260,6 +260,10 @@
           {
             "name": "Jayden Boyer",
             "senior": false
+          },
+          {
+            "name": "Joseph Saitta",
+            "senior": false
           }
         ]
       },
@@ -267,10 +271,6 @@
         "label": "Edison Team",
         "color": "rgba(255,255,255,0.55)",
         "players": [
-          {
-            "name": "Joseph Saitta",
-            "senior": false
-          },
           {
             "name": "Jack Krumpols",
             "senior": false

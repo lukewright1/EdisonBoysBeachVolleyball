@@ -212,10 +212,6 @@
             "senior": false
           },
           {
-            "name": "Keaton Hocking",
-            "senior": false
-          },
-          {
             "name": "Mason Drumm",
             "senior": false
           },
@@ -301,6 +297,10 @@
           },
           {
             "name": "Jonah Aziz",
+            "senior": false
+          },
+          {
+            "name": "Keaton Hocking",
             "senior": false
           }
         ]

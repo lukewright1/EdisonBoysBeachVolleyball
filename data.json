@@ -226,6 +226,10 @@
           {
             "name": "James Cottrell",
             "senior": false
+          },
+          {
+            "name": "Sawyer Dinsbach",
+            "senior": false
           }
         ]
       },
@@ -255,10 +259,6 @@
           },
           {
             "name": "Joseph Saitta",
-            "senior": false
-          },
-          {
-            "name": "Sawyer Dinsbach",
             "senior": false
           }
         ]

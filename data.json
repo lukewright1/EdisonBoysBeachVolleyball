@@ -94,10 +94,6 @@
             "senior": false
           },
           {
-            "name": "Matthew Copelin",
-            "senior": false
-          },
-          {
             "name": "Mason Dean",
             "senior": false
           },
@@ -169,6 +165,10 @@
           },
           {
             "name": "Jack Grady",
+            "senior": false
+          },
+          {
+            "name": "Matthew Copelin",
             "senior": false
           }
         ]

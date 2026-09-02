@@ -226,10 +226,6 @@
             "senior": false
           },
           {
-            "name": "Charlie Broman",
-            "senior": false
-          },
-          {
             "name": "Kelly Dusky",
             "senior": false
           },
@@ -281,6 +277,10 @@
           },
           {
             "name": "Sam Brown",
+            "senior": false
+          },
+          {
+            "name": "Charlie Broman",
             "senior": false
           }
         ]

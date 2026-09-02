@@ -110,10 +110,6 @@
             "senior": false
           },
           {
-            "name": "Kyle Horrocks",
-            "senior": false
-          },
-          {
             "name": "Stefan Molodoi",
             "senior": false
           },
@@ -169,6 +165,10 @@
           },
           {
             "name": "Matthew Copelin",
+            "senior": false
+          },
+          {
+            "name": "Kyle Horrocks",
             "senior": false
           }
         ]

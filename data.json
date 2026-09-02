@@ -98,10 +98,6 @@
             "senior": false
           },
           {
-            "name": "Sean Cottrell",
-            "senior": false
-          },
-          {
             "name": "Mason Dean",
             "senior": false
           },
@@ -233,6 +229,10 @@
           },
           {
             "name": "Dane Schmidt",
+            "senior": false
+          },
+          {
+            "name": "Sean Cottrell",
             "senior": false
           }
         ]

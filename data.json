@@ -136,6 +136,10 @@
           {
             "name": "Shane Wright",
             "senior": false
+          },
+          {
+            "name": "Jack Grady",
+            "senior": false
           }
         ]
       },
@@ -158,10 +162,6 @@
           {
             "name": "Shane Nguyen",
             "senior": true
-          },
-          {
-            "name": "Jack Grady",
-            "senior": false
           },
           {
             "name": "Matthew Copelin",

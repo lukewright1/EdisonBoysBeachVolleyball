@@ -208,10 +208,6 @@
         "color": "#2dd4bf",
         "players": [
           {
-            "name": "Sam Brown",
-            "senior": false
-          },
-          {
             "name": "Mason Drumm",
             "senior": false
           },
@@ -301,6 +297,10 @@
           },
           {
             "name": "Keaton Hocking",
+            "senior": false
+          },
+          {
+            "name": "Sam Brown",
             "senior": false
           }
         ]

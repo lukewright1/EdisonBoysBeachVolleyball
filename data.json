@@ -240,6 +240,10 @@
           {
             "name": "Joseph Saitta",
             "senior": false
+          },
+          {
+            "name": "Jack Krumpols",
+            "senior": false
           }
         ]
       },
@@ -247,10 +251,6 @@
         "label": "Edison Team",
         "color": "rgba(255,255,255,0.55)",
         "players": [
-          {
-            "name": "Jack Krumpols",
-            "senior": false
-          },
           {
             "name": "Kaden Rivera",
             "senior": false

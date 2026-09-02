@@ -98,10 +98,6 @@
             "senior": false
           },
           {
-            "name": "Jackson Felsmann",
-            "senior": false
-          },
-          {
             "name": "Crosby Gibb",
             "senior": false
           },
@@ -166,6 +162,10 @@
           {
             "name": "Cameron Schurig",
             "senior": true
+          },
+          {
+            "name": "Jackson Felsmann",
+            "senior": false
           }
         ]
       },

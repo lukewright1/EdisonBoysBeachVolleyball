@@ -2404,7 +2404,7 @@ function showTab(name) {
     setTimeout(initSubscribePrompt, 600);
   }
   if (name === 'schedule') {
-    setTimeout(scrollToToday, 200);
+    setTimeout(scrollToToday, 500);
   }
   document.querySelectorAll('.tab-btn').forEach(b => {
     if (b.textContent.trim().toLowerCase().startsWith(name)) b.classList.add('active');
@@ -3782,6 +3782,10 @@ function render() {
     html += `</div>`;
   }
   container.innerHTML = html;
+  // Scroll to today after render
+  if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {
+    scrollToToday();
+  }
 }
 
 function renderCard(e) {
@@ -4734,4 +4738,27 @@ function stopAutoRefresh() {
 </div>
 
 
-<script src="https://www.instagram.com/embed.js"></script></body></html>
+<script src="https://www.instagram.com/embed.js">
+function scrollToToday() {
+  const today = new Date().toISOString().slice(0, 10);
+  // Find first event card on or after today
+  const cards = document.querySelectorAll('[data-date]');
+  let target = null;
+  for (const card of cards) {
+    if (card.getAttribute('data-date') >= today) {
+      target = card;
+      break;
+    }
+  }
+  if (target) {
+    // Small delay to ensure tab is visible
+    setTimeout(() => {
+      const navHeight = document.getElementById('main-nav') ? 
+        document.getElementById('main-nav').offsetHeight : 70;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 150);
+  }
+}
+
+</script></body></html>

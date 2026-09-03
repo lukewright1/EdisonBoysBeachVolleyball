@@ -291,9 +291,9 @@
     </div>
   </a>
   <div class="tab-nav">
-    <button class="tab-btn" onclick="showTab('about')">About</button>
+    <button class="tab-btn active" onclick="showTab('about')">About</button>
     <button class="tab-btn" onclick="showTab('schedule')">Schedule</button>
-    <button class="tab-btn active" onclick="showTab('roster')">Roster</button>
+    <button class="tab-btn" onclick="showTab('roster')">Roster</button>
     <button class="tab-btn" onclick="showTab('news')">News</button>
     <button class="tab-btn" onclick="showTab('gallery')">Gallery</button>
     <button id="adminBtn" onclick="toggleAdmin()" style="font-family: &quot;Barlow Condensed&quot;, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; padding: 6px 14px; border-radius: 2px; border: 1px solid rgba(255, 255, 255, 0.12);" class=""><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg> Admin ✓</button>
@@ -331,7 +331,7 @@
 
 
 <!-- ══════════════════ TAB: ABOUT ══════════════════ -->
-<div id="tab-about" class="tab-content">
+<div id="tab-about" class="tab-content active">
   <div class="page-section">
     <div class="section-label reveal visible">Program</div>
     <h2 class="section-title reveal visible">ABOUT THE PROGRAM</h2>
@@ -1820,7 +1820,7 @@
 </div>
 
 <!-- ══════════════════ TAB: ROSTER ══════════════════ -->
-<div id="tab-roster" class="tab-content active">
+<div id="tab-roster" class="tab-content">
   <div class="page-section">
     <div class="section-label reveal visible">The Team</div>
     <h2 class="section-title reveal visible">ROSTER</h2>

@@ -3444,123 +3444,56 @@ async function loadEvents() {
 }
 
 async function _refreshEventsBackground() {
-  // Run API v3 and iCal proxy in PARALLEL — use whichever succeeds first
-  let done = false;
-
-  const processAndRender = (evtList) => {
-    if (done || !evtList.length) return;
-    done = true;
-    events = evtList;
-    render(); buildYearSelector(); updateCounts();
-    // Write fresh events back to data.json so next load is instant
-    try {
-      getAppData().then(d => {
-        if (d) {
-          d.events = evtList;
-          persistData();
-        }
-      });
-    } catch {}
-  };
-
-  // Build API v3 promise
-  const apiV3Promise = (async () => {
-    try {
-      const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear() - 1, 11, 1).toISOString()}&maxResults=250`;
-      const res = await fetchWithTimeout(url, 5000);
-      if (!res.ok) return [];
-      const data = await res.json();
-      if (!data.items || !data.items.length) return [];
-      return data.items.map(item => {
-        const rawTitle = item.summary || 'Event';
-        const startRaw = (item.start && (item.start.dateTime || item.start.date)) || '';
-        const endRaw   = (item.end   && (item.end.dateTime   || item.end.date))   || '';
-        const loc  = item.location || PRACTICE_LOC;
-        const note = item.description || '';
-        let date = '', time = '', dur = 90, year = new Date().getFullYear();
-        if (startRaw) {
-          if (startRaw.includes('T')) {
-            const d = new Date(startRaw);
-            if (startRaw.match(/[+-]\d{2}:\d{2}$/)) {
-              date = startRaw.slice(0, 10);
-            } else {
-              date = d.getFullYear() + '-' +
-                     String(d.getMonth()+1).padStart(2,'0') + '-' +
-                     String(d.getDate()).padStart(2,'0');
-            }
-            time = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
-            if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
-          } else {
-            date = startRaw.slice(0, 10);
-          }
-          year = parseInt(date.slice(0, 4));
-        }
-        const parsed = parseTitlePrefixes(rawTitle, date);
-        return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
-      });
-    } catch(e) { console.warn('API v3 failed:', e.message); return []; }
-  })();
-
-  // Build iCal proxy promise
-  const icalPromise = (async () => {
-    try {
-      const ical = await fetchIcal();
-      if (!ical) return [];
-      return parseIcal(ical);
-    } catch(e) { console.warn('iCal failed:', e.message); return []; }
-  })();
-
-  // Race them — first one with results wins
-  const raceWithFallback = async () => {
-    return new Promise(resolve => {
-      let settled = 0;
-      const check = (result) => {
-        if (result && result.length) { resolve(result); return; }
-        settled++;
-        if (settled === 2) resolve([]); // both failed — nothing to show
-      };
-      apiV3Promise.then(check);
-      icalPromise.then(check);
-    });
-  };
-
-  const winner = await raceWithFallback();
-  if (winner && winner.length) { processAndRender(winner); return; }
-
-  // Final fallback — Google JSON feed
+  // Try API v3 first (fastest, no proxy needed)
   try {
-    const res = await fetchWithTimeout(GCAL_PUBLIC_FEED, 4000);
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear() - 1, 11, 1).toISOString()}&maxResults=250`;
+    const res = await fetchWithTimeout(url, 5000);
     if (res.ok) {
       const data = await res.json();
-      const entries = data.feed && data.feed.entry;
-      if (entries && entries.length) {
-        const mapped = entries.map(entry => {
-          const rawTitle = (entry.title && entry.title.$t) || 'Event';
-          const when = entry['gd$when'] && entry['gd$when'][0];
-          const startRaw = (when && when.startTime) || '';
-          const endRaw   = (when && when.endTime) || '';
-          const loc = (entry['gd$where'] && entry['gd$where'][0] && entry['gd$where'][0].valueString) || PRACTICE_LOC;
-          const note = (entry.content && entry.content.$t) || '';
+      if (data.items && data.items.length) {
+        const mapped = data.items.map(item => {
+          const rawTitle = item.summary || 'Event';
+          const startRaw = (item.start && (item.start.dateTime || item.start.date)) || '';
+          const endRaw   = (item.end   && (item.end.dateTime   || item.end.date))   || '';
+          const loc  = item.location || PRACTICE_LOC;
+          const note = item.description || '';
           let date = '', time = '', dur = 90, year = new Date().getFullYear();
           if (startRaw) {
             if (startRaw.includes('T')) {
               const d = new Date(startRaw);
-              date = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+              date = startRaw.match(/[+-]\d{2}:\d{2}$/)
+                ? startRaw.slice(0, 10)
+                : d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
               time = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
               if (endRaw) dur = Math.round((new Date(endRaw) - d) / 60000);
             } else { date = startRaw.slice(0, 10); }
             year = parseInt(date.slice(0, 4));
           }
           const parsed = parseTitlePrefixes(rawTitle, date);
-          return { id: entry.id && entry.id.$t || date+rawTitle, ...parsed, date, time, dur, loc, note, year, series: null };
+          return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
         });
-        if (mapped.length) { processAndRender(mapped); return; }
+        events = mapped;
+        render(); buildYearSelector(); updateCounts();
+        return;
       }
     }
-  } catch(e) { console.warn('JSON feed failed:', e.message); }
+  } catch(e) { console.warn('API v3 failed:', e.message); }
 
-  // Everything failed — never wipe events already showing
-  if (!events.length) { events = []; render(); }
+  // Fallback: iCal via proxy
+  try {
+    const ical = await fetchIcal();
+    if (ical) {
+      const parsed = parseIcal(ical);
+      if (parsed.length) {
+        events = parsed;
+        render(); buildYearSelector(); updateCounts();
+        return;
+      }
+    }
+  } catch(e) { console.warn('iCal failed:', e.message); }
+
+  // Both failed — keep existing events, never wipe
+  console.warn('All calendar fetches failed — keeping existing events');
 }
 
 

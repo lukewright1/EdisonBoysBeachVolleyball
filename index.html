@@ -2426,6 +2426,15 @@ window.addEventListener('load', async () => {
   await loadEvents();
   startAutoRefresh();
 
+  // Past events toggle — event delegation
+  const schedDiv = document.getElementById('sched');
+  if (schedDiv) {
+    schedDiv.addEventListener('click', function(e) {
+      const toggle = e.target.closest('#past-events-toggle, .past-events-toggle');
+      if (toggle) togglePastEvents();
+    });
+  }
+
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -3903,7 +3912,7 @@ function render() {
   if (pastHtml) {
     const pastCount = (pastHtml.match(/class="event-card/g) || []).length;
     finalHtml += `
-      <div class="past-events-toggle" onclick="togglePastEvents()">
+      <div class="past-events-toggle" id="past-events-toggle">
         <div class="past-events-toggle-line"></div>
         <div class="past-events-toggle-btn" id="past-toggle-btn">&#9650; ${pastCount} Past Event${pastCount!==1?'s':''}</div>
         <div class="past-events-toggle-line"></div>

@@ -3152,42 +3152,38 @@ const DEFAULT_ROSTER = {
   ],
   sections: [
     { label: 'Varsity', color: '#ffb612', players: [
-      { name: 'Joel Akins', senior: false }, { name: 'Beckett Bierlein', senior: false },
-      { name: 'Brandon Clark', senior: false }, { name: 'Matthew Copelin', senior: false },
-      { name: 'Sean Cottrell', senior: false }, { name: 'Mason Dean', senior: false },
-      { name: 'Jackson Felsmann', senior: false }, { name: 'Crosby Gibb', senior: false },
-      { name: 'Jack Grady', senior: false }, { name: 'Kyle Horrocks', senior: false },
-      { name: 'Stefan Molodoi', senior: false }, { name: 'Shane Nguyen', senior: false },
-      { name: 'Hayden Pham', senior: false }, { name: 'Cooper Platt', senior: false },
-      { name: 'Calen Rosen', senior: false }, { name: 'Cameron Schurig', senior: false },
-      { name: 'Shane Wright', senior: false }
+      { name: 'Shane Wright', senior: false }, { name: 'Mason Dean', senior: false },
+      { name: 'Crosby Gibb', senior: false }, { name: 'Calen Rosen', senior: false },
+      { name: 'Joel Akins', senior: false }, { name: 'Jack Grady', senior: false },
+      { name: 'Stefan Molodoi', senior: false }, { name: 'Brandon Clark', senior: false },
+      { name: 'Hayden Pham', senior: false }, { name: 'Cooper Platt', senior: false }
     ]},
     { label: 'JV1', color: '#3b82f6', players: [
-      { name: 'Jackson Felsmann', senior: false }, { name: 'Matthew Copelin', senior: false },
-      { name: 'Beckett Bierlein', senior: false }, { name: 'Shane Nguyen', senior: false },
-      { name: 'Jack Grady', senior: false }
+      { name: 'Matthew Copelin', senior: false }, { name: 'Cameron Schurig', senior: false },
+      { name: 'Jackson Felsmann', senior: false }, { name: 'Kyle Horrocks', senior: false },
+      { name: 'Beckett Bierlein', senior: false }, { name: 'Shane Nguyen', senior: false }
     ]},
     { label: 'JV2', color: '#a855f7', players: [
       { name: 'Soren Wright', senior: false }, { name: 'Wyatt Weeks', senior: false },
-      { name: 'Joe Ferrier', senior: false }, { name: 'Nate Ferrier', senior: false },
-      { name: 'Rex Rowlson', senior: false }, { name: 'Caleb McGary', senior: false }
+      { name: 'Rex Rowlson', senior: false }, { name: 'Caleb McGary', senior: false },
+      { name: 'Joe Ferrier', senior: false }, { name: 'Nate Ferrier', senior: false }
     ]},
     { label: 'FS1', color: '#2dd4bf', players: [
-      { name: 'Sam Brown', senior: false }, { name: 'Keaton Hocking', senior: false },
+      { name: 'Sean Cottrell', senior: false }, { name: 'James Cottrell', senior: false },
       { name: 'Mason Drumm', senior: false }, { name: 'Dorian Miyazato', senior: false },
-      { name: 'Jayden Boyer', senior: false }, { name: 'Dane Schmidt', senior: false }
+      { name: 'Sawyer Dinsbach', senior: false }, { name: 'Dane Schmidt', senior: false }
     ]},
     { label: 'FS2', color: '#fb923c', players: [
-      { name: 'Sean Cottrell', senior: false }, { name: 'James Cottrell', senior: false },
-      { name: 'Andrew (AJ) Stanton', senior: false }, { name: 'Landon Megrin', senior: false },
-      { name: 'Charlie Broman', senior: false }, { name: 'Kelly Dusky', senior: false }
+      { name: 'Jayden Boyer', senior: false }, { name: 'Joseph Saitta', senior: false },
+      { name: 'Andrew (AJ) Stanton', senior: false }, { name: 'Evan Wilbur', senior: false },
+      { name: 'Jack Krumpols', senior: false }, { name: 'Kelly Dusky', senior: false }
     ]},
     { label: 'Edison Team', color: 'rgba(255,255,255,0.55)', players: [
-      { name: 'Joseph Saitta', senior: false }, { name: 'Jack Krumpols', senior: false },
-      { name: 'Sawyer Dinsbach', senior: false }, { name: 'Kaden Rivera', senior: false },
-      { name: 'Evan Wilbur', senior: false }, { name: 'Drew Martin', senior: false },
-      { name: 'Jackson Hackett', senior: false }, { name: 'Owen Jenison', senior: false },
-      { name: 'Jonah Aziz', senior: false }
+      { name: 'Landon Megrin', senior: false }, { name: 'Kaden Rivera', senior: false },
+      { name: 'Drew Martin', senior: false }, { name: 'Jackson Hackett', senior: false },
+      { name: 'Sam Brown', senior: false }, { name: 'Keaton Hocking', senior: false },
+      { name: 'Charlie Broman', senior: false },
+      { name: 'Owen Jenison', senior: false }, { name: 'Jonah Aziz', senior: false }
     ]}
   ]
 };
@@ -3677,6 +3673,9 @@ function parseIcal(ical) {
       { pattern: /^\[JV1\]\s*/i,  teams: ['jv1'] },
       { pattern: /^\[JV2\]\s*/i,  teams: ['jv2'] },
       { pattern: /^\[JV\]\s*/i,   teams: ['jv1','jv2'] },
+      { pattern: /^\[FS1\]\s*/i,  teams: ['fs1'] },
+      { pattern: /^\[FS2\]\s*/i,  teams: ['fs2'] },
+      { pattern: /^\[FS\]\s*/i,   teams: ['fs1','fs2'] },
       { pattern: /^\[ALL\]\s*/i,  teams: ['all'] },
     ];
     for (const pm of prefixMap) {

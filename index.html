@@ -304,6 +304,67 @@
   white-space: nowrap;
 }
 
+
+/* ── PAST EVENTS COLLAPSIBLE ── */
+.past-events-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.past-events-toggle-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.past-events-toggle-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.past-events-toggle:hover .past-events-toggle-btn {
+  color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.2);
+}
+#past-events-container {
+  display: none;
+  margin-bottom: 8px;
+}
+#past-events-container.open { display: block; }
+
+/* ── TODAY BOX ── */
+.today-events-box {
+  border: 1px solid rgba(245,182,18,0.4);
+  border-radius: 4px;
+  padding: 10px;
+  margin: 4px 0 12px 0;
+  background: rgba(245,182,18,0.04);
+  box-shadow: 0 0 20px rgba(245,182,18,0.06);
+}
+.today-events-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
 </style>
 </head>
 <body class="" style="">
@@ -3803,26 +3864,81 @@ function render() {
   let html = '';
   const today = new Date().toISOString().slice(0, 10);
   let todayMarkerInserted = false;
+  let pastHtml = '';
+  let futureHtml = '';
+  let todayHtml = '';
 
+  // Split events into past, today, future
   for (const [key, mEvts] of Object.entries(months)) {
     const [y,m] = key.split('-');
-    html += `<div class="month-group">
-      <div class="month-hdr">${MONTHS[+m-1]} ${y}</div>`;
+    let pastMonthHtml = '';
+    let futureMonthHtml = '';
+    let todayMonthHtml = '';
+
     mEvts.forEach(e => {
-      // Insert TODAY marker before the first event on or after today
-      if (!todayMarkerInserted && e.date >= today) {
-        todayMarkerInserted = true;
-        html += `<div class="today-marker" id="today-marker">
-          <div class="today-marker-line"></div>
-          <div class="today-marker-label">&#8595; Today</div>
-          <div class="today-marker-line"></div>
-        </div>`;
+      if (e.date < today) {
+        pastMonthHtml += renderCard(e);
+      } else if (e.date === today) {
+        todayMonthHtml += renderCard(e);
+      } else {
+        futureMonthHtml += renderCard(e);
       }
-      html += renderCard(e);
     });
-    html += `</div>`;
+
+    if (pastMonthHtml) {
+      pastHtml += `<div class="month-group">
+        <div class="month-hdr">${MONTHS[+m-1]} ${y}</div>${pastMonthHtml}</div>`;
+    }
+    if (todayMonthHtml) {
+      todayHtml += todayMonthHtml;
+    }
+    if (futureMonthHtml) {
+      futureHtml += `<div class="month-group">
+        <div class="month-hdr">${MONTHS[+m-1]} ${y}</div>${futureMonthHtml}</div>`;
+    }
   }
-  container.innerHTML = html;
+
+  // Build final HTML
+  let finalHtml = '';
+
+  // Past events — collapsible
+  if (pastHtml) {
+    const pastCount = (pastHtml.match(/class="event-card/g) || []).length;
+    finalHtml += `
+      <div class="past-events-toggle" onclick="togglePastEvents(this)">
+        <div class="past-events-toggle-line"></div>
+        <div class="past-events-toggle-btn">&#9650; ${pastCount} Past Event${pastCount!==1?'s':''}</div>
+        <div class="past-events-toggle-line"></div>
+      </div>
+      <div id="past-events-container">${pastHtml}</div>`;
+  }
+
+  // Today's events — gold box
+  if (todayHtml) {
+    finalHtml += `
+      <div class="today-marker" id="today-marker">
+        <div class="today-marker-line"></div>
+        <div class="today-marker-label">Today</div>
+        <div class="today-marker-line"></div>
+      </div>
+      <div class="today-events-box">
+        <div class="today-events-label">&#9679; Today's Events</div>
+        ${todayHtml}
+      </div>`;
+  } else {
+    // No events today — just show the marker
+    finalHtml += `
+      <div class="today-marker" id="today-marker">
+        <div class="today-marker-line"></div>
+        <div class="today-marker-label">Today</div>
+        <div class="today-marker-line"></div>
+      </div>`;
+  }
+
+  // Future events
+  finalHtml += futureHtml;
+
+  container.innerHTML = finalHtml;
   // Scroll to today after render
   if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {
     scrollToToday();
@@ -4797,6 +4913,17 @@ function scrollToToday() {
     if (attempts < 10) setTimeout(tryScroll, 200);
   };
   setTimeout(tryScroll, 100);
+}
+
+
+function togglePastEvents(el) {
+  const container = document.getElementById('past-events-container');
+  const btn = el.querySelector('.past-events-toggle-btn');
+  if (!container) return;
+  container.classList.toggle('open');
+  const isOpen = container.classList.contains('open');
+  const count = (container.innerHTML.match(/class="event-card/g) || []).length;
+  btn.innerHTML = (isOpen ? '&#9660;' : '&#9650;') + ` ${count} Past Event${count!==1?'s':''}`;
 }
 
 </script></body></html>

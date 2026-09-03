@@ -277,6 +277,33 @@
   .record-card { min-width: calc(50% - 4px); }
 }
 
+
+/* ── TODAY MARKER ── */
+.today-marker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  position: relative;
+}
+.today-marker-line {
+  flex: 1;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.today-marker-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--navy);
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
 </style>
 </head>
 <body class="" style="">
@@ -3774,11 +3801,25 @@ function render() {
   });
 
   let html = '';
+  const today = new Date().toISOString().slice(0, 10);
+  let todayMarkerInserted = false;
+
   for (const [key, mEvts] of Object.entries(months)) {
     const [y,m] = key.split('-');
     html += `<div class="month-group">
       <div class="month-hdr">${MONTHS[+m-1]} ${y}</div>`;
-    mEvts.forEach(e => { html += renderCard(e); });
+    mEvts.forEach(e => {
+      // Insert TODAY marker before the first event on or after today
+      if (!todayMarkerInserted && e.date >= today) {
+        todayMarkerInserted = true;
+        html += `<div class="today-marker" id="today-marker">
+          <div class="today-marker-line"></div>
+          <div class="today-marker-label">&#8595; Today</div>
+          <div class="today-marker-line"></div>
+        </div>`;
+      }
+      html += renderCard(e);
+    });
     html += `</div>`;
   }
   container.innerHTML = html;
@@ -4740,25 +4781,15 @@ function stopAutoRefresh() {
 
 <script src="https://www.instagram.com/embed.js">
 function scrollToToday() {
-  const today = new Date().toISOString().slice(0, 10);
-  // Find first event card on or after today
-  const cards = document.querySelectorAll('[data-date]');
-  let target = null;
-  for (const card of cards) {
-    if (card.getAttribute('data-date') >= today) {
-      target = card;
-      break;
-    }
-  }
-  if (target) {
-    // Small delay to ensure tab is visible
-    setTimeout(() => {
-      const navHeight = document.getElementById('main-nav') ? 
+  setTimeout(() => {
+    const marker = document.getElementById('today-marker');
+    if (marker) {
+      const navHeight = document.getElementById('main-nav') ?
         document.getElementById('main-nav').offsetHeight : 70;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+      const top = marker.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
       window.scrollTo({ top, behavior: 'smooth' });
-    }, 150);
-  }
+    }
+  }, 150);
 }
 
 </script></body></html>

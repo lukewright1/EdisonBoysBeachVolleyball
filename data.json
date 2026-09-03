@@ -86,27 +86,11 @@
             "senior": false
           },
           {
-            "name": "Beckett Bierlein",
-            "senior": false
-          },
-          {
             "name": "Brandon Clark",
             "senior": false
           },
           {
-            "name": "Matthew Copelin",
-            "senior": false
-          },
-          {
-            "name": "Sean Cottrell",
-            "senior": false
-          },
-          {
             "name": "Mason Dean",
-            "senior": false
-          },
-          {
-            "name": "Jackson Felsmann",
             "senior": false
           },
           {
@@ -118,31 +102,19 @@
             "senior": false
           },
           {
-            "name": "Kyle Horrocks",
-            "senior": false
-          },
-          {
             "name": "Stefan Molodoi",
             "senior": false
           },
           {
-            "name": "Shane Nguyen",
-            "senior": false
-          },
-          {
             "name": "Hayden Pham",
-            "senior": false
+            "senior": true
           },
           {
             "name": "Cooper Platt",
-            "senior": false
+            "senior": true
           },
           {
             "name": "Calen Rosen",
-            "senior": false
-          },
-          {
-            "name": "Cameron Schurig",
             "senior": false
           },
           {
@@ -161,19 +133,23 @@
           },
           {
             "name": "Matthew Copelin",
-            "senior": false
+            "senior": true
           },
           {
             "name": "Beckett Bierlein",
-            "senior": false
+            "senior": true
           },
           {
             "name": "Shane Nguyen",
+            "senior": true
+          },
+          {
+            "name": "Kyle Horrocks",
             "senior": false
           },
           {
-            "name": "Jack Grady",
-            "senior": false
+            "name": "Cameron Schurig",
+            "senior": true
           }
         ]
       },
@@ -212,14 +188,6 @@
         "color": "#2dd4bf",
         "players": [
           {
-            "name": "Sam Brown",
-            "senior": false
-          },
-          {
-            "name": "Keaton Hocking",
-            "senior": false
-          },
-          {
             "name": "Mason Drumm",
             "senior": false
           },
@@ -228,19 +196,9 @@
             "senior": false
           },
           {
-            "name": "Jayden Boyer",
-            "senior": false
-          },
-          {
             "name": "Dane Schmidt",
             "senior": false
-          }
-        ]
-      },
-      {
-        "label": "FS2",
-        "color": "#fb923c",
-        "players": [
+          },
           {
             "name": "Sean Cottrell",
             "senior": false
@@ -250,6 +208,16 @@
             "senior": false
           },
           {
+            "name": "Sawyer Dinsbach",
+            "senior": false
+          }
+        ]
+      },
+      {
+        "label": "FS2",
+        "color": "#fb923c",
+        "players": [
+          {
             "name": "Andrew (AJ) Stanton",
             "senior": false
           },
@@ -258,11 +226,19 @@
             "senior": false
           },
           {
-            "name": "Charlie Broman",
+            "name": "Kelly Dusky",
             "senior": false
           },
           {
-            "name": "Kelly Dusky",
+            "name": "Jayden Boyer",
+            "senior": false
+          },
+          {
+            "name": "Joseph Saitta",
+            "senior": false
+          },
+          {
+            "name": "Jack Krumpols",
             "senior": false
           }
         ]
@@ -271,18 +247,6 @@
         "label": "Edison Team",
         "color": "rgba(255,255,255,0.55)",
         "players": [
-          {
-            "name": "Joseph Saitta",
-            "senior": false
-          },
-          {
-            "name": "Jack Krumpols",
-            "senior": false
-          },
-          {
-            "name": "Sawyer Dinsbach",
-            "senior": false
-          },
           {
             "name": "Kaden Rivera",
             "senior": false
@@ -306,6 +270,18 @@
           {
             "name": "Jonah Aziz",
             "senior": false
+          },
+          {
+            "name": "Keaton Hocking",
+            "senior": false
+          },
+          {
+            "name": "Sam Brown",
+            "senior": false
+          },
+          {
+            "name": "Charlie Broman",
+            "senior": false
           }
         ]
       }
@@ -319,16 +295,34 @@
   ],
   "events": [
     {
-      "id": "6oc85951rjeedgpgkh271svfgf@google.com",
-      "type": "practice",
+      "id": "2aqoniskpbaqp8ck8mv0c2hmj7@google.com",
+      "type": "tryout",
       "teams": [
         "all"
       ],
-      "date": "2026-09-03",
+      "date": "2026-09-01",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
+      "opponent": "First Practice & Makeup Tryouts",
+      "ha": "home",
+      "result": "past",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "09mubtdobtuesqj9inco4hgtr0@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-10-07",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
+      "opponent": "[FS1] Aliso Niguel @ Edison FS1",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -355,34 +349,16 @@
       "series": null
     },
     {
-      "id": "1470scbk4j736eko8ea9kg7og2@google.com",
+      "id": "34n64g9a17vn9c23b817996bec@google.com",
       "type": "event",
       "teams": [
-        "all"
+        "varsity"
       ],
-      "date": "2026-09-02",
+      "date": "2026-10-06",
       "time": "15:30",
       "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[FS] San Clemente @ Edison FS 1",
-      "ha": "home",
-      "result": "past",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "5sev4p238kg8d3gbvtqk50ikq8@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-10-07",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
-      "opponent": "[FS2] Newport Harbor @ Edison FS2",
+      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
+      "opponent": "[V] Edison @ Newport Beach - Varsity",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -391,20 +367,182 @@
       "series": null
     },
     {
-      "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
+      "id": "62ncdkookb2k0pjt8q32vjbqkm@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-21",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1iakkivk0g0u7qmtgonigkrfes@google.com",
       "type": "tryout",
       "teams": [
         "all"
       ],
-      "date": "2026-08-26",
+      "date": "2026-08-27",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
-      "opponent": "Tryouts - Day 1",
+      "opponent": "Tryouts - Day 2",
       "ha": "home",
       "result": "past",
       "score": "",
       "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "057efep14em5okqg0odablial8@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-16",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[FS2] Dana Hills @ Edison FS2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "5at8g8oi2rl7q6v5v4miiouiq5@google.com",
+      "type": "game",
+      "teams": [
+        "varsity"
+      ],
+      "date": "2026-09-09",
+      "time": "14:30",
+      "dur": 120,
+      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
+      "opponent": "[V] Newport Harbor Varsity 4-Man Tournament (Away Game)",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "29sldv7sk8l909kfs8t8jcqihe@google.com",
+      "type": "event",
+      "teams": [
+        "varsity"
+      ],
+      "date": "2026-09-17",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[V] Laguna Beach @ Edison - Varsity",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "2iuimcj3acgeep2der21pe8hof@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-23",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[FS2] Aliso Niguel @ Edison FS2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "3km0j1psevd1t2o0jsuj96qbme@google.com",
+      "type": "event",
+      "teams": [
+        "varsity"
+      ],
+      "date": "2026-09-25",
+      "time": "10:00",
+      "dur": 360,
+      "loc": "Main Beach, Laguna Beach, CA 92651",
+      "opponent": "[V] Edison @ Laguna Beach Doubles Invitational - Varsity",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "6oc85951rjeedgpgkh271svfgf@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-03",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1fikm4167a1e5gvv8fqgq7a49b@google.com",
+      "type": "event",
+      "teams": [
+        "jv2"
+      ],
+      "date": "2026-10-07",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
+      "opponent": "[JV2] Dana Hills @ Edison JV2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "24on4o0862k2q4b6edjunljogh@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-10-22",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "[ALL] Playoff End- Awaiting Schedule",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "Varsity Playoff Oct 12-22 - End- Awaiting Schedule",
       "year": 2026,
       "series": null
     },
@@ -427,16 +565,16 @@
       "series": null
     },
     {
-      "id": "4iuo8hs20b1t4u2qdhhqa2d9d2@google.com",
+      "id": "01eem0jubltgmbmu4pvo4o60ub@google.com",
       "type": "event",
       "teams": [
-        "all"
+        "jv1"
       ],
-      "date": "2026-09-16",
+      "date": "2026-09-28",
       "time": "15:30",
       "dur": 60,
       "loc": "Newland Street Volleyball Courts",
-      "opponent": "[FS1] Laguna Beach @ Edison FS1",
+      "opponent": "[JV1] Pacifica Christian @ Edison JV1",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -445,16 +583,34 @@
       "series": null
     },
     {
-      "id": "4a35tdd81bsrk8nn03pb719as2@google.com",
-      "type": "event",
+      "id": "502daa4p0soeuoemjqdqr2te4u@google.com",
+      "type": "practice",
       "teams": [
-        "jv1"
+        "all"
       ],
-      "date": "2026-09-21",
-      "time": "15:30",
-      "dur": 60,
+      "date": "2026-09-08",
+      "time": "14:00",
+      "dur": 120,
       "loc": "Newland Street Volleyball Courts",
-      "opponent": "[JV1] Crean Lutheran @ Edison JV1",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "12gcjpd1de67737rqjek2o3r09@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-17",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
       "ha": "home",
       "result": "tbd",
       "score": "",
@@ -481,12 +637,426 @@
       "series": null
     },
     {
+      "id": "5iqom2uio45lv7tq11idq4996c@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-24",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-02",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "Edison - First day of school",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "7hj2g5qsdnsomrddlgq86cl7s7@google.com",
+      "type": "event",
+      "teams": [
+        "varsity"
+      ],
+      "date": "2026-09-02",
+      "time": "14:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[V] Scrimmage - San Clemente @ Edison - Varsity",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "5cu13dh1pmak84bh3mlln47d28@google.com",
+      "type": "tryout",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-08-26",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
+      "opponent": "Tryouts - Day 1",
+      "ha": "home",
+      "result": "past",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "5mblctcptl6bejd0n58oiq9nms@google.com",
+      "type": "game",
+      "teams": [
+        "jv2"
+      ],
+      "date": "2026-09-09",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "San Clemente, CA",
+      "opponent": "[JV2] Edison JV2 @ San Clemente 2  (away game)",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1rljn4liatloicqjj530slqi0m@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-30",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
+      "opponent": "[FS2] Laguna Beach @ Edison FS2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "0r52lkenkdp817e8p2fuehpau1@google.com",
+      "type": "event",
+      "teams": [
+        "varsity"
+      ],
+      "date": "2026-09-08",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[V] Huntington Beach @ Edison Varsity",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "59gmcc9lmiual2ij6u0skohv8p@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-09",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[FS1] Crean Lutheran @ Edison FS1",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "7l0jktqusl9d0d4t3r5l7asvv4@google.com",
+      "type": "event",
+      "teams": [
+        "jv2"
+      ],
+      "date": "2026-09-22",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[JV2] Laguna Beach 2 @ Edison JV2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "1470scbk4j736eko8ea9kg7og2@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-02",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[FS] San Clemente @ Edison FS 1",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "6c4b3fphrbifci089sg91lol4r@google.com",
+      "type": "event",
+      "teams": [
+        "jv1"
+      ],
+      "date": "2026-09-08",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[JV1] Huntington Beach @ Edison JV1",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "6oekhhag1m91pq4a6u9isemoo1@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-09",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[FS2] Pacifica Christian @ Edison FS2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "4a35tdd81bsrk8nn03pb719as2@google.com",
+      "type": "event",
+      "teams": [
+        "jv1"
+      ],
+      "date": "2026-09-21",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[JV1] Crean Lutheran @ Edison JV1",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
       "id": "1203ebf759q8faqp5colgo1n5n@google.com",
       "type": "practice",
       "teams": [
         "all"
       ],
       "date": "2026-09-15",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "498ogehcfvh07f4l4u0665bhvq@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-22",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "2c2au5obgg38j5j2781otqs8bv@google.com",
+      "type": "event",
+      "teams": [
+        "varsity"
+      ],
+      "date": "2026-09-21",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[V] Crean Lutheran @ Edison - Varsity",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "3caf5kbodbqqet1nk5ju6nu2fj@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-14",
+      "time": "14:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Practice (M, T, Th) 2-4pm",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "5n2a0i3jkboe7j2j2077i3d690@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-10-12",
+      "time": "",
+      "dur": 90,
+      "loc": "Newland St Beach, Huntington Beach, CA",
+      "opponent": "[ALL] Playoff Start - Awaiting Schedule",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "Playoffs Oct 12-22 - Awaiting Schedule",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "7kq9ssbcfk87e5gljqr72249s9@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-30",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
+      "opponent": "[FS1] Aliso Niguel @ Edison FS1",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "6943dcj8va9fdv53isdiuvcef9@google.com",
+      "type": "event",
+      "teams": [
+        "jv1"
+      ],
+      "date": "2026-09-03",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[JV1] Ocean View @ Edison JV1",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "5sev4p238kg8d3gbvtqk50ikq8@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-10-07",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
+      "opponent": "[FS2] Newport Harbor @ Edison FS2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "7853oeecc7v4ghgotvh0pg2icr@google.com",
+      "type": "event",
+      "teams": [
+        "jv2"
+      ],
+      "date": "2026-09-29",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
+      "opponent": "[JV2] Laguna Beach @ Edison JV2",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "4iuo8hs20b1t4u2qdhhqa2d9d2@google.com",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-16",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "[FS1] Laguna Beach @ Edison FS1",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "0403trfeopa506jjagi3hmno0s@google.com",
+      "type": "practice",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-09-10",
       "time": "14:00",
       "dur": 120,
       "loc": "Newland Street Volleyball Courts",
@@ -523,356 +1093,14 @@
         "jv2"
       ],
       "date": "2026-09-02",
-      "time": "14:00",
+      "time": "15:30",
       "dur": 60,
       "loc": "Newland Street Volleyball Courts",
       "opponent": "[JV2] Dana Hills 2 @ Edison JV2",
       "ha": "home",
-      "result": "past",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "2aqoniskpbaqp8ck8mv0c2hmj7@google.com",
-      "type": "tryout",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-01",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "First Practice & Makeup Tryouts",
-      "ha": "home",
-      "result": "past",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "502daa4p0soeuoemjqdqr2te4u@google.com",
-      "type": "practice",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-08",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
       "result": "tbd",
       "score": "",
       "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "498ogehcfvh07f4l4u0665bhvq@google.com",
-      "type": "practice",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-22",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "59gmcc9lmiual2ij6u0skohv8p@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-09",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[FS1] Crean Lutheran @ Edison FS1",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "01eem0jubltgmbmu4pvo4o60ub@google.com",
-      "type": "event",
-      "teams": [
-        "jv1"
-      ],
-      "date": "2026-09-28",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[JV1] Pacifica Christian @ Edison JV1",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1fikm4167a1e5gvv8fqgq7a49b@google.com",
-      "type": "event",
-      "teams": [
-        "jv2"
-      ],
-      "date": "2026-10-07",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
-      "opponent": "[JV2] Dana Hills @ Edison JV2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "7kq9ssbcfk87e5gljqr72249s9@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-30",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
-      "opponent": "[FS1] Aliso Niguel @ Edison FS1",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "3caf5kbodbqqet1nk5ju6nu2fj@google.com",
-      "type": "practice",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-14",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "62ncdkookb2k0pjt8q32vjbqkm@google.com",
-      "type": "practice",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-21",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "6943dcj8va9fdv53isdiuvcef9@google.com",
-      "type": "event",
-      "teams": [
-        "jv1"
-      ],
-      "date": "2026-09-03",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[JV1] Ocean View @ Edison JV1",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "29sldv7sk8l909kfs8t8jcqihe@google.com",
-      "type": "event",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-09-17",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[V] Laguna Beach @ Edison - Varsity",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "5mblctcptl6bejd0n58oiq9nms@google.com",
-      "type": "game",
-      "teams": [
-        "jv2"
-      ],
-      "date": "2026-09-09",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "San Clemente, CA",
-      "opponent": "[JV2] Edison JV2 @ San Clemente 2  (away game)",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "6c4b3fphrbifci089sg91lol4r@google.com",
-      "type": "event",
-      "teams": [
-        "jv1"
-      ],
-      "date": "2026-09-08",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[JV1] Huntington Beach @ Edison JV1",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "0r52lkenkdp817e8p2fuehpau1@google.com",
-      "type": "event",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-09-08",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[V] Huntington Beach @ Edison Varsity",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "2c2au5obgg38j5j2781otqs8bv@google.com",
-      "type": "event",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-09-21",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[V] Crean Lutheran @ Edison - Varsity",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1iakkivk0g0u7qmtgonigkrfes@google.com",
-      "type": "tryout",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-08-27",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street, Newland St, Huntington Beach, CA, USA",
-      "opponent": "Tryouts - Day 2",
-      "ha": "home",
-      "result": "past",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "09mubtdobtuesqj9inco4hgtr0@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-10-07",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
-      "opponent": "[FS1] Aliso Niguel @ Edison FS1",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "34n64g9a17vn9c23b817996bec@google.com",
-      "type": "event",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-10-06",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
-      "opponent": "[V] Edison @ Newport Beach - Varsity",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "5n2a0i3jkboe7j2j2077i3d690@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-10-12",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "[ALL] Playoff Start - Awaiting Schedule",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "Playoffs Oct 12-22 - Awaiting Schedule",
       "year": 2026,
       "series": null
     },
@@ -887,258 +1115,6 @@
       "dur": 60,
       "loc": "Newland Street Volleyball Courts",
       "opponent": "[JV1] Laguna Beach @ Edison JV1",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "057efep14em5okqg0odablial8@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-16",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[FS2] Dana Hills @ Edison FS2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "7853oeecc7v4ghgotvh0pg2icr@google.com",
-      "type": "event",
-      "teams": [
-        "jv2"
-      ],
-      "date": "2026-09-29",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
-      "opponent": "[JV2] Laguna Beach @ Edison JV2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "2iuimcj3acgeep2der21pe8hof@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-23",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[FS2] Aliso Niguel @ Edison FS2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "5iqom2uio45lv7tq11idq4996c@google.com",
-      "type": "practice",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-24",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "7hj2g5qsdnsomrddlgq86cl7s7@google.com",
-      "type": "event",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-09-02",
-      "time": "14:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[V] Scrimmage - San Clemente @ Edison - Varsity",
-      "ha": "home",
-      "result": "past",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1vi51cr9nqtc9r350bm79gi8md@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-02",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "Edison - First day of school",
-      "ha": "home",
-      "result": "past",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "24on4o0862k2q4b6edjunljogh@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-10-22",
-      "time": "",
-      "dur": 90,
-      "loc": "Newland St Beach, Huntington Beach, CA",
-      "opponent": "[ALL] Playoff End- Awaiting Schedule",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "Varsity Playoff Oct 12-22 - End- Awaiting Schedule",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "1rljn4liatloicqjj530slqi0m@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-30",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts, 7, Huntington State Beach, Huntington Bch Bike Trl, HUNTINGTN BCH, CA 92646, USA",
-      "opponent": "[FS2] Laguna Beach @ Edison FS2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "6oekhhag1m91pq4a6u9isemoo1@google.com",
-      "type": "event",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-09",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[FS2] Pacifica Christian @ Edison FS2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "3km0j1psevd1t2o0jsuj96qbme@google.com",
-      "type": "event",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-09-25",
-      "time": "10:00",
-      "dur": 360,
-      "loc": "Main Beach, Laguna Beach, CA 92651",
-      "opponent": "[V] Edison @ Laguna Beach Doubles Invitational - Varsity",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "0403trfeopa506jjagi3hmno0s@google.com",
-      "type": "practice",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-10",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "12gcjpd1de67737rqjek2o3r09@google.com",
-      "type": "practice",
-      "teams": [
-        "all"
-      ],
-      "date": "2026-09-17",
-      "time": "14:00",
-      "dur": 120,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "Practice (M, T, Th) 2-4pm",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "7l0jktqusl9d0d4t3r5l7asvv4@google.com",
-      "type": "event",
-      "teams": [
-        "jv2"
-      ],
-      "date": "2026-09-22",
-      "time": "15:30",
-      "dur": 60,
-      "loc": "Newland Street Volleyball Courts",
-      "opponent": "[JV2] Laguna Beach 2 @ Edison JV2",
-      "ha": "home",
-      "result": "tbd",
-      "score": "",
-      "note": "",
-      "year": 2026,
-      "series": null
-    },
-    {
-      "id": "5at8g8oi2rl7q6v5v4miiouiq5@google.com",
-      "type": "game",
-      "teams": [
-        "varsity"
-      ],
-      "date": "2026-09-09",
-      "time": "14:30",
-      "dur": 120,
-      "loc": "Grant Street, Grant St, Newport Beach, CA, USA",
-      "opponent": "[V] Newport Harbor Varsity 4-Man Tournament (Away Game)",
       "ha": "home",
       "result": "tbd",
       "score": "",

@@ -2561,11 +2561,61 @@ function closeEditModal() {
 }
 
 async function saveAllEdits() {
+  saveToWebsite();
+}
+
+async function saveToWebsite() {
+  const btn = document.getElementById('save-to-website-btn');
+  if (btn) { btn.textContent = '⏳ Saving...'; btn.disabled = true; }
+
+  // Save locally first
   await saveSiteData(siteData);
-  const bar = document.getElementById('adminBar');
-  const orig = bar.innerHTML;
-  bar.querySelector('button').textContent = '✓ Saved!';
-  setTimeout(() => { bar.querySelector('button').textContent = 'Save All'; }, 2000);
+
+  // Then push to GitHub
+  const token = getToken();
+  if (!token) {
+    // No token — prompt for it
+    promptForToken();
+    if (btn) { btn.textContent = '⬆ Save to Website'; btn.disabled = false; }
+    return;
+  }
+
+  try {
+    // Get current SHA
+    const headers = {
+      'Authorization': 'token ' + token,
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    };
+    const getRes = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + DATA_PATH + '?ref=' + GITHUB_BRANCH, { headers });
+    const getJson = await getRes.json();
+    const sha = getJson.sha;
+
+    // Push updated data.json
+    const dataToSave = { ..._appData, roster: rosterData, news: newsPosts };
+    const body = JSON.stringify({
+      message: 'Update site data',
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(dataToSave, null, 2)))),
+      sha,
+      branch: GITHUB_BRANCH
+    });
+    const putRes = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + DATA_PATH, { method: 'PUT', headers, body });
+
+    if (putRes.ok) {
+      if (btn) { btn.textContent = '✓ Saved!'; btn.style.background = 'var(--green)'; btn.style.color = '#fff'; }
+      setTimeout(() => {
+        if (btn) { btn.textContent = '⬆ Save to Website'; btn.style.background = 'var(--gold)'; btn.style.color = 'var(--navy)'; btn.disabled = false; }
+      }, 3000);
+    } else {
+      throw new Error('GitHub push failed: ' + putRes.status);
+    }
+  } catch(e) {
+    console.error('Save failed:', e);
+    if (btn) { btn.textContent = '✗ Failed — Check Token'; btn.style.background = '#ef4444'; btn.style.color = '#fff'; }
+    setTimeout(() => {
+      if (btn) { btn.textContent = '⬆ Save to Website'; btn.style.background = 'var(--gold)'; btn.style.color = 'var(--navy)'; btn.disabled = false; }
+    }, 3000);
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -4621,8 +4671,7 @@ function stopAutoRefresh() {
   <div class="admin-bar-label">Admin Mode Active — Click any field to edit</div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
     <span id="sync-status" style="font-family: &quot;Barlow Condensed&quot;, sans-serif; font-size: 11px; letter-spacing: 1px; cursor: pointer; color: rgb(74, 222, 128);" onclick="isConnected()?disconnectToken():promptForToken()" title="Changes save to all devices automatically">● Synced</span>
-    <button onclick="saveAllEdits()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);">Save All</button>
-    <button onclick="showGithubPush()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:none;background:var(--green);color:#fff;">⬆ Save to Website</button>
+    <button onclick="saveToWebsite()" id="save-to-website-btn" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:none;background:var(--gold);color:var(--navy);">⬆ Save to Website</button>
     <button onclick="showChangePw()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text-muted);">🔑 Password</button>
     <button onclick="logoutAdmin()" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 20px;border-radius:2px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text-muted);">Exit Admin</button>
   </div>

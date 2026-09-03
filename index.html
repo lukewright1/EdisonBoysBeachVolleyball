@@ -3421,7 +3421,7 @@ const GCAL_JSON = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIC
 const GCAL_PUBLIC_FEED = `https://www.google.com/calendar/feeds/${encodeURIComponent(GCAL_ID)}/public/full?alt=json&orderby=starttime&sortorder=ascending&singleevents=true&futureevents=true`;
 
 async function loadEvents() {
-  // Step 1: Show data.json events INSTANTLY (zero network wait)
+  // Step 1: Show data.json events instantly if available
   let hasInstantEvents = false;
   try {
     const d = await getAppData();
@@ -3432,16 +3432,18 @@ async function loadEvents() {
     }
   } catch {}
 
-  // Step 2: Refresh from Google Calendar
-  // If we already have events showing, do it silently in background
-  // If not, await it so user sees something
+  // Step 2: Always refresh from Google Calendar
   if (hasInstantEvents) {
+    // Already showing something — update silently in background
     _refreshEventsBackground().catch(() => {});
   } else {
+    // Nothing showing — fetch and render when ready
     await _refreshEventsBackground().catch(() => {});
-    if (!events.length) render(); // show empty state only if truly nothing
+    // If still nothing after fetch, show empty state
+    if (!events.length) render();
   }
 }
+
 
 async function _refreshEventsBackground() {
   // Try API v3 first (fastest, no proxy needed)
@@ -3520,7 +3522,7 @@ function parseTitlePrefixes(summary, date) {
     }
   }
   let calResult = null, calScore = '';
-  const resultRx = /^(W|L)\s+([\d]+[–\-][\d]+)\s*/i;
+  const resultRx = /^(W|L)\s*([\d]+[–\-][\d]+)\s*/i;
   const rm = cleanSummary.match(resultRx);
   if (rm) {
     calResult = rm[1].toUpperCase() === 'W' ? 'win' : 'loss';
@@ -3618,7 +3620,7 @@ function parseIcal(ical) {
     // ── Result detection: W 2-0, L 1-2, W 2–1 etc. at start of remaining title ──
     let calResult = null;
     let calScore  = '';
-    const resultRx = /^(W|L)\s+([\d]+[–\-][\d]+)\s*/i;
+    const resultRx = /^(W|L)\s*([\d]+[–\-][\d]+)\s*/i;
     const rm = cleanSummary.match(resultRx);
     if (rm) {
       calResult  = rm[1].toUpperCase() === 'W' ? 'win' : 'loss';
@@ -3628,7 +3630,7 @@ function parseIcal(ical) {
 
     const sl = cleanSummary.toLowerCase();
     let type = 'event';
-    if (sl.includes(' vs ') || sl.includes('game') || sl.includes('match')) type = 'game';
+    if (sl.includes(' vs ') || sl.includes('game') || sl.includes('match') || sl.includes('@')) type = 'game';
     else if (calResult) type = 'game'; // has a result → must be a game
     else if (sl.includes('tryout')) type = 'tryout';
     else if (sl.includes('practice')) type = 'practice';

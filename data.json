@@ -6,14 +6,14 @@
   },
   "facts": {
     "league": "OCVBL",
-    "season": "Fall (Aug – Oct)",
+    "season": "Fall (Aug \u2013 Oct)",
     "practice": "Newland Beach Courts, HB"
   },
   "coaches": [
     {
       "role": "Head Coach",
       "name": "Brian Boone",
-      "bio": "An Edison High School alumnus and former collegiate indoor player at UCLA, Coach Boone brings an elite competitive background to the program. He also serves as an Edison US History and CIBACS teacher — deeply rooted in the school and community he coaches for. Under his leadership the Chargers have become one of Orange County's most competitive OCVBL programs."
+      "bio": "An Edison High School alumnus and former collegiate indoor player at UCLA, Coach Boone brings an elite competitive background to the program. He also serves as an Edison US History and CIBACS teacher \u2014 deeply rooted in the school and community he coaches for. Under his leadership the Chargers have become one of Orange County's most competitive OCVBL programs."
     },
     {
       "role": "Assistant Coaches",
@@ -22,117 +22,350 @@
     }
   ],
   "gallery": [
-    { "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full-2025.jpg", "caption": "Full Team 2025" },
-    { "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2025.jpg", "caption": "JV Team 2025" },
-    { "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv1-2025.jpg", "caption": "JV1 Team 2025" },
-    { "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2025.jpg", "caption": "Varsity 2025" },
-    { "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-jv2-2025.jpg", "caption": "Varsity JV2 2025" }
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full-2025.jpg",
+      "caption": "Full Team 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2025.jpg",
+      "caption": "JV Team 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv1-2025.jpg",
+      "caption": "JV1 Team 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2025.jpg",
+      "caption": "Varsity 2025"
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-jv2-2025.jpg",
+      "caption": "Varsity JV2 2025"
+    }
   ],
   "news": [
     {
       "id": "post-1774305806973",
-      "title": "Tryouts – Late August",
+      "title": "Tryouts \u2013 Late August",
       "body": "Tryouts are typically held the week before school starts. Many other schools and teams already have a head start, as their seasons begin earlier.\n\nWe expect to hold two days of tryouts, with teams finalized the following week so we can prepare for our first games.",
       "date": "March 23, 2026"
     },
     {
       "id": "default-physical-day",
-      "title": "🏥 Edison Physical Day — May 30, 2026",
-      "body": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
+      "title": "\ud83c\udfe5 Edison Physical Day \u2014 May 30, 2026",
+      "body": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM \u2013 2 PM at the Edison Gym. Cost: $30 cash or check.",
       "date": "Mar 23, 2026"
     }
   ],
   "roster": {
     "coaches": [
-      { "role": "Head Coach",      "name": "Brian Boone"   },
-      { "role": "Assistant Coach", "name": "Trent Jackson" },
-      { "role": "Assistant Coach", "name": "Nathan Cumme"  },
-      { "role": "Assistant Coach", "name": "Luke Wright"   }
+      {
+        "role": "Head Coach",
+        "name": "Brian Boone"
+      },
+      {
+        "role": "Assistant Coach",
+        "name": "Trent Jackson"
+      },
+      {
+        "role": "Assistant Coach",
+        "name": "Nathan Cumme"
+      },
+      {
+        "role": "Assistant Coach",
+        "name": "Luke Wright"
+      }
     ],
     "sections": [
       {
         "label": "Varsity",
         "color": "#ffb612",
         "players": [
-          { "name": "Shane Wright",   "senior": false },
-          { "name": "Mason Dean",     "senior": false },
-          { "name": "Crosby Gibb",    "senior": false },
-          { "name": "Calen Rosen",    "senior": false },
-          { "name": "Joel Akins",     "senior": false },
-          { "name": "Jack Grady",     "senior": false },
-          { "name": "Stefan Molodoi", "senior": false },
-          { "name": "Brandon Clark",  "senior": false },
-          { "name": "Hayden Pham",    "senior": false },
-          { "name": "Cooper Platt",   "senior": false }
+          {
+            "name": "Shane Wright",
+            "senior": false
+          },
+          {
+            "name": "Mason Dean",
+            "senior": false
+          },
+          {
+            "name": "Crosby Gibb",
+            "senior": false
+          },
+          {
+            "name": "Calen Rosen",
+            "senior": false
+          },
+          {
+            "name": "Joel Akins",
+            "senior": false
+          },
+          {
+            "name": "Jack Grady",
+            "senior": false
+          },
+          {
+            "name": "Stefan Molodoi",
+            "senior": false
+          },
+          {
+            "name": "Brandon Clark",
+            "senior": false
+          },
+          {
+            "name": "Hayden Pham",
+            "senior": false
+          },
+          {
+            "name": "Cooper Platt",
+            "senior": false
+          }
         ]
       },
       {
         "label": "JV1",
         "color": "#3b82f6",
         "players": [
-          { "name": "Matthew Copelin",  "senior": false },
-          { "name": "Cameron Schurig",  "senior": false },
-          { "name": "Jackson Felsmann", "senior": false },
-          { "name": "Kyle Horrocks",    "senior": false },
-          { "name": "Beckett Bierlein", "senior": false },
-          { "name": "Shane Nguyen",     "senior": false }
+          {
+            "name": "Matthew Copelin",
+            "senior": false
+          },
+          {
+            "name": "Cameron Schurig",
+            "senior": false
+          },
+          {
+            "name": "Jackson Felsmann",
+            "senior": false
+          },
+          {
+            "name": "Kyle Horrocks",
+            "senior": false
+          },
+          {
+            "name": "Beckett Bierlein",
+            "senior": false
+          },
+          {
+            "name": "Shane Nguyen",
+            "senior": false
+          }
         ]
       },
       {
         "label": "JV2",
         "color": "#a855f7",
         "players": [
-          { "name": "Soren Wright",  "senior": false },
-          { "name": "Wyatt Weeks",   "senior": false },
-          { "name": "Rex Rowlson",   "senior": false },
-          { "name": "Caleb McGary",  "senior": false },
-          { "name": "Joe Ferrier",   "senior": false },
-          { "name": "Nate Ferrier",  "senior": false }
+          {
+            "name": "Soren Wright",
+            "senior": false
+          },
+          {
+            "name": "Wyatt Weeks",
+            "senior": false
+          },
+          {
+            "name": "Rex Rowlson",
+            "senior": false
+          },
+          {
+            "name": "Caleb McGary",
+            "senior": false
+          },
+          {
+            "name": "Joe Ferrier",
+            "senior": false
+          },
+          {
+            "name": "Nate Ferrier",
+            "senior": false
+          }
         ]
       },
       {
         "label": "FS1",
         "color": "#2dd4bf",
         "players": [
-          { "name": "Sean Cottrell",   "senior": false },
-          { "name": "James Cottrell",  "senior": false },
-          { "name": "Mason Drumm",     "senior": false },
-          { "name": "Dorian Miyazato", "senior": false },
-          { "name": "Sawyer Dinsbach", "senior": false },
-          { "name": "Dane Schmidt",    "senior": false }
+          {
+            "name": "Sean Cottrell",
+            "senior": false
+          },
+          {
+            "name": "James Cottrell",
+            "senior": false
+          },
+          {
+            "name": "Mason Drumm",
+            "senior": false
+          },
+          {
+            "name": "Dorian Miyazato",
+            "senior": false
+          },
+          {
+            "name": "Sawyer Dinsbach",
+            "senior": false
+          },
+          {
+            "name": "Dane Schmidt",
+            "senior": false
+          }
         ]
       },
       {
         "label": "FS2",
         "color": "#fb923c",
         "players": [
-          { "name": "Jayden Boyer",          "senior": false },
-          { "name": "Joseph Saitta",         "senior": false },
-          { "name": "Andrew (AJ) Stanton",   "senior": false },
-          { "name": "Evan Wilbur",           "senior": false },
-          { "name": "Jack Krumpols",         "senior": false },
-          { "name": "Kelly Dusky",           "senior": false }
+          {
+            "name": "Jayden Boyer",
+            "senior": false
+          },
+          {
+            "name": "Joseph Saitta",
+            "senior": false
+          },
+          {
+            "name": "Andrew (AJ) Stanton",
+            "senior": false
+          },
+          {
+            "name": "Evan Wilbur",
+            "senior": false
+          },
+          {
+            "name": "Jack Krumpols",
+            "senior": false
+          },
+          {
+            "name": "Kelly Dusky",
+            "senior": false
+          }
         ]
       },
       {
         "label": "Edison Team",
         "color": "rgba(255,255,255,0.55)",
         "players": [
-          { "name": "Landon Megrin",   "senior": false },
-          { "name": "Kaden Rivera",    "senior": false },
-          { "name": "Drew Martin",     "senior": false },
-          { "name": "Jackson Hackett", "senior": false },
-          { "name": "Sam Brown",       "senior": false },
-          { "name": "Keaton Hocking",  "senior": false },
-          { "name": "Charlie Broman",  "senior": false },
-          { "name": "Owen Jenison",    "senior": false },
-          { "name": "Jonah Aziz",      "senior": false }
+          {
+            "name": "Landon Megrin",
+            "senior": false
+          },
+          {
+            "name": "Kaden Rivera",
+            "senior": false
+          },
+          {
+            "name": "Drew Martin",
+            "senior": false
+          },
+          {
+            "name": "Jackson Hackett",
+            "senior": false
+          },
+          {
+            "name": "Sam Brown",
+            "senior": false
+          },
+          {
+            "name": "Keaton Hocking",
+            "senior": false
+          },
+          {
+            "name": "Charlie Broman",
+            "senior": false
+          },
+          {
+            "name": "Owen Jenison",
+            "senior": false
+          },
+          {
+            "name": "Jonah Aziz",
+            "senior": false
+          }
         ]
       }
     ]
   },
   "igPosts": [
-    { "url": "https://www.instagram.com/p/DO86pNxD_WT/", "added": "3/23/2026" }
+    {
+      "url": "https://www.instagram.com/p/DO86pNxD_WT/",
+      "added": "3/23/2026"
+    }
   ],
-  "events": []
+  "events": [
+    {
+      "id": "seed-physical-day",
+      "type": "event",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-05-30",
+      "time": "10:00",
+      "dur": 240,
+      "loc": "Edison High School, 21400 Magnolia St, Huntington Beach, CA 92646",
+      "opponent": "Edison Physical Day",
+      "ha": "home",
+      "result": "tbd",
+      "score": "",
+      "note": "All students must have a physical on file. Cost: $30 cash or check.",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "seed-tryouts",
+      "type": "tryout",
+      "teams": [
+        "all"
+      ],
+      "date": "2026-08-26",
+      "time": "15:00",
+      "dur": 120,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Possible Tryout Date",
+      "ha": "home",
+      "result": "past",
+      "score": "",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "seed-jv2-win",
+      "type": "game",
+      "teams": [
+        "jv2"
+      ],
+      "date": "2026-09-02",
+      "time": "14:00",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "Dana Hills 2 @ Edison JV2",
+      "ha": "home",
+      "result": "win",
+      "score": "5-0",
+      "note": "",
+      "year": 2026,
+      "series": null
+    },
+    {
+      "id": "seed-fs-win",
+      "type": "game",
+      "teams": [
+        "fs1",
+        "fs2"
+      ],
+      "date": "2026-09-02",
+      "time": "15:30",
+      "dur": 60,
+      "loc": "Newland Street Volleyball Courts",
+      "opponent": "San Clemente @ Edison FS 1",
+      "ha": "home",
+      "result": "win",
+      "score": "5-0",
+      "note": "",
+      "year": 2026,
+      "series": null
+    }
+  ]
 }

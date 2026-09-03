@@ -3421,9 +3421,18 @@ const GCAL_JSON = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIC
 const GCAL_PUBLIC_FEED = `https://www.google.com/calendar/feeds/${encodeURIComponent(GCAL_ID)}/public/full?alt=json&orderby=starttime&sortorder=ascending&singleevents=true&futureevents=true`;
 
 async function loadEvents() {
-  // Always fetch from Google Calendar — data.json events are not used
-  await _refreshEventsBackground().catch(() => {});
-  if (!events.length) render(); // show empty state only if truly nothing
+  // Show cached events instantly if available (< 30 min old)
+  try {
+    const cached = localStorage.getItem('gcal-cache');
+    const cacheTime = localStorage.getItem('gcal-cache-time');
+    if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 30 * 60 * 1000) {
+      events = JSON.parse(cached);
+      if (events.length) { render(); buildYearSelector(); updateCounts(); }
+    }
+  } catch {}
+
+  // Always refresh from Google Cal in background
+  _refreshEventsBackground().catch(() => {});
 }
 
 
@@ -3458,6 +3467,8 @@ async function _refreshEventsBackground() {
         });
         events = mapped;
         render(); buildYearSelector(); updateCounts();
+        // Cache for next load
+        try { localStorage.setItem('gcal-cache', JSON.stringify(mapped)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}
         return;
       }
     }
@@ -3471,6 +3482,7 @@ async function _refreshEventsBackground() {
       if (parsed.length) {
         events = parsed;
         render(); buildYearSelector(); updateCounts();
+        try { localStorage.setItem('gcal-cache', JSON.stringify(parsed)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}
         return;
       }
     }

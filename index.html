@@ -3421,27 +3421,9 @@ const GCAL_JSON = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIC
 const GCAL_PUBLIC_FEED = `https://www.google.com/calendar/feeds/${encodeURIComponent(GCAL_ID)}/public/full?alt=json&orderby=starttime&sortorder=ascending&singleevents=true&futureevents=true`;
 
 async function loadEvents() {
-  // Step 1: Show data.json events instantly if available
-  let hasInstantEvents = false;
-  try {
-    const d = await getAppData();
-    if (d && d.events && d.events.length) {
-      events = d.events;
-      render(); buildYearSelector(); updateCounts();
-      hasInstantEvents = true;
-    }
-  } catch {}
-
-  // Step 2: Always refresh from Google Calendar
-  if (hasInstantEvents) {
-    // Already showing something — update silently in background
-    _refreshEventsBackground().catch(() => {});
-  } else {
-    // Nothing showing — fetch and render when ready
-    await _refreshEventsBackground().catch(() => {});
-    // If still nothing after fetch, show empty state
-    if (!events.length) render();
-  }
+  // Always fetch from Google Calendar — data.json events are not used
+  await _refreshEventsBackground().catch(() => {});
+  if (!events.length) render(); // show empty state only if truly nothing
 }
 
 

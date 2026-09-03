@@ -2431,7 +2431,7 @@ function showTab(name) {
     setTimeout(initSubscribePrompt, 600);
   }
   if (name === 'schedule') {
-    setTimeout(scrollToToday, 500);
+    setTimeout(scrollToToday, 300);
   }
   document.querySelectorAll('.tab-btn').forEach(b => {
     if (b.textContent.trim().toLowerCase().startsWith(name)) b.classList.add('active');
@@ -4781,15 +4781,22 @@ function stopAutoRefresh() {
 
 <script src="https://www.instagram.com/embed.js">
 function scrollToToday() {
-  setTimeout(() => {
+  // Try immediately, then retry a few times in case events haven't rendered yet
+  let attempts = 0;
+  const tryScroll = () => {
     const marker = document.getElementById('today-marker');
     if (marker) {
       const navHeight = document.getElementById('main-nav') ?
         document.getElementById('main-nav').offsetHeight : 70;
-      const top = marker.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+      const top = marker.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
       window.scrollTo({ top, behavior: 'smooth' });
+      return;
     }
-  }, 150);
+    // Marker not found yet — retry up to 10 times
+    attempts++;
+    if (attempts < 10) setTimeout(tryScroll, 200);
+  };
+  setTimeout(tryScroll, 100);
 }
 
 </script></body></html>

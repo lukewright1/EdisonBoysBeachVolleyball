@@ -189,7 +189,7 @@
         "players": [
           {
             "name": "Sean Cottrell",
-            "senior": false
+            "senior": true
           },
           {
             "name": "James Cottrell",

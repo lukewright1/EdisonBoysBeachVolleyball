@@ -3903,9 +3903,9 @@ function render() {
   if (pastHtml) {
     const pastCount = (pastHtml.match(/class="event-card/g) || []).length;
     finalHtml += `
-      <div class="past-events-toggle" onclick="togglePastEvents(this)">
+      <div class="past-events-toggle" onclick="togglePastEvents()">
         <div class="past-events-toggle-line"></div>
-        <div class="past-events-toggle-btn">&#9650; ${pastCount} Past Event${pastCount!==1?'s':''}</div>
+        <div class="past-events-toggle-btn" id="past-toggle-btn">&#9650; ${pastCount} Past Event${pastCount!==1?'s':''}</div>
         <div class="past-events-toggle-line"></div>
       </div>
       <div id="past-events-container" style="display:none;">${pastHtml}</div>`;
@@ -4914,11 +4914,10 @@ function scrollToToday() {
 }
 
 
-function togglePastEvents(el) {
-  // Find the container — it's the next sibling of the toggle div
-  const container = el.nextElementSibling;
-  const btn = el.querySelector('.past-events-toggle-btn');
-  if (!container) return;
+function togglePastEvents() {
+  const container = document.getElementById('past-events-container');
+  const btn = document.getElementById('past-toggle-btn');
+  if (!container || !btn) return;
   const isOpen = container.style.display === 'block';
   container.style.display = isOpen ? 'none' : 'block';
   const count = (container.innerHTML.match(/class="event-card/g) || []).length;

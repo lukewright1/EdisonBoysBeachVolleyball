@@ -129,7 +129,7 @@
         "players": [
           {
             "name": "Matthew Copelin",
-            "senior": false
+            "senior": true
           },
           {
             "name": "Cameron Schurig",

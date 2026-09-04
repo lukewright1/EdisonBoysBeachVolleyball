@@ -2426,15 +2426,6 @@ window.addEventListener('load', async () => {
   await loadEvents();
   startAutoRefresh();
 
-  // Past events toggle — event delegation
-  const schedDiv = document.getElementById('sched');
-  if (schedDiv) {
-    schedDiv.addEventListener('click', function(e) {
-      const toggle = e.target.closest('#past-events-toggle, .past-events-toggle');
-      if (toggle) togglePastEvents();
-    });
-  }
-
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -3912,11 +3903,11 @@ function render() {
   if (pastHtml) {
     const pastCount = (pastHtml.match(/class="event-card/g) || []).length;
     finalHtml += `
-      <div class="past-events-toggle" id="past-events-toggle">
-        <div class="past-events-toggle-line"></div>
-        <div class="past-events-toggle-btn" id="past-toggle-btn">&#9650; ${pastCount} Past Event${pastCount!==1?'s':''}</div>
-        <div class="past-events-toggle-line"></div>
-      </div>
+      <button onclick="togglePastEvents()" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;cursor:pointer;width:100%;background:none;border:none;padding:0;">
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
+        <span id="past-toggle-label" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:5px 12px;white-space:nowrap;">&#9650; ${pastCount} Past Events</span>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
+      </button>
       <div id="past-events-container" style="display:none;">${pastHtml}</div>`;
   }
 
@@ -4924,13 +4915,12 @@ function scrollToToday() {
 
 
 function togglePastEvents() {
-  const container = document.getElementById('past-events-container');
-  const btn = document.getElementById('past-toggle-btn');
-  if (!container || !btn) return;
-  const isOpen = container.style.display === 'block';
-  container.style.display = isOpen ? 'none' : 'block';
-  const count = (container.innerHTML.match(/class="event-card/g) || []).length;
-  btn.innerHTML = (!isOpen ? '&#9660;' : '&#9650;') + ` ${count} Past Event${count!==1?'s':''}`;
+  const c = document.getElementById('past-events-container');
+  const l = document.getElementById('past-toggle-label');
+  if (!c) return;
+  const opening = c.style.display === 'none';
+  c.style.display = opening ? 'block' : 'none';
+  if (l) l.innerHTML = opening ? '&#9660; Hide Past Events' : '&#9650; ' + l.innerHTML.replace(/.*Past/, 'Past');
 }
 
 </script></body></html>

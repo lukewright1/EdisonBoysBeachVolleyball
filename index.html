@@ -3571,7 +3571,7 @@ async function loadEvents() {
 async function _refreshEventsBackground() {
   // Try API v3 first (fastest, no proxy needed)
   try {
-    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear() - 1, 11, 1).toISOString()}&maxResults=250`;
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_ID)}/events?key=${GCAL_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${new Date(new Date().getFullYear() - 1, 11, 1).toISOString()}&maxResults=500`;
     const res = await fetchWithTimeout(url, 5000);
     if (res.ok) {
       const data = await res.json();

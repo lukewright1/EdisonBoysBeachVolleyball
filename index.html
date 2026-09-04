@@ -3861,82 +3861,62 @@ function render() {
 
   let html = '';
   const today = new Date().toISOString().slice(0, 10);
-  let todayMarkerInserted = false;
   let pastHtml = '';
-  let futureHtml = '';
   let todayHtml = '';
+  let futureHtml = '';
 
-  // Split events into past, today, future
   for (const [key, mEvts] of Object.entries(months)) {
     const [y,m] = key.split('-');
-    let pastMonthHtml = '';
-    let futureMonthHtml = '';
-    let todayMonthHtml = '';
-
+    let pHtml = '', tHtml = '', fHtml = '';
     mEvts.forEach(e => {
-      if (e.date < today) {
-        pastMonthHtml += renderCard(e);
-      } else if (e.date === today) {
-        todayMonthHtml += renderCard(e);
-      } else {
-        futureMonthHtml += renderCard(e);
-      }
+      if (e.date < today) pHtml += renderCard(e);
+      else if (e.date === today) tHtml += renderCard(e);
+      else fHtml += renderCard(e);
     });
-
-    if (pastMonthHtml) {
-      pastHtml += `<div class="month-group">
-        <div class="month-hdr">${MONTHS[+m-1]} ${y}</div>${pastMonthHtml}</div>`;
-    }
-    if (todayMonthHtml) {
-      todayHtml += todayMonthHtml;
-    }
-    if (futureMonthHtml) {
-      futureHtml += `<div class="month-group">
-        <div class="month-hdr">${MONTHS[+m-1]} ${y}</div>${futureMonthHtml}</div>`;
-    }
+    const hdr = `<div class="month-hdr">${MONTHS[+m-1]} ${y}</div>`;
+    if (pHtml) pastHtml += `<div class="month-group">${hdr}${pHtml}</div>`;
+    if (tHtml) todayHtml += tHtml;
+    if (fHtml) futureHtml += `<div class="month-group">${hdr}${fHtml}</div>`;
   }
 
-  // Build final HTML
   let finalHtml = '';
 
-  // Past events — collapsible
+  // Past events collapsible
   if (pastHtml) {
-    const pastCount = (pastHtml.match(/class="event-card/g) || []).length;
-    finalHtml += `
-      <button onclick="togglePastEvents()" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;cursor:pointer;width:100%;background:none;border:none;padding:0;">
+    const cnt = (pastHtml.match(/class="event-card/g)||[]).length;
+    finalHtml += `<div id="past-section">
+      <button id="past-toggle-btn" onclick="togglePastEvents()" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;cursor:pointer;width:100%;background:none;border:none;padding:0;-webkit-tap-highlight-color:transparent;">
         <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
-        <span id="past-toggle-label" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:5px 12px;white-space:nowrap;">&#9650; ${pastCount} Past Events</span>
+        <span id="past-toggle-label" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:5px 12px;white-space:nowrap;">&#9650; ${cnt} Past Events</span>
         <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
       </button>
-      <div id="past-events-container" style="display:none;">${pastHtml}</div>`;
+      <div id="past-events-container" style="display:none;">${pastHtml}</div>
+    </div>`;
   }
 
-  // Today's events — gold box
+  // Today marker
+  finalHtml += `<div class="today-marker" id="today-marker">
+    <div class="today-marker-line"></div>
+    <div class="today-marker-label">Today</div>
+    <div class="today-marker-line"></div>
+  </div>`;
+
+  // Today box
   if (todayHtml) {
-    finalHtml += `
-      <div class="today-marker" id="today-marker">
-        <div class="today-marker-line"></div>
-        <div class="today-marker-label">Today</div>
-        <div class="today-marker-line"></div>
-      </div>
-      <div class="today-events-box">
-        <div class="today-events-label">&#9679; Today's Events</div>
-        ${todayHtml}
-      </div>`;
-  } else {
-    // No events today — just show the marker
-    finalHtml += `
-      <div class="today-marker" id="today-marker">
-        <div class="today-marker-line"></div>
-        <div class="today-marker-label">Today</div>
-        <div class="today-marker-line"></div>
-      </div>`;
+    finalHtml += `<div class="today-events-box">
+      <div class="today-events-label">&#9679; Today's Events</div>
+      ${todayHtml}
+    </div>`;
   }
 
-  // Future events
   finalHtml += futureHtml;
-
   container.innerHTML = finalHtml;
+
+  // Attach toggle after innerHTML set
+  const pastBtn = document.getElementById('past-toggle-btn');
+  if (pastBtn) {
+    pastBtn.addEventListener('click', togglePastEvents);
+  }
   // Scroll to today after render
   if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {
     scrollToToday();
@@ -4918,9 +4898,9 @@ function togglePastEvents() {
   const c = document.getElementById('past-events-container');
   const l = document.getElementById('past-toggle-label');
   if (!c) return;
-  const opening = c.style.display === 'none';
+  const opening = c.style.display === 'none' || c.style.display === '';
   c.style.display = opening ? 'block' : 'none';
-  if (l) l.innerHTML = opening ? '&#9660; Hide Past Events' : '&#9650; ' + l.innerHTML.replace(/.*Past/, 'Past');
+  if (l) l.innerHTML = opening ? '&#9660; Hide Past Events' : '&#9650; Show Past Events';
 }
 
 </script></body></html>

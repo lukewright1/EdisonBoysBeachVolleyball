@@ -3626,6 +3626,10 @@ async function _refreshEventsBackground() {
 
 
 function parseTitlePrefixes(summary, date) {
+  // Debug: log first char code to see what bracket character Google sends
+  if (summary && summary[0]) {
+    console.log('parseTitlePrefixes input:', JSON.stringify(summary.slice(0,10)), 'char0:', summary.charCodeAt(0));
+  }
   let cleanSummary = summary;
   let teams = ['all'];
   const prefixMap = [

@@ -2426,6 +2426,13 @@ window.addEventListener('load', async () => {
   await loadEvents();
   startAutoRefresh();
 
+  // Delegated click for past events toggle — survives innerHTML re-renders
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('#past-toggle-btn')) {
+      togglePastEvents();
+    }
+  });
+
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -3885,7 +3892,7 @@ function render() {
   if (pastHtml) {
     const cnt = (pastHtml.match(/class="event-card/g)||[]).length;
     finalHtml += `<div id="past-section">
-      <button id="past-toggle-btn" onclick="togglePastEvents()" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;cursor:pointer;width:100%;background:none;border:none;padding:0;-webkit-tap-highlight-color:transparent;">
+      <button id="past-toggle-btn" id="past-toggle-btn" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;cursor:pointer;width:100%;background:none;border:none;padding:0;-webkit-tap-highlight-color:transparent;">
         <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
         <span id="past-toggle-label" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:5px 12px;white-space:nowrap;">&#9650; ${cnt} Past Events</span>
         <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
@@ -3912,10 +3919,9 @@ function render() {
   finalHtml += futureHtml;
   container.innerHTML = finalHtml;
 
-  // Attach toggle after innerHTML set
-  const pastBtn = document.getElementById('past-toggle-btn');
-  if (pastBtn) {
-    pastBtn.addEventListener('click', togglePastEvents);
+  // scroll to today after render
+  if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {
+    scrollToToday();
   }
   // Scroll to today after render
   if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {

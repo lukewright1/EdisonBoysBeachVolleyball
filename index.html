@@ -622,10 +622,10 @@ body.past-collapsed .past-group { display: none; }
   <div id="records-bar" style="display:none;"></div>
 
   <!-- PAST EVENTS TOGGLE - static HTML, never re-rendered -->
-<div id="past-toggle-wrap" style="display:none;">
+<div id="past-toggle-wrap" style="display:block;">
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
     <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
-    <button id="past-toggle-btn" onclick="togglePast()" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:#ffb612;background:rgba(255,182,18,0.08);border:1px solid rgba(255,182,18,0.3);border-radius:2px;padding:10px 28px;cursor:pointer;white-space:nowrap;"></button>
+    <button id="past-toggle-btn" onclick="togglePast()" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:#ffb612;background:rgba(255,182,18,0.08);border:1px solid rgba(255,182,18,0.3);border-radius:2px;padding:10px 28px;cursor:pointer;white-space:nowrap;">&#9650; Show Past Events</button>
     <button onclick="scrollToToday()" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:#ffb612;background:rgba(255,182,18,0.08);border:1px solid rgba(255,182,18,0.3);border-radius:2px;padding:10px 28px;cursor:pointer;white-space:nowrap;">&#9660; Go to Today</button>
     <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
   </div>
@@ -3943,8 +3943,9 @@ function render() {
 
   // Show/hide static toggle button based on whether past events exist
   const hasPast = finalHtml.includes('past-group');
-  const toggleWrap = document.getElementById('past-toggle-wrap');
-  if (toggleWrap) toggleWrap.style.display = hasPast ? 'block' : 'none';
+  // Show/hide past button based on whether past events exist
+  const pastToggleBtn = document.getElementById('past-toggle-btn');
+  if (pastToggleBtn) pastToggleBtn.style.display = hasPast ? 'inline-block' : 'none';
   container.innerHTML = finalHtml;
   if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {
     scrollToToday();

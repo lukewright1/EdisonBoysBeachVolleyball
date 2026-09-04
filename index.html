@@ -374,6 +374,9 @@ body.past-collapsed .past-group { display: none; }
   margin-bottom: 12px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 10;
+  pointer-events: all;
 }
 #past-toggle-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
 #past-toggle-label {
@@ -2455,7 +2458,13 @@ window.addEventListener('load', async () => {
 
   // Past toggle click — works even after innerHTML re-renders
   document.addEventListener('click', function(e) {
-    if (e.target.closest('#past-toggle')) togglePast();
+    const t = e.target;
+    if (t.id === 'past-toggle' || 
+        t.id === 'past-toggle-label' || 
+        t.id === 'past-toggle-line' ||
+        (t.parentElement && t.parentElement.id === 'past-toggle')) {
+      togglePast();
+    }
   });
 
   // scroll reveal

@@ -4909,7 +4909,8 @@ function stopAutoRefresh() {
 </div>
 
 
-<script src="https://www.instagram.com/embed.js">
+<script src="https://www.instagram.com/embed.js"></script>
+<script>
 function scrollToToday() {
   // Try immediately, then retry a few times in case events haven't rendered yet
   let attempts = 0;
@@ -4940,5 +4941,4 @@ function togglePast() {
   if (btn) btn.innerHTML = collapsed ? '&#9650; Show Past Events' : '&#9660; Hide Past Events';
   if (!collapsed) setTimeout(scrollToToday, 100);
 }
-
 </script></body></html>

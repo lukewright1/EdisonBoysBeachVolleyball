@@ -392,7 +392,7 @@ body.past-collapsed .past-group { display: none; }
 
 </style>
 </head>
-<body class="" style="">
+<body class="past-collapsed" style="">
 
 <!-- NAV -->
 <nav id="main-nav">
@@ -2458,9 +2458,6 @@ window.addEventListener('load', async () => {
     if (e.target.closest('#past-toggle')) togglePast();
   });
 
-  // Default: collapse past events
-  document.body.classList.add('past-collapsed');
-
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -3938,9 +3935,9 @@ function render() {
   if (hasPast) {
     const collapsed = document.body.classList.contains('past-collapsed');
     const pastCount = (finalHtml.match(/past-group/g)||[]).length;
-    finalHtml = `<div id="past-toggle" onclick="togglePast()">
+    finalHtml = `<div id="past-toggle">
       <div id="past-toggle-line"></div>
-      <span id="past-toggle-label">${collapsed ? '&#9650; Show Past Events' : '&#9660; Hide Past Events'}</span>
+      <span id="past-toggle-label">&#9650; Show Past Events</span>
       <div id="past-toggle-line"></div>
     </div>` + finalHtml;
   }
@@ -4938,6 +4935,7 @@ function togglePast() {
   const collapsed = document.body.classList.contains('past-collapsed');
   const lbl = document.getElementById('past-toggle-label');
   if (lbl) lbl.innerHTML = collapsed ? '&#9650; Show Past Events' : '&#9660; Hide Past Events';
+  if (!collapsed) setTimeout(scrollToToday, 100);
 }
 
 </script></body></html>

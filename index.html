@@ -3629,15 +3629,15 @@ function parseTitlePrefixes(summary, date) {
   let cleanSummary = summary;
   let teams = ['all'];
   const prefixMap = [
-    { pattern: /^\[V\]\s*/i,    teams: ['varsity'] },
-    { pattern: /^\[VAR\]\s*/i,  teams: ['varsity'] },
-    { pattern: /^\[JV1\]\s*/i,  teams: ['jv1'] },
-    { pattern: /^\[JV2\]\s*/i,  teams: ['jv2'] },
-    { pattern: /^\[JV\]\s*/i,   teams: ['jv1','jv2'] },
+    { pattern: /^[\[［【]V[\]］】]\s*/i,    teams: ['varsity'] },
+    { pattern: /^[\[［【]VAR[\]］】]\s*/i,  teams: ['varsity'] },
+    { pattern: /^[\[［【]JV1[\]］】]\s*/i,  teams: ['jv1'] },
+    { pattern: /^[\[［【]JV2[\]］】]\s*/i,  teams: ['jv2'] },
+    { pattern: /^[\[［【]JV[\]］】]\s*/i,   teams: ['jv1','jv2'] },
     { pattern: /^\[ALL\]\s*/i,  teams: ['all'] },
-    { pattern: /^\[FS1\]\s*/i,  teams: ['fs1'] },
-    { pattern: /^\[FS2\]\s*/i,  teams: ['fs2'] },
-    { pattern: /^\[FS\]\s*/i,   teams: ['fs1','fs2'] },
+    { pattern: /^[\[［【]FS1[\]］】]\s*/i,  teams: ['fs1'] },
+    { pattern: /^[\[［【]FS2[\]］】]\s*/i,  teams: ['fs2'] },
+    { pattern: /^[\[［【]FS[\]］】]\s*/i,   teams: ['fs1','fs2'] },
     { pattern: /^\[FR\]\s*/i,   teams: ['fs'] },
   ];
   for (const pm of prefixMap) {
@@ -3646,6 +3646,17 @@ function parseTitlePrefixes(summary, date) {
       cleanSummary = cleanSummary.replace(pm.pattern, '').trim();
       break;
     }
+  }
+  // Keyword fallback if no bracket tag found
+  if (teams[0] === 'all') {
+    const sl2 = cleanSummary.toLowerCase();
+    if (/^varsity[\s\-]/.test(sl2)) { teams = ['varsity']; cleanSummary = cleanSummary.replace(/^varsity[\s\-]+/i,'').trim(); }
+    else if (/^jv2[\s\-]/.test(sl2)) { teams = ['jv2']; cleanSummary = cleanSummary.replace(/^jv2[\s\-]+/i,'').trim(); }
+    else if (/^jv1[\s\-]/.test(sl2)) { teams = ['jv1']; cleanSummary = cleanSummary.replace(/^jv1[\s\-]+/i,'').trim(); }
+    else if (/^jv[\s\-]/.test(sl2))  { teams = ['jv1','jv2']; cleanSummary = cleanSummary.replace(/^jv[\s\-]+/i,'').trim(); }
+    else if (/^fs2[\s\-]/.test(sl2)) { teams = ['fs2']; cleanSummary = cleanSummary.replace(/^fs2[\s\-]+/i,'').trim(); }
+    else if (/^fs1[\s\-]/.test(sl2)) { teams = ['fs1']; cleanSummary = cleanSummary.replace(/^fs1[\s\-]+/i,'').trim(); }
+    else if (/^fs[\s\-]/.test(sl2))  { teams = ['fs1','fs2']; cleanSummary = cleanSummary.replace(/^fs[\s\-]+/i,'').trim(); }
   }
   let calResult = null, calScore = '';
   const resultRx = /^[^WLwl]{0,15}(W|L)\s*([\d]+[–\-][\d]+)\s*/i;
@@ -3725,14 +3736,14 @@ function parseIcal(ical) {
     let cleanSummary = summary;
     let teams = ['all'];
     const prefixMap = [
-      { pattern: /^\[V\]\s*/i,    teams: ['varsity'] },
-      { pattern: /^\[VAR\]\s*/i,  teams: ['varsity'] },
-      { pattern: /^\[JV1\]\s*/i,  teams: ['jv1'] },
-      { pattern: /^\[JV2\]\s*/i,  teams: ['jv2'] },
-      { pattern: /^\[JV\]\s*/i,   teams: ['jv1','jv2'] },
-      { pattern: /^\[FS1\]\s*/i,  teams: ['fs1'] },
-      { pattern: /^\[FS2\]\s*/i,  teams: ['fs2'] },
-      { pattern: /^\[FS\]\s*/i,   teams: ['fs1','fs2'] },
+      { pattern: /^[\[［【]V[\]］】]\s*/i,    teams: ['varsity'] },
+      { pattern: /^[\[［【]VAR[\]］】]\s*/i,  teams: ['varsity'] },
+      { pattern: /^[\[［【]JV1[\]］】]\s*/i,  teams: ['jv1'] },
+      { pattern: /^[\[［【]JV2[\]］】]\s*/i,  teams: ['jv2'] },
+      { pattern: /^[\[［【]JV[\]］】]\s*/i,   teams: ['jv1','jv2'] },
+      { pattern: /^[\[［【]FS1[\]］】]\s*/i,  teams: ['fs1'] },
+      { pattern: /^[\[［【]FS2[\]］】]\s*/i,  teams: ['fs2'] },
+      { pattern: /^[\[［【]FS[\]］】]\s*/i,   teams: ['fs1','fs2'] },
       { pattern: /^\[ALL\]\s*/i,  teams: ['all'] },
     ];
     for (const pm of prefixMap) {

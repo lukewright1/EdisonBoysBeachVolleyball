@@ -363,6 +363,33 @@
   opacity: 0.8;
 }
 
+
+/* ── PAST EVENTS COLLAPSE ── */
+.past-group { }
+body.past-collapsed .past-group { display: none; }
+#past-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+#past-toggle-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+#past-toggle-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px;
+  padding: 5px 14px;
+  white-space: nowrap;
+  user-select: none;
+}
+
 </style>
 </head>
 <body class="" style="">
@@ -2426,6 +2453,14 @@ window.addEventListener('load', async () => {
   await loadEvents();
   startAutoRefresh();
 
+  // Past toggle click — works even after innerHTML re-renders
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('#past-toggle')) togglePast();
+  });
+
+  // Default: collapse past events
+  document.body.classList.add('past-collapsed');
+
   // scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -3605,7 +3640,7 @@ function parseTitlePrefixes(summary, date) {
     }
   }
   let calResult = null, calScore = '';
-  const resultRx = /^(W|L)\s*([\d]+[–\-][\d]+)\s*/i;
+  const resultRx = /^[^WLwl]{0,15}(W|L)\s*([\d]+[–\-][\d]+)\s*/i;
   const rm = cleanSummary.match(resultRx);
   if (rm) {
     calResult = rm[1].toUpperCase() === 'W' ? 'win' : 'loss';
@@ -3703,7 +3738,7 @@ function parseIcal(ical) {
     // ── Result detection: W 2-0, L 1-2, W 2–1 etc. at start of remaining title ──
     let calResult = null;
     let calScore  = '';
-    const resultRx = /^(W|L)\s*([\d]+[–\-][\d]+)\s*/i;
+    const resultRx = /^[^WLwl]{0,15}(W|L)\s*([\d]+[–\-][\d]+)\s*/i;
     const rm = cleanSummary.match(resultRx);
     if (rm) {
       calResult  = rm[1].toUpperCase() === 'W' ? 'win' : 'loss';
@@ -3866,6 +3901,8 @@ function render() {
 
   for (const [key, mEvts] of Object.entries(months)) {
     const [y,m] = key.split('-');
+    const isPast = (key < today.slice(0,7));
+    const grpClass = isPast ? 'month-group past-group' : 'month-group';
     const hdr = `<div class="month-hdr">${MONTHS[+m-1]} ${y}</div>`;
     let monthHtml = '';
     let injectedMarker = false;
@@ -3884,7 +3921,7 @@ function render() {
       monthHtml += renderCard(e);
     });
 
-    if (monthHtml) finalHtml += `<div class="month-group">${hdr}${monthHtml}</div>`;
+    if (monthHtml) finalHtml += `<div class="${grpClass}">${hdr}${monthHtml}</div>`;
   }
 
   // If all events are past, add marker at the end
@@ -3896,6 +3933,17 @@ function render() {
     </div>`;
   }
 
+  // Prepend toggle button if there are past events
+  const hasPast = finalHtml.includes('past-group');
+  if (hasPast) {
+    const collapsed = document.body.classList.contains('past-collapsed');
+    const pastCount = (finalHtml.match(/past-group/g)||[]).length;
+    finalHtml = `<div id="past-toggle" onclick="togglePast()">
+      <div id="past-toggle-line"></div>
+      <span id="past-toggle-label">${collapsed ? '&#9650; Show Past Events' : '&#9660; Hide Past Events'}</span>
+      <div id="past-toggle-line"></div>
+    </div>` + finalHtml;
+  }
   container.innerHTML = finalHtml;
   if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {
     scrollToToday();
@@ -4883,5 +4931,13 @@ function scrollToToday() {
 
 
 
+
+
+function togglePast() {
+  document.body.classList.toggle('past-collapsed');
+  const collapsed = document.body.classList.contains('past-collapsed');
+  const lbl = document.getElementById('past-toggle-label');
+  if (lbl) lbl.innerHTML = collapsed ? '&#9650; Show Past Events' : '&#9660; Hide Past Events';
+}
 
 </script></body></html>

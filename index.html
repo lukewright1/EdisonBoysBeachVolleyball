@@ -364,20 +364,7 @@
 }
 
 
-/* ── PAST EVENTS COLLAPSE ── */
-.past-group { }
-body.past-collapsed .past-group { display: none; }
-#past-toggle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  z-index: 10;
-  pointer-events: all;
-}
+
 #past-toggle-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
 #past-toggle-label {
   font-family: 'Barlow Condensed', sans-serif;
@@ -393,9 +380,14 @@ body.past-collapsed .past-group { display: none; }
   user-select: none;
 }
 
+
+/* ── PAST EVENTS COLLAPSE ── */
+.past-group { display: none; }
+.past-group.show { display: block; }
+
 </style>
 </head>
-<body class="past-collapsed" style="">
+<body class="" style="">
 
 <!-- NAV -->
 <nav id="main-nav">
@@ -621,12 +613,11 @@ body.past-collapsed .past-group { display: none; }
   <!-- RECORDS BAR -->
   <div id="records-bar" style="display:none;"></div>
 
-  <!-- PAST EVENTS TOGGLE - static HTML, never re-rendered -->
-<div id="past-toggle-wrap" style="display:block;">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+  <!-- PAST EVENTS TOGGLE -->
+<div id="past-toggle-wrap" style="display:none;margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:12px;">
     <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
-    <button id="past-toggle-btn" onclick="togglePast()" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:#ffb612;background:rgba(255,182,18,0.08);border:1px solid rgba(255,182,18,0.3);border-radius:2px;padding:10px 28px;cursor:pointer;white-space:nowrap;">&#9650; Show Past Events</button>
-    <button onclick="scrollToToday()" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:#ffb612;background:rgba(255,182,18,0.08);border:1px solid rgba(255,182,18,0.3);border-radius:2px;padding:10px 28px;cursor:pointer;white-space:nowrap;">&#9660; Go to Today</button>
+    <button id="past-toggle-btn" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:#ffb612;background:rgba(255,182,18,0.08);border:1px solid rgba(255,182,18,0.3);border-radius:2px;padding:10px 28px;cursor:pointer;white-space:nowrap;">&#9650; Show Past Events</button>
     <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
   </div>
 </div>
@@ -3928,7 +3919,7 @@ function render() {
 
   for (const [key, mEvts] of Object.entries(months)) {
     const [y,m] = key.split('-');
-    const isPast = (key < today.slice(0,7));
+    const isPast = key < today.slice(0,7);
     const grpClass = isPast ? 'month-group past-group' : 'month-group';
     const hdr = `<div class="month-hdr">${MONTHS[+m-1]} ${y}</div>`;
     let monthHtml = '';
@@ -3962,10 +3953,11 @@ function render() {
 
   // Show/hide static toggle button based on whether past events exist
   const hasPast = finalHtml.includes('past-group');
-  // Show/hide past button based on whether past events exist
-  const pastToggleBtn = document.getElementById('past-toggle-btn');
-  if (pastToggleBtn) pastToggleBtn.style.display = hasPast ? 'inline-block' : 'none';
   container.innerHTML = finalHtml;
+  // Show past toggle button if past events exist
+  const _hasPast = container.querySelectorAll('.past-group').length > 0;
+  const _wrap = document.getElementById('past-toggle-wrap');
+  if (_wrap) _wrap.style.display = _hasPast ? 'block' : 'none';
   if (document.getElementById('tab-schedule') && document.getElementById('tab-schedule').classList.contains('active')) {
     scrollToToday();
   }
@@ -4955,11 +4947,21 @@ function scrollToToday() {
 
 
 
+
+</script>
+<script>
 function togglePast() {
-  document.body.classList.toggle('past-collapsed');
-  const collapsed = document.body.classList.contains('past-collapsed');
+  const groups = document.querySelectorAll('.past-group');
   const btn = document.getElementById('past-toggle-btn');
-  if (btn) btn.innerHTML = collapsed ? '&#9650; Show Past Events' : '&#9660; Hide Past Events';
-  if (!collapsed) setTimeout(scrollToToday, 100);
+  const anyVisible = document.querySelector('.past-group.show');
+  groups.forEach(g => g.classList.toggle('show', !anyVisible));
+  if (btn) btn.innerHTML = anyVisible ? '&#9650; Show Past Events' : '&#9660; Hide Past Events';
 }
-</script></body></html>
+// Wire up button once DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('past-toggle-btn');
+  if (btn) btn.onclick = togglePast;
+});
+</script>
+
+</body></html>

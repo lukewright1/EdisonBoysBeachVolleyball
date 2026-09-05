@@ -3920,11 +3920,14 @@ function render() {
 
   for (const [key, mEvts] of Object.entries(months)) {
     const [y,m] = key.split('-');
-    const isPast = key < today.slice(0,7);
-    const grpClass = isPast ? 'month-group past-group' : 'month-group';
     const hdr = `<div class="month-hdr">${MONTHS[+m-1]} ${y}</div>`;
     let monthHtml = '';
     let injectedMarker = false;
+
+    // Yesterday = hide events older than this
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yest = yesterday.toISOString().slice(0,10);
 
     mEvts.forEach(e => {
       // Before first event on/after today, insert TODAY marker
@@ -3937,10 +3940,14 @@ function render() {
           <div class="today-marker-line"></div>
         </div>`;
       }
-      monthHtml += renderCard(e);
+      if (e.date < yest) {
+        monthHtml += `<div class="past-group">${renderCard(e)}</div>`;
+      } else {
+        monthHtml += renderCard(e);
+      }
     });
 
-    if (monthHtml) finalHtml += `<div class="${grpClass}">${hdr}${monthHtml}</div>`;
+    if (monthHtml) finalHtml += `<div class="month-group">${hdr}${monthHtml}</div>`;
   }
 
   // If all events are past, add marker at the end

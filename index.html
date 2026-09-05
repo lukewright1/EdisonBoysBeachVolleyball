@@ -3680,7 +3680,15 @@ function parseTitlePrefixes(summary, date) {
   const result = ov.result !== undefined ? ov.result : calResult ? calResult : date < today ? 'past' : 'tbd';
   const score  = ov.score  !== undefined ? ov.score  : calScore;
 
-  return { type, teams, opponent: cleanSummary, ha: 'home', result, score };
+  // Detect home/away from title keywords
+  let ha = 'home';
+  const titleLower = cleanSummary.toLowerCase();
+  if (titleLower.includes('away') || titleLower.includes('@ ') || titleLower.includes('[away')) ha = 'away';
+  if (titleLower.includes('home game') || titleLower.includes('[home') || titleLower.includes('@ edison')) ha = 'home';
+  // Strip [AWAY GAME] / [HOME GAME] from display title
+  cleanSummary = cleanSummary.replace(/\s*\[(away|home)\s*(game)?\]/gi, '').trim();
+
+  return { type, teams, opponent: cleanSummary, ha, result, score };
 }
 
 function parseIcal(ical) {

@@ -3931,19 +3931,30 @@ function render() {
 
     mEvts.forEach(e => {
       // Before first event on/after today, insert TODAY marker
-      if (!todayBoxDone && e.date >= today && !injectedMarker) {
-        injectedMarker = true;
-        todayBoxDone = true;
-        monthHtml += `<div class="today-marker" id="today-marker">
-          <div class="today-marker-line"></div>
-          <div class="today-marker-label">Today</div>
-          <div class="today-marker-line"></div>
-        </div>`;
-      }
       if (e.date < yest) {
         monthHtml += `<div class="past-group">${renderCard(e)}</div>`;
       } else {
-        monthHtml += renderCard(e);
+        // Insert TODAY marker + open gold box before first today/future event
+        if (!todayBoxDone && e.date >= today && !injectedMarker) {
+          injectedMarker = true;
+          todayBoxDone = true;
+          // Collect all today's events for the gold box
+          const todayEvts = mEvts.filter(ev => ev.date === today);
+          const futureEvts = mEvts.filter(ev => ev.date > today);
+          monthHtml += `<div class="today-marker" id="today-marker">
+            <div class="today-marker-line"></div>
+            <div class="today-marker-label">Today</div>
+            <div class="today-marker-line"></div>
+          </div>`;
+          if (todayEvts.length > 0) {
+            monthHtml += `<div class="today-events-box"><div class="today-events-label">&#9679; Today's Events</div>`;
+            todayEvts.forEach(ev => { monthHtml += renderCard(ev); });
+            monthHtml += `</div>`;
+          }
+          futureEvts.forEach(ev => { monthHtml += renderCard(ev); });
+          return; // skip normal rendering for this month's events
+        }
+        if (e.date !== today) monthHtml += renderCard(e); // skip today events (already added)
       }
     });
 

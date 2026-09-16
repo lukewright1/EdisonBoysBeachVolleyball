@@ -248,6 +248,10 @@
           {
             "name": "Sam Brown",
             "senior": false
+          },
+          {
+            "name": "Keaton Hocking",
+            "senior": false
           }
         ]
       },
@@ -265,10 +269,6 @@
           },
           {
             "name": "Jackson Hackett",
-            "senior": false
-          },
-          {
-            "name": "Keaton Hocking",
             "senior": false
           },
           {

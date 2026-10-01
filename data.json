@@ -274,6 +274,10 @@
           {
             "name": "Landon Megrin",
             "senior": false
+          },
+          {
+            "name": "Sam Brown",
+            "senior": false
           }
         ]
       },
@@ -291,10 +295,6 @@
           },
           {
             "name": "Jackson Hackett",
-            "senior": false
-          },
-          {
-            "name": "Sam Brown",
             "senior": false
           },
           {

@@ -144,10 +144,6 @@
             "senior": false
           },
           {
-            "name": "Hayden Pham",
-            "senior": false
-          },
-          {
             "name": "Shane Nguyen",
             "senior": false
           },
@@ -179,6 +175,10 @@
           },
           {
             "name": "Cooper Platt",
+            "senior": false
+          },
+          {
+            "name": "Hayden Pham",
             "senior": false
           }
         ]

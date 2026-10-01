@@ -270,6 +270,10 @@
           {
             "name": "Kelly Dusky",
             "senior": false
+          },
+          {
+            "name": "Landon Megrin",
+            "senior": false
           }
         ]
       },
@@ -277,10 +281,6 @@
         "label": "Edison Team",
         "color": "rgba(255,255,255,0.55)",
         "players": [
-          {
-            "name": "Landon Megrin",
-            "senior": false
-          },
           {
             "name": "Kaden Rivera",
             "senior": false

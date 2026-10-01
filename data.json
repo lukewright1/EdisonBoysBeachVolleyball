@@ -149,7 +149,7 @@
           },
           {
             "name": "Beckett Bierlein",
-            "senior": false
+            "senior": true
           }
         ]
       },
@@ -179,7 +179,7 @@
           },
           {
             "name": "Hayden Pham",
-            "senior": false
+            "senior": true
           }
         ]
       },

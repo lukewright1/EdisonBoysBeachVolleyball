@@ -6,14 +6,14 @@
   },
   "facts": {
     "league": "OCVBL",
-    "season": "Fall (Aug – Oct)",
+    "season": "Fall (Aug \u2013 Oct)",
     "practice": "Newland Beach Courts, HB"
   },
   "coaches": [
     {
       "role": "Head Coach",
       "name": "Brian Boone",
-      "bio": "An Edison High School alumnus and former collegiate indoor player at UCLA, Coach Boone brings an elite competitive background to the program. He also serves as an Edison US History and CIBACS teacher — deeply rooted in the school and community he coaches for. Under his leadership the Chargers have become one of Orange County's most competitive OCVBL programs."
+      "bio": "An Edison High School alumnus and former collegiate indoor player at UCLA, Coach Boone brings an elite competitive background to the program. He also serves as an Edison US History and CIBACS teacher \u2014 deeply rooted in the school and community he coaches for. Under his leadership the Chargers have become one of Orange County's most competitive OCVBL programs."
     },
     {
       "role": "Assistant Coaches",
@@ -23,37 +23,67 @@
   ],
   "gallery": [
     {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full%20team-2026.jpg",
+      "caption": "Full Team 2026",
+      "year": 2026
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2026.jpg",
+      "caption": "Varsity 2026",
+      "year": 2026
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2026%20-2.jpg",
+      "caption": "Varsity 2026",
+      "year": 2026
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2026.jpg",
+      "caption": "JV 2026",
+      "year": 2026
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-fs-2026.jpg",
+      "caption": "Frosh/Soph 2026",
+      "year": 2026
+    },
+    {
       "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full-2025.jpg",
-      "caption": "Full Team 2025"
-    },
-    {
-      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2025.jpg",
-      "caption": "JV Team 2025"
-    },
-    {
-      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv1-2025.jpg",
-      "caption": "JV1 Team 2025"
+      "caption": "Full Team 2025",
+      "year": 2025
     },
     {
       "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2025.jpg",
-      "caption": "Varsity 2025"
+      "caption": "Varsity 2025",
+      "year": 2025
     },
     {
       "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-jv2-2025.jpg",
-      "caption": "Varsity JV2 2025"
+      "caption": "Varsity & JV2 2025",
+      "year": 2025
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2025.jpg",
+      "caption": "JV 2025",
+      "year": 2025
+    },
+    {
+      "url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv1-2025.jpg",
+      "caption": "JV1 2025",
+      "year": 2025
     }
   ],
   "news": [
     {
       "id": "post-1774305806973",
-      "title": "Tryouts – Late August",
+      "title": "Tryouts \u2013 Late August",
       "body": "Tryouts are typically held the week before school starts. Many other schools and teams already have a head start, as their seasons begin earlier.\n\nWe expect to hold two days of tryouts, with teams finalized the following week so we can prepare for our first games.",
       "date": "March 23, 2026"
     },
     {
       "id": "default-physical-day",
-      "title": "🏥 Edison Physical Day — May 30, 2026",
-      "body": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM – 2 PM at the Edison Gym. Cost: $30 cash or check.",
+      "title": "\ud83c\udfe5 Edison Physical Day \u2014 May 30, 2026",
+      "body": "All students must have a physical on file to participate in high school summer camps or sports during the school year. Physical Day is May 30, 2026 from 10 AM \u2013 2 PM at the Edison Gym. Cost: $30 cash or check.",
       "date": "Mar 23, 2026"
     }
   ],
@@ -115,11 +145,11 @@
           },
           {
             "name": "Hayden Pham",
-            "senior": true
+            "senior": false
           },
           {
             "name": "Cooper Platt",
-            "senior": true
+            "senior": false
           }
         ]
       },
@@ -129,11 +159,11 @@
         "players": [
           {
             "name": "Matthew Copelin",
-            "senior": true
+            "senior": false
           },
           {
             "name": "Cameron Schurig",
-            "senior": true
+            "senior": false
           },
           {
             "name": "Jackson Felsmann",
@@ -145,11 +175,11 @@
           },
           {
             "name": "Beckett Bierlein",
-            "senior": true
+            "senior": false
           },
           {
             "name": "Shane Nguyen",
-            "senior": true
+            "senior": false
           }
         ]
       },
@@ -189,7 +219,7 @@
         "players": [
           {
             "name": "Sean Cottrell",
-            "senior": true
+            "senior": false
           },
           {
             "name": "James Cottrell",
@@ -240,18 +270,6 @@
           {
             "name": "Kelly Dusky",
             "senior": false
-          },
-          {
-            "name": "Landon Megrin",
-            "senior": false
-          },
-          {
-            "name": "Sam Brown",
-            "senior": false
-          },
-          {
-            "name": "Keaton Hocking",
-            "senior": false
           }
         ]
       },
@@ -259,6 +277,10 @@
         "label": "Edison Team",
         "color": "rgba(255,255,255,0.55)",
         "players": [
+          {
+            "name": "Landon Megrin",
+            "senior": false
+          },
           {
             "name": "Kaden Rivera",
             "senior": false
@@ -269,6 +291,14 @@
           },
           {
             "name": "Jackson Hackett",
+            "senior": false
+          },
+          {
+            "name": "Sam Brown",
+            "senior": false
+          },
+          {
+            "name": "Keaton Hocking",
             "senior": false
           },
           {

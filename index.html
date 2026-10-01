@@ -2400,7 +2400,15 @@ const DEFAULT_DATA = {
     { role: 'Head Coach', name: 'Brian Boone', bio: 'An Edison High School alumnus and former collegiate indoor player at UCLA, Coach Boone brings an elite competitive background to the program. He also serves as an Edison US History and CIBACS teacher — deeply rooted in the school and community he coaches for. Under his leadership the Chargers have become one of Orange County\'s most competitive OCVBL programs.' },
     { role: 'Assistant Coaches', name: 'Nathan Cumme & Luke Wright', bio: 'Nathan and Luke bring additional coaching depth to the Chargers, supporting player development at Newland Beach Volleyball Courts throughout the fall season.' }
   ],
-  gallery: [{"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full-2025.jpg", "caption": "Full Team 2025"}, {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2025.jpg", "caption": "JV Team 2025"}, {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv1-2025.jpg", "caption": "JV1 Team 2025"}, {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2025.jpg", "caption": "Varsity 2025"}, {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-jv2-2025.jpg", "caption": "Varsity 2025"}]
+  gallery: [
+    {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full%20team-2026.jpg", "caption": "Full Team 2026", "year": 2026},
+    {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2026.jpg", "caption": "Varsity 2026", "year": 2026},
+    {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2026.jpg", "caption": "JV 2026", "year": 2026},
+    {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-fs-2026.jpg", "caption": "Frosh/Soph 2026", "year": 2026},
+    {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-full-2025.jpg", "caption": "Full Team 2025", "year": 2025},
+    {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-varsity-2025.jpg", "caption": "Varsity 2025", "year": 2025},
+    {"url": "https://lukewright1.github.io/EdisonBoysBeachVolleyball/photos/team-jv-2025.jpg", "caption": "JV 2025", "year": 2025}
+  ]
 };
 
 let siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -3007,20 +3015,51 @@ function renderGallery() {
     return;
   }
 
-  container.className = 'gallery-grid reveal visible';
-  container.innerHTML = siteData.gallery.map((p, i) => `
+  const photos2026 = siteData.gallery.filter(p => !p.year || p.year === 2026);
+  const photos2025 = siteData.gallery.filter(p => p.year === 2025);
+  const photosOther = siteData.gallery.filter(p => p.year && p.year < 2025);
+
+  const makeCard = (p, i) => `
     <div class="gallery-item" style="position:relative;" onclick="openLightbox(${i})">
       <div class="gallery-inner" style="background:#0a1628;">
-        <img src="${p.url}" alt="${p.caption||'Edison BVB'}"
-          loading="${i === 0 ? 'eager' : 'lazy'}"
-          style="width:100%;height:100%;object-fit:cover;display:block;"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <img src="${p.url}" alt="${p.caption}" loading="eager" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div style="display:none;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;">Image not found</div>
-        ${p.caption ? `<div class="gallery-placeholder-text">${p.caption}</div>` : ''}
+        <div class="gallery-placeholder-text">${p.caption}</div>
       </div>
-      ${isAdmin ? `<button onclick="removePhoto(${i})" style="position:absolute;top:8px;right:8px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:4px 10px;border-radius:2px;border:1px solid rgba(239,68,68,0.4);background:rgba(10,22,40,0.85);color:#f87171;z-index:2;">✕ Remove</button>` : ''}
-    </div>`).join('');
+    </div>`;
+
+  let html = '';
+
+  // 2026 section — always visible
+  if (photos2026.length) {
+    html += `<div style="margin-bottom:32px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">2026 Season</div>
+      <div class="gallery-grid">${photos2026.map((p,i) => makeCard(p, i)).join('')}</div>
+    </div>`;
+  }
+
+  // Past seasons — collapsible
+  const pastPhotos = [...photos2025, ...photosOther];
+  if (pastPhotos.length) {
+    html += `
+      <div style="margin-top:8px;">
+        <button id="gallery-past-btn" onclick="toggleGalleryPast()" style="display:flex;align-items:center;gap:12px;width:100%;background:none;border:none;padding:0;cursor:pointer;margin-bottom:12px;">
+          <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:2px;padding:7px 18px;white-space:nowrap;">&#9650; Past Seasons</span>
+          <div style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></div>
+        </button>
+        <div id="gallery-past-container" style="display:none;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;">2025 Season</div>
+          <div class="gallery-grid">${pastPhotos.map((p,i) => makeCard(p, photos2026.length + i)).join('')}</div>
+        </div>
+      </div>`;
+  }
+
+  container.className = '';
+  container.innerHTML = html;
+  container.style.opacity = '1';
 }
+
 
 function showAddPhoto() {
   document.getElementById('add-photo-form').style.display = 'block';
@@ -4969,6 +5008,18 @@ function scrollToToday() {
 
 </script>
 <script>
+function toggleGalleryPast() {
+  var c = document.getElementById('gallery-past-container');
+  var btn = document.getElementById('gallery-past-btn');
+  if (!c) return;
+  var isOpen = c.style.display === 'block';
+  c.style.display = isOpen ? 'none' : 'block';
+  if (btn) {
+    var span = btn.querySelector('span');
+    if (span) span.innerHTML = isOpen ? '&#9650; Past Seasons' : '&#9660; Past Seasons';
+  }
+}
+
 function togglePast() {
   var groups = document.querySelectorAll('.past-group');
   var btn = document.getElementById('past-toggle-btn');

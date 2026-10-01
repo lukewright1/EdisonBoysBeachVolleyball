@@ -154,6 +154,10 @@
           {
             "name": "Shane Nguyen",
             "senior": false
+          },
+          {
+            "name": "Beckett Bierlein",
+            "senior": false
           }
         ]
       },
@@ -175,10 +179,6 @@
           },
           {
             "name": "Kyle Horrocks",
-            "senior": false
-          },
-          {
-            "name": "Beckett Bierlein",
             "senior": false
           }
         ]

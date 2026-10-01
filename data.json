@@ -145,7 +145,7 @@
           },
           {
             "name": "Shane Nguyen",
-            "senior": false
+            "senior": true
           },
           {
             "name": "Beckett Bierlein",
@@ -219,7 +219,7 @@
         "players": [
           {
             "name": "Sean Cottrell",
-            "senior": false
+            "senior": true
           },
           {
             "name": "James Cottrell",

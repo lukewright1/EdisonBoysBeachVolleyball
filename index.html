@@ -3626,15 +3626,28 @@ async function _refreshEventsBackground() {
             year = parseInt(date.slice(0, 4));
           }
           const parsed = parseTitlePrefixes(rawTitle, date);
-          return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
+          // Store recurringEventId so we can prefer exceptions over base instances
+          const recurringEventId = item.recurringEventId || null;
+          return { id: item.id, recurringEventId, ...parsed, date, time, dur, loc, note, year, series: null };
         });
-        // Deduplicate by event ID (Google API occasionally returns same event twice)
-        const seenIds = new Set();
-        events = mapped.filter(e => {
-          if (seenIds.has(e.id)) return false;
-          seenIds.add(e.id);
-          return true;
-        });
+        // Deduplicate: prefer exception instances over their recurring base event
+        // Key = date+time+normalizedTitle; if a recurring exception exists, drop the base instance
+        const dedupeMap = new Map();
+        for (const e of mapped) {
+          const key = `${e.date}|${e.time}|${e.title.toLowerCase().trim()}`;
+          const existing = dedupeMap.get(key);
+          if (!existing) {
+            dedupeMap.set(key, e);
+          } else {
+            // Prefer the exception (has recurringEventId) over the base recurring instance
+            if (e.recurringEventId && !existing.recurringEventId) {
+              dedupeMap.set(key, e);
+            }
+            // If both are exceptions or neither, keep the first (already set)
+          }
+        }
+        events = Array.from(dedupeMap.values())
+          .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
         render(); buildYearSelector(); updateCounts();
         // Cache for next load
         try { localStorage.setItem('gcal-cache', JSON.stringify(mapped)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}

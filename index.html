@@ -3637,39 +3637,36 @@ async function _refreshEventsBackground() {
           return { id: item.id, recurringEventId, ...parsed, date, time, dur, loc, note, year, series: null };
         });
         // Deduplicate: prefer exception instances over their recurring base event
-        // Key = date+time+normalizedTitle; if a recurring exception exists, drop the base instance
-        // Deduplicate by Google event ID first
+        // Pass 1 — dedupe by Google event ID (shouldn't happen but just in case)
         const seenById = new Map();
         for (const e of mapped) {
           const existing = seenById.get(e.id);
-          if (!existing) {
-            seenById.set(e.id, e);
-          } else if (e.recurringEventId && !existing.recurringEventId) {
-            seenById.set(e.id, e);
-          }
+          if (!existing) { seenById.set(e.id, e); }
+          else if (e.recurringEventId && !existing.recurringEventId) { seenById.set(e.id, e); }
         }
-        // Then deduplicate by date+time+title+loc (catches recurring exceptions with different IDs)
+        // Pass 2 — dedupe by date+time+normalizedTitle (ignore location — may differ slightly)
+        // Keeps the event that has a recurringEventId (exception) over the base series entry
         const dedupeMap = new Map();
         for (const e of seenById.values()) {
-          const titleKey = (e.opponent||e.title||'').toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'').slice(0,25);
-          const locKey = e.loc.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'').slice(0,20);
-          const key = `${e.date}|${e.time}|${titleKey}|${locKey}`;
+          const titleKey = (e.opponent||'').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,30);
+          const key = `${e.date}|${e.time}|${titleKey}`;
           const existing = dedupeMap.get(key);
           if (!existing) {
             dedupeMap.set(key, e);
           } else {
-            // Prefer exception over base recurring instance
-            if (e.recurringEventId && !existing.recurringEventId) {
-              dedupeMap.set(key, e);
-            }
-            console.warn('[dedup] dropped duplicate:', e.title, e.date, e.time, 'ids:', e.id, existing.id);
+            // Prefer the exception (recurringEventId set) over the base recurring entry
+            const keepNew = e.recurringEventId && !existing.recurringEventId;
+            if (keepNew) dedupeMap.set(key, e);
+            console.warn('[dedup] dropped duplicate:', e.opponent, e.date, e.time,
+              '| kept recurringEventId:', keepNew ? e.recurringEventId : existing.recurringEventId,
+              '| dropped id:', keepNew ? existing.id : e.id);
           }
         }
         events = Array.from(dedupeMap.values())
           .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
         render(); buildYearSelector(); updateCounts();
-        // Cache for next load
-        try { localStorage.setItem('gcal-cache', JSON.stringify(mapped)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}
+        // Cache deduplicated events (not raw mapped) so reload doesn't re-introduce duplicates
+        try { localStorage.setItem('gcal-cache', JSON.stringify(events)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}
         return;
       }
     }
@@ -3737,7 +3734,7 @@ function parseTitlePrefixes(summary, date) {
   }
   const sl = cleanSummary.toLowerCase();
   let type = 'event';
-  if (sl.includes(' vs ') || sl.includes('game') || sl.includes('match')) type = 'game';
+  if (sl.includes(' vs ') || sl.includes('game') || sl.includes('match') || sl.includes(' at ') || sl.includes('@ ')) type = 'game';
   else if (calResult) type = 'game';
   else if (sl.includes('tryout')) type = 'tryout';
   else if (sl.includes('practice')) type = 'practice';
@@ -3754,9 +3751,8 @@ function parseTitlePrefixes(summary, date) {
   const titleLower = cleanSummary.toLowerCase();
   if (titleLower.includes('away') || titleLower.includes('@ ') || titleLower.includes('[away')) ha = 'away';
   if (titleLower.includes('home game') || titleLower.includes('[home') || titleLower.includes('@ edison')) ha = 'home';
-  // Strip [AWAY] / [HOME] / [AWAY GAME] / [HOME GAME] bracket tags and trailing " - Away" / " - Home" from display title
+  // Strip only bracket tags [AWAY] / [HOME] / [AWAY GAME] from display title — keep " - Away" as readable label
   cleanSummary = cleanSummary.replace(/\s*\[(away|home)\s*(game)?\]/gi, '').trim();
-  cleanSummary = cleanSummary.replace(/\s*[-–]\s*(away|home)\s*$/gi, '').trim();
 
   return { type, teams, opponent: cleanSummary, ha, result, score };
 }

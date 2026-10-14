@@ -3628,7 +3628,13 @@ async function _refreshEventsBackground() {
           const parsed = parseTitlePrefixes(rawTitle, date);
           return { id: item.id, ...parsed, date, time, dur, loc, note, year, series: null };
         });
-        events = mapped;
+        // Deduplicate by event ID (Google API occasionally returns same event twice)
+        const seenIds = new Set();
+        events = mapped.filter(e => {
+          if (seenIds.has(e.id)) return false;
+          seenIds.add(e.id);
+          return true;
+        });
         render(); buildYearSelector(); updateCounts();
         // Cache for next load
         try { localStorage.setItem('gcal-cache', JSON.stringify(mapped)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}

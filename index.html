@@ -3754,8 +3754,9 @@ function parseTitlePrefixes(summary, date) {
   const titleLower = cleanSummary.toLowerCase();
   if (titleLower.includes('away') || titleLower.includes('@ ') || titleLower.includes('[away')) ha = 'away';
   if (titleLower.includes('home game') || titleLower.includes('[home') || titleLower.includes('@ edison')) ha = 'home';
-  // Strip [AWAY GAME] / [HOME GAME] from display title
+  // Strip [AWAY] / [HOME] / [AWAY GAME] / [HOME GAME] bracket tags and trailing " - Away" / " - Home" from display title
   cleanSummary = cleanSummary.replace(/\s*\[(away|home)\s*(game)?\]/gi, '').trim();
+  cleanSummary = cleanSummary.replace(/\s*[-–]\s*(away|home)\s*$/gi, '').trim();
 
   return { type, teams, opponent: cleanSummary, ha, result, score };
 }

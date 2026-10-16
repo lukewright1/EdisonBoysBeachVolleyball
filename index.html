@@ -3585,12 +3585,22 @@ const GCAL_JSON = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIC
 const GCAL_PUBLIC_FEED = `https://www.google.com/calendar/feeds/${encodeURIComponent(GCAL_ID)}/public/full?alt=json&orderby=starttime&sortorder=ascending&singleevents=true&futureevents=true`;
 
 async function loadEvents() {
-  // Show cached events instantly if available (< 30 min old)
+  // Show cached events instantly if available (< 2 min old)
   try {
     const cached = localStorage.getItem('gcal-cache');
     const cacheTime = localStorage.getItem('gcal-cache-time');
     if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 2 * 60 * 1000) {
-      events = JSON.parse(cached);
+      const raw = JSON.parse(cached);
+      // Safety dedup on cache load in case stale pre-dedup data was saved
+      const safeMap = new Map();
+      for (const e of raw) {
+        const titleKey = (e.opponent||'').toLowerCase()
+          .replace(/\b(away|home|playoff|playoffs)\b/g,'')
+          .replace(/[^a-z0-9]/g,'').slice(0,30);
+        const key = `${e.date}|${e.time}|${titleKey}`;
+        if (!safeMap.has(key)) safeMap.set(key, e);
+      }
+      events = Array.from(safeMap.values()).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
       if (events.length) { render(); buildYearSelector(); updateCounts(); }
     }
   } catch {}
@@ -3648,7 +3658,9 @@ async function _refreshEventsBackground() {
         // Keeps the event that has a recurringEventId (exception) over the base series entry
         const dedupeMap = new Map();
         for (const e of seenById.values()) {
-          const titleKey = (e.opponent||'').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,30);
+          const titleKey = (e.opponent||'').toLowerCase()
+            .replace(/\b(away|home|playoff|playoffs)\b/g,'')
+            .replace(/[^a-z0-9]/g,'').slice(0,30);
           const key = `${e.date}|${e.time}|${titleKey}`;
           const existing = dedupeMap.get(key);
           if (!existing) {
@@ -3678,9 +3690,19 @@ async function _refreshEventsBackground() {
     if (ical) {
       const parsed = parseIcal(ical);
       if (parsed.length) {
-        events = parsed;
+        // Apply same dedup logic as API path
+        const icalDedupeMap = new Map();
+        for (const e of parsed) {
+          const titleKey = (e.opponent||'').toLowerCase()
+            .replace(/\b(away|home|playoff|playoffs)\b/g,'')
+            .replace(/[^a-z0-9]/g,'').slice(0,30);
+          const key = `${e.date}|${e.time}|${titleKey}`;
+          if (!icalDedupeMap.has(key)) icalDedupeMap.set(key, e);
+        }
+        events = Array.from(icalDedupeMap.values())
+          .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
         render(); buildYearSelector(); updateCounts();
-        try { localStorage.setItem('gcal-cache', JSON.stringify(parsed)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}
+        try { localStorage.setItem('gcal-cache', JSON.stringify(events)); localStorage.setItem('gcal-cache-time', Date.now()); } catch {}
         return;
       }
     }

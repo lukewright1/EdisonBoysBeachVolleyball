@@ -3597,7 +3597,7 @@ async function loadEvents() {
         const titleKey = (e.opponent||'').toLowerCase()
           .replace(/\b(away|home|playoff|playoffs)\b/g,'')
           .replace(/[^a-z0-9]/g,'').slice(0,30);
-        const key = `${e.date}|${e.time}|${titleKey}`;
+        const key = `${e.date}|${titleKey}`;
         if (!safeMap.has(key)) safeMap.set(key, e);
       }
       events = Array.from(safeMap.values()).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
@@ -3654,14 +3654,15 @@ async function _refreshEventsBackground() {
           if (!existing) { seenById.set(e.id, e); }
           else if (e.recurringEventId && !existing.recurringEventId) { seenById.set(e.id, e); }
         }
-        // Pass 2 — dedupe by date+time+normalizedTitle (ignore location — may differ slightly)
+        // Pass 2 — dedupe by date+titleKey (time intentionally excluded — Google can return
+        // both a recurring series base entry AND a modified exception with slightly different times)
         // Keeps the event that has a recurringEventId (exception) over the base series entry
         const dedupeMap = new Map();
         for (const e of seenById.values()) {
           const titleKey = (e.opponent||'').toLowerCase()
             .replace(/\b(away|home|playoff|playoffs)\b/g,'')
             .replace(/[^a-z0-9]/g,'').slice(0,30);
-          const key = `${e.date}|${e.time}|${titleKey}`;
+          const key = `${e.date}|${titleKey}`;
           const existing = dedupeMap.get(key);
           if (!existing) {
             dedupeMap.set(key, e);
@@ -3696,7 +3697,7 @@ async function _refreshEventsBackground() {
           const titleKey = (e.opponent||'').toLowerCase()
             .replace(/\b(away|home|playoff|playoffs)\b/g,'')
             .replace(/[^a-z0-9]/g,'').slice(0,30);
-          const key = `${e.date}|${e.time}|${titleKey}`;
+          const key = `${e.date}|${titleKey}`;
           if (!icalDedupeMap.has(key)) icalDedupeMap.set(key, e);
         }
         events = Array.from(icalDedupeMap.values())
